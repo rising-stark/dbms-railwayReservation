@@ -1,0 +1,376 @@
+*, body{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+body{
+    background: url(../IMAGES/train.jpg);
+    background-repeat: no-repeat;
+}
+
+.two {
+	position: relative;
+	width: 45%;
+	background-color: rgba(10,10,15,0.5);
+	height: 360px;
+	position: relative;
+	left:27.5%;
+	top:75px;
+	color: white;
+	font-family: serif;
+	border-radius: 20px;
+}
+
+.two .twop1{
+	position: absolute;
+	width: 100%;
+	height:50px;
+	background-color: rgba(10,10,15,0.8);
+	line-height:50px;
+	text-align:center;
+	border-radius: 20px;
+}
+
+.two .twop2{
+	position: absolute;
+	width: 100%;
+	height:335px;
+	top: 65px;
+	/* background-color: rgba(100,100,15,0.8); */
+	/* border: 2px solid #111; */
+    font-size: 20px;
+	overflow:hidden;
+}
+
+.two .twop2 h4{
+	position: absolute;
+	width: calc(100% - 20px);
+	top: 0px;
+	left: 20px;
+	height:35px;
+	line-height:35px;
+}
+
+.two .twop2 table{
+	width: calc(100% - 75px);
+	position: absolute;
+	height:200px;
+	top: 55px;
+	left: 75px;
+	/* border: 1px solid #111; */
+	border-collapse: collapse;
+	table-layout:fixed;
+	overflow:hidden;
+}
+
+.two .twop2 h3{
+	position: absolute;
+	width: calc(100% - 20px);
+	bottom: 10px;
+	left: 20px;
+	height:35px;
+	line-height:35px;
+}
+
+.two .twop2 table tr{
+	position: relative;
+	/* border: 1px solid #111eee; */
+}
+
+.two .twop2 table #link a{
+	color: cyan;
+	font-weight: bold;
+	font-size: 22px;
+	text-decoration: none;
+	/*position: absolute;
+	right: 25px;*/
+	/* border: 1px solid #111eee; */
+}
+
+.two .twop2 table tr td img{
+	width: 30px;
+	height: 30px;
+}
+
+.two .twop2 table td{
+	/* border: 2px solid #ddddee; */
+	text-align: left;
+	padding: 8px;
+}
+.two .twop2 table tr td input{
+	width:90%;
+	height:35px;
+	font-family: sans-serif;
+}
+
+.two .twop2 table tr td input[type=text], input[type=password]{
+	padding-left: 5px;
+}
+/* .two .twop2 table tr td input[type=button]{
+	width:40%;
+	height:35px;
+	position:relative;
+	left:30%;
+	background-color:seagreen;
+	transition: 0.1s ease-in;
+} */
+
+.two .twop2 table tr td input[type=button]{
+	background-color: darkred;
+	width:30%;
+	height:35px;
+	position:relative;
+	top: 5px;
+	left:32%;
+	transition: 0.1s ease-in;
+	cursor: not-allowed;
+    color: white;
+    font-size: 20px;
+    font-weight: 300;
+    border-radius: 20px;
+}
+.two .twop2 table tr td .grow{
+	background-color: #e4e3e2 !important;
+	cursor: pointer !important;
+}
+.two .twop2 table tr td .grow:hover{
+	box-shadow:5px 3px 10px 2px #1baf4b;
+	background-color:#266549 !important;
+	transform:scale(1.05,1);
+    -webkit-transform:scale(1.01,1);
+    -moz-transform:scale(1.05,1);
+}
+.three{
+	width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 22;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    display: none;
+    align-items: center;
+    text-align: center;
+    /* vertical-align: baseline; */
+    /* line-height: 140px; */
+}
+.three h1{
+	position: absolute;
+	top: 50%;
+	left: 45%;
+}
+.three img{
+	position: absolute;
+    width: 17%;
+    height: 25%;
+    top: 300px;
+    left: 40%;
+}
+.four {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    height: 100%;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.four #fourp1 {
+    width: 30%;
+    position: absolute;
+    top: 32%;
+    left: 36%;
+    height: 240px;
+    /* margin: 18% 36%; */
+    z-index: 25;
+    background-color: #e4dcab;
+    /* padding: 14px; */
+    display: none;
+    border: 4px solid #75771e;
+    border-radius: 30px;
+}
+.four #fourp2 {
+    width: 30%;
+    position: absolute;
+    top: 32%;
+    left: 36%;
+    height: 240px;
+    /* margin: 18% 36%; */
+    z-index: 25;
+    background-color: #ff6262;
+    /* padding: 14px; */
+    display: none;
+    border: 4px solid #7d021b;
+    border-radius: 30px;
+}
+
+#fourp1 h2 {
+    position: absolute;
+    top: 4%;
+    left: 5%;
+    padding: 5px;
+}
+#fourp2 h2 {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    padding: 5px;
+}
+
+#fourp1 #fourp1p1 {
+    position: absolute;
+    width: 30%;
+    height: 50%;
+    top: 90px;
+    left: 35%;
+    cursor:pointer;
+    /*box-shadow: 7px 10px 35px 4px #fff;
+    border:5px white solid;
+    border-radius: 50%;*/
+}
+#fourp2 #fourp2p1 {
+    position: absolute;
+    width: 30%;
+    height: 50%;
+    top: 10px;
+    left: 35%;
+    cursor:pointer;
+    /*box-shadow: 7px 10px 35px 4px #fff;
+    border:5px white solid;
+    border-radius: 50%;*/
+}
+#fourp2 #fourp2p2 {
+    position: absolute;
+    width: 30%;
+    height: 50%;
+    top: 10px;
+    left: 35%;
+    cursor:pointer;
+    display: none;
+    /*box-shadow: 7px 10px 35px 4px #fff;
+    border:5px white solid;
+    border-radius: 50%;*/
+}
+.four #fourp3{
+	width: 50%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: 400px;
+    transform: translate(-50%, -50%);
+    z-index: 21;
+    background-color: #f0f0fd;
+    /* padding: 14px; */
+    display: none;
+    border: 4px solid #75771e;
+    border-radius: 30px;
+}
+.four #fourp3 #fourp3p1{
+	position: absolute;
+    width: 100%;
+    /* top: 10px; */
+    left: 0%;
+    height: 100px;
+    border-bottom: 3px solid black;
+    border-radius: 25px;
+    background: cornsilk;
+}
+.four #fourp3 #fourp3p1 h2{
+    width: 100%;
+    /* top: 10px; */
+    padding: 20px;
+    font-size:20px;
+}
+.four #fourp3 table{
+	position: absolute;
+    top: 140px;
+    width: 70%;
+    left: 5%;
+    height: 220px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    overflow: hidden;
+    font-size:20px;
+}
+
+.four #fourp3 table tr{
+	position: relative;
+	/* border: 1px solid #111eee; */
+}
+.four #fourp3 table td{
+	/* border: 2px solid #ddddee; */
+	text-align: left;
+	padding: 8px;
+}
+.four #fourp3 table tr td input,select{
+	width:80%;
+	height:35px;
+	font-family: sans-serif;
+}
+
+.four #fourp3 table tr td input[type=text]{
+	padding-left:5px;
+	width: 80%;
+}
+
+.four #fourp3 table tr td input[type=button]{
+	background-color: #e4e3e2;
+	width:30%;
+	height:35px;
+	position:relative;
+	top: 15px;
+	left:32%;
+	transition: 0.1s ease-in;
+}
+.four #fourp3 table tr td .grow{
+	background-color:rgba(0,200,0,0.4) !important;
+	transform:scale(1.05,1);
+    -webkit-transform:scale(1.01,1);
+    -moz-transform:scale(1.05,1);
+}
+.four #fourp3 table tr td .grow:hover{
+	box-shadow:5px 3px 10px 2px #1baf4b;
+	background-color:#266549;
+	transform:scale(1.05,1);
+    -webkit-transform:scale(1.01,1);
+    -moz-transform:scale(1.05,1);
+}
+.seven{
+	position: absolute;
+	top: 440px;
+	border-radius: 50%;
+	font-size: 40px;
+	width: 80px;
+	height: 80px;
+	line-height: 60px;
+	font-weight: bold;
+	left: 48.5%;
+	padding: 10px;
+	background-color: black;
+	color: yellow;
+}
+
+.eight{
+	position: absolute;
+	top: 530px;
+	left: 35%;
+	width: 30%;
+	height: 60px;
+}
+.eight input{
+	width: 100%;
+	height: 90%;
+	font-size: 35px;
+	border-radius: 45px;
+	color: white;
+	background-color: darkred;
+	transition: 0.1s ease-in;
+}
+.eight input:hover{
+	width: 105%;
+	height: 95%;
+	background-color: darkgreen;
+	box-shadow: 5px 5px 15px 5px darkgreen;
+}

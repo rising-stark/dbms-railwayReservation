@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Railway Admin Login</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<link rel="stylesheet" type="text/css" href="../CSS/admin_login.css">
+		
+		<script type="text/javascript" src="../JS/Jquery.js"></script>
+	</head>
+	<body style="background-image: url('../IMAGES/train.jpg');">
+		<div class="two">
+			<div class="twop1">
+				<h1>Login</h1>
+			</div>
+			<div class="twop2">
+				<h4>Care: Username and Password are case sensitive</h4>
+				<form action="Login" method="post">
+					<table>
+						<tr>
+						    <td width="45%">Enter User Name: </td>
+						    <td width="45%"><input id="uname" type="text" name="uname" size="40" autofocus placeholder="Enter User Name" required/></td>
+					    </tr>
+					    <tr>
+						    <td>Enter password: </td>
+						    <td><input type="password" name="password" size="40" placeholder="Enter your password"  required/></td>
+					    </tr>
+					    <tr id="link">
+					    	<td colspan="2"><a href="#">Forgot Password?</a></td>
+					    </tr>
+					    <tr><!-- Here there is no need of reset button on login.jsp page because this is not of that much use   -->
+					    	<!-- <td><input class="grow" type="button" name="btnRESET" value="RESET"/></td> -->
+						    <td colspan="2"><input type="button" name="btnNEXT" value="NEXT" disabled /></td>
+					    </tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		<!-- <div class="three">
+			<img alt="loading" src="gifs/processing.gif">
+		</div>
+		<div class="four">
+			<div id="fourp1">
+				<h2 id="msgp1">Redirect to Email Verify Page</h2>
+				<img id="fourp1p1" alt="next" src="gifs/next.gif">
+			</div>
+			<div id="fourp2">
+				<h2 id="msgp2">Incorrect Answer</h2>
+				<img id="fourp2p1" alt="wrong" src="gifs/wrong2.png">
+				<img id="fourp2p2" alt="wrong" src="gifs/wrong2.png">
+			</div>
+			<div id="fourp3">
+				<div id="fourp3p1">
+					<h2 class="msgp3">There have been multiple unsuccessful login attempts through your account. <br>
+					To login into your account, you would have to choose your security question and answer. </h2>
+				</div>
+				<table>
+					<tr>
+					    <td width="40%">Security Question: </td>
+					    <td width="60%">
+					    	<select id="securityquestion" name="securityquestion" required>
+					    		<option value='null'>---- Choose Your Security Question ----</option>
+					    		<option value="Actor">Who is Your Favourite Actor?</option>
+					    		<option value="School">Which is Your Favourite School?</option>
+							  	<option value="City">Which is Your Favourite City?</option>
+							  	<option value="Sport">Which is Your Favourite Sport?</option>
+							  	<option value="Teacher">Who is Your Favourite Teacher?</option>
+							</select>
+						</td>
+						
+				    </tr>
+				    <tr>
+					    <td width="40%">Security Answer: </td>
+					    <td width="60%"><input id="securityanswer" type="text" name="securityanswer" size="40" placeholder="Write Your Answer between 3 to 40 characters" required/></td>
+						
+				    </tr>
+				    <tr>
+					    <td colspan="2"><input class="verify" type="button" name="btnVERIFY" value="SUBMIT" disabled></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		-->
+		<div class="seven">
+			OR
+		</div>
+		<div class="eight">
+			<input type="button" name="btnREGISTER" value="REGISTER NEW USER"/>
+		</div>
+	</body>
+</html>
