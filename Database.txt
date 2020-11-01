@@ -77,4 +77,7 @@ Doubts:	Answer
 Future works:	
 1. preference of berth type LB/MB/UB	
 2. time based availability of trains	
+
+Assumptions:
+1. Only one admin. Different Page opens if Admin logins 
 */
