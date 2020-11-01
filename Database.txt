@@ -80,4 +80,5 @@ Future works:
 
 Assumptions:
 1. Only one admin. Different Page opens if Admin logins 
+2 Only one master URL
 */
