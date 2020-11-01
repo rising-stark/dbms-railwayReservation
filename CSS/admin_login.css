@@ -24,12 +24,13 @@ body{
 
 .two .twop1{
 	position: absolute;
-	width: 100%;
+	width: 40%;
+	left: 30%;
 	height:50px;
 	background-color: rgba(10,10,15,0.8);
 	line-height:50px;
 	text-align:center;
-	border-radius: 20px;
+	border-radius: 30px;
 }
 
 .two .twop2{
@@ -371,7 +372,7 @@ body{
 .eight input:hover{
 	width: 105%;
 	height: 95%;
-	background-color: darkred;
+	background-color: darkgreen;
 	cursor: pointer;
-	/*box-shadow: 5px 5px 15px 5px darkgreen;*/
+	box-shadow: 5px 5px 15px 5px darkgreen;
 }
