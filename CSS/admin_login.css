@@ -371,6 +371,7 @@ body{
 .eight input:hover{
 	width: 105%;
 	height: 95%;
-	background-color: darkgreen;
-	box-shadow: 5px 5px 15px 5px darkgreen;
+	background-color: darkred;
+	cursor: pointer;
+	/*box-shadow: 5px 5px 15px 5px darkgreen;*/
 }
