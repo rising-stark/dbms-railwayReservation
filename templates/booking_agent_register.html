@@ -48,7 +48,7 @@
 			<div class="twop1">
 				<h1>Registration of a new user</h1>
 			</div>
-			<form action="Registration" method="post">
+			<form action="register" method="post" id="register-form">
 				<div class="twop2">
 					<table>
 						<tr>
@@ -64,11 +64,11 @@
 							<td><img id="dobimg" src="img/wrong.png" alt="wrong" hidden="true"/></td>
 							<td>Gender: </td>
 						    <td>
-						    	<select id="genderlist" name="genderlist" required>
+						    	<select id="genderlist" name="gender" required>
 						    		<option value="0">-- Choose Your Gender --</option>
-						    		<option value="MALE">MALE</option>
-								  	<option value="FEMALE">FEMALE</option>
-								  	<option value="OTHER">OTHER</option>
+						    		<option value="M">MALE</option>
+								  	<option value="F">FEMALE</option>
+								  	<option value="O">OTHER</option>
 								</select>
 							</td>
 							<td><img id="genderimg" src="img/wrong.png" alt="wrong" hidden="true"/></td>
@@ -120,7 +120,7 @@
 					    </tr> -->
 					    <tr>
 					    	<td><input class="grow reset" type="button" name="btnRESET" value="RESET"></td>
-						    <td colspan="2"><input class="next" type="submit" name="btnNEXT" value="NEXT"></td>
+						    <td colspan="2"><input class="next" type="button" name="btnNEXT" value="NEXT"></td>
 					    </tr>
 
 					</table>

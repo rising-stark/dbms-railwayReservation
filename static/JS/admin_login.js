@@ -6,29 +6,29 @@ pass=0;
 
 function ajaxvalidation(){
 	$.ajax({
-		type: 'POST',
-		url: 'AJAXValidation',
-		contentType: 'application/json',
-		data: JSON.stringify({
-			a: 'emailVerificationInitiated',
-			action1: 'new'
-		}),
-		cache: false,
-		processData: false,
-		success: function(result){
-			if(result == "1"){
-				msg="Email sent successfully for emailVerificationInitiated"
-				alert(msg)
-			}else{
-				var msg="Error in sending email for emailVerificationInitiated";
-				alert(msg)
-				console.log(msg);
+			type: 'POST',
+			url: 'AJAXValidation',
+			contentType: 'application/json',
+			data: JSON.stringify({
+				a: 'emailVerificationInitiated',
+				action1: 'new'
+			}),
+			cache: false,
+			processData: false,
+			success: function(result){
+				if(result == "1"){
+					msg="Email sent successfully for emailVerificationInitiated"
+					alert(msg)
+				}else{
+					var msg="Error in sending email for emailVerificationInitiated";
+					alert(msg)
+					console.log(msg);
+				}
+			},
+			error: function(){
+				console.log("Not able");
 			}
-		},
-		error: function(){
-			console.log("Not able");
-		}
-	});
+		});
 }
 
 $(document).ready(function(){
