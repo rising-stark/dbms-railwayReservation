@@ -17,7 +17,7 @@
 			</div>
 			<div class="twop2">
 				<h4>Care: Username and Password are case sensitive</h4>
-				<form action="Login" method="post">
+				<form action="{{ url_for('login')}}" method="post">
 					<table>
 						<tr>
 						    <td width="45%">Enter User Name: </td>
@@ -32,7 +32,7 @@
 					    </tr>
 					    <tr><!-- Here there is no need of reset button on login.jsp page because this is not of that much use   -->
 					    	<!-- <td><input class="grow" type="button" name="btnRESET" value="RESET"/></td> -->
-						    <td colspan="2"><input type="button" name="btnNEXT" value="NEXT" disabled /></td>
+						    <td colspan="2"><input type="button" name="btnNEXT" value="NEXT"  /></td>
 					    </tr>
 					</table>
 				</form>
