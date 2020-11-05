@@ -6,28 +6,63 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<link rel="stylesheet" type="text/css" href="../CSS/admin_home.css">
+		<link rel="stylesheet" type="text/css" href="../static/CSS/admin_home.css">
 		
-		<script type="text/javascript" src="../JS/Jquery.js"></script>
-		<script type="text/javascript" src="../JS/admin_home.js"></script>
+		<script type="text/javascript" src="../static/JS/Jquery.js"></script>
+		<script type="text/javascript" src="../static/JS/admin_home.js"></script>
 	</head>
 	<body>
 		<div class="two">
 			<div class="twop1">
-				<img src="../IMAGES/avatar.png">
+				<img src="../static/IMAGES/avatar.png">
+				<div class="twop1p1">Welcome, <span>oufgidfgyuvhhhvhjvfsdgfhg</span></div>
 			</div>
-			<div class="twop2">
-				<h3>Insert the train number or date to search</h3>
+		</div>
+		<div class="three">
+			<div class="threep1">
+				<div class="threep1p1" id="active" onclick="openCity(event, 'London')">View Trains Info</div>
+				<div class="threep1p1" onclick="openCity(event, 'Paris')">Add Trains Info</div>
+			</div>
+			<div class="threep2">
+				<h2>Insert the train number and/or date to search</h2>
 				<br>
 				<form>
-					<div class="twop2p1">
-						Train no. <input id="train" type="text" name="train" size="40" placeholder="Enter Train Number"  required/>
+					<div class="threep2p1">
+						Train no. <input id="train" type="text" name="train" size="40" placeholder="Enter Train Number" required/>
 					</div>
-					<div class="twop2p1">
+					<div class="threep2p1">
 						Date <input id="doj" type="date" name="doj" size="40" required/>
 					</div>
-					<input type="submit" name="btnSearch" value="search">
+					<input id="btnSearch" class="valid" type="submit" name="btnSearch" value="Search">
 				</form>
+			</div>
+			<div class="threep3">
+				<table>
+					<tr>
+						<th>Sl. no</th>
+						<th>Train Number</th>
+						<th>Date of Journey</th>
+						<th>Source</th>
+						<th>Start Time</th>
+						<th>Destination</th>
+						<th>End Time</th>
+						<th>#AC coaches</th>
+						<th>#SL coaches</th>
+						<th>Seats Available</th>
+					</tr>
+					<tr>
+						<td>1. </td>
+						<td>15156</td>
+						<td>03-01-2021</td>
+						<td>Delhi</td>
+						<td>13:00</td>
+						<td>Rupnagar</td>
+						<td>21:00</td>
+						<td>04</td>
+						<td>12</td>
+						<td id="available">12</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</body>

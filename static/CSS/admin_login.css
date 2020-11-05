@@ -117,7 +117,7 @@ body{
 	transition: 0.1s ease-in;
 } */
 
-.two .twop2 table tr td input[type=button]{
+.two .twop2 table tr td input[type=submit]{
 	background-color: darkred;
 	width:30%;
 	height:35px;

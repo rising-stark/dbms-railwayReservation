@@ -1,0 +1,184 @@
+*, body{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+/*
+body{
+    background: url(../IMAGES/train.jpg);
+    background-repeat: no-repeat;
+}*/
+
+.two {
+	position: relative;
+	width: 100%;
+	/*background-color: rgba(10,10,15,0.5);*/
+	height: 60px;
+	left: 0;
+	top: 0;
+	font-family: serif;
+	background: url(../IMAGES/train.jpg);
+    background-repeat: no-repeat;
+}
+
+.two .twop1{
+	position: fixed;
+	right: 2%;
+	top: 10px;
+	min-width: 20%;
+	max-width: 40%;
+	height: 40px;
+}
+
+.two .twop1 img{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border: 2px brown solid;
+	padding: 2px;
+}
+
+.two .twop1 .twop1p1{
+	position: relative;
+	top: -35%;
+	right: -2%;
+	width: auto;
+	height: 40px;
+	line-height: 40px;
+	display: inline-block;
+	font-size: 20px;
+	color: white;
+}
+
+.two .twop1 .twop1p1 span{
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.two .twop1:hover{
+	cursor: pointer;
+}
+
+.three{
+	position: relative;
+	left: 0%;
+	width: 100%;
+	height: 640px;
+	/*background-image: linear-gradient(to right, rgba(25, 90, 60, 0), rgba(25, 40, 50, 1));*/
+	background-image: linear-gradient(red, yellow, blue);
+}
+
+.three .threep1{
+	width: 100%;
+	height: 40px;
+}
+.three .threep1 .threep1p1{
+	width: 50%;
+	font-size: 18px;
+	height: 40px;
+	border-right: 2px solid gray;
+	float: left;
+	line-height: 40px;
+	padding-bottom: 5px;
+	text-align: center;
+	background-color: #efeeee;
+	opacity: 0.7;
+}
+.three .threep1 .threep1p1:hover{
+	cursor: pointer;
+}
+.three .threep1 #active{
+	background-color: white;
+	opacity: 1.0;
+	border-right: 2px solid brown;
+	border-left: 2px solid brown;
+	border-bottom: 2px solid brown;
+	border-radius: 20px;
+	/*border-top-right-radius: 10px;
+	border-top-left-radius: 10px;*/
+}
+
+.three .threep2{
+	position: relative;
+	width: 60%;
+	top: 10px;
+	left: 20%;
+	height: 150px;
+	/*border: 2px solid black;*/
+}
+.three .threep2 .threep2p1{
+	width: 50%;
+	float: left;
+	height: 50px;
+}
+.three .threep2 .threep2p1 input{
+	position: relative;
+	left: 10px;
+	height: 35px;
+	padding: 5px;
+}
+.three .threep2 #btnSearch{
+	width: 10%;
+	padding: 5px;
+	height: 40px;
+	position: relative;
+	left: 40%;
+	font-size: 16px;
+	color: white;
+	background-color: rgba(140, 0, 0, 0.8);
+}
+.three .threep2 #btnSearch:hover{
+	cursor: not-allowed;
+}
+
+.three .threep2 .valid{
+	width: 10%;
+	padding: 5px;
+	height: 40px;
+	position: relative;
+	left: 40%;
+	font-size: 16px;
+	color: white;
+	background-color: rgba(0, 100, 0, 0.8);
+	transition: 0.1s ease-in;
+}
+.three .threep2 .valid:hover{
+	cursor: pointer;
+	border-radius: 20px;
+	width: 12%;
+	height: 45px;
+}
+
+.three .threep3{
+	position: relative;
+	top: 25px;
+	left: 5%;
+	width: 90%;
+	overflow-y: auto;
+}
+.three .threep3 table{
+	width: 100%;
+	border: 2px solid black;
+}
+.three .threep3 table tr{
+	height: 20px;
+	border-bottom: 2px solid brown;
+}
+.three .threep3 table th{
+	font-weight: bold;
+	font-size: 18px;
+	color: white;
+	border: 2px solid brown;
+	background-color: black;
+}
+.three .threep3 table td, th{
+	min-width: 30px;
+	max-width: 80px;
+	text-align: center;
+	padding: 5px;
+	word-wrap: normal;
+	border-right: 2px solid black;
+}
+.three .threep3 table tr #available{
+	background-color: green;
+}

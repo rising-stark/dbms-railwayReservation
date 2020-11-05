@@ -12,21 +12,29 @@ app.secret_key = '12345678' ''' this key is used to communicate with database.''
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 
-@app.route("/addbook")
+@app.route("/")
 def addbook():
-	return render_template("addbook.html")
+	return render_template("admin_login.html")
 
 @app.route("/bookadd", methods=["POST"])
 def bookadd():
-	isbn=request.form.get("isbn")
-	title=request.form.get("title")
-	author=request.form.get("author")
-	year=request.form.get("year")
+	if request.method == "POST":
+		clicked=request.json['action']
+		print(clicked)
+		if(clicked=='emailVerificationInitiated'):
+			return "1"
+		else:
+			return "0"
+
+	# isbn=request.form.get("isbn")
+	# title=request.form.get("title")
+	# author=request.form.get("author")
+	# year=request.form.get("year")
 	
-	db.execute("INSERT INTO first (id, name) VALUES (:id, :name)",
-			{"id": isbn, "name": title}) 
-	db.commit() 
-	return render_template("addbook.html")
+	# db.execute("INSERT INTO first (id, name) VALUES (:id, :name)",
+	# 		{"id": isbn, "name": title}) 
+	# db.commit() 
+	return render_template("admin_login.html")
 
 if __name__ == '__main__':
 	app.run(debug=True)
