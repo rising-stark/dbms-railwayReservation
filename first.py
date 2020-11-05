@@ -13,28 +13,19 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 
 @app.route("/")
+@app.route("/addbook")
 def addbook():
 	return render_template("admin_login.html")
 
-@app.route("/bookadd", methods=["POST"])
-def bookadd():
+@app.route("/AJAXValidation", methods=["GET", "POST"])
+def AJAXValidation():
 	if request.method == "POST":
-		clicked=request.json['action']
-		print(clicked)
-		if(clicked=='emailVerificationInitiated'):
+		clicked = request.json['a']
+		if(clicked == 'emailVerificationInitiated'):
 			return "1"
 		else:
 			return "0"
-
-	# isbn=request.form.get("isbn")
-	# title=request.form.get("title")
-	# author=request.form.get("author")
-	# year=request.form.get("year")
-	
-	# db.execute("INSERT INTO first (id, name) VALUES (:id, :name)",
-	# 		{"id": isbn, "name": title}) 
-	# db.commit() 
-	return render_template("admin_login.html")
+	return "null"
 
 if __name__ == '__main__':
 	app.run(debug=True)

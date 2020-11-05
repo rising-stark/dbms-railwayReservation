@@ -3,6 +3,34 @@ var uname, pass;
 var tooltipUname, tooltipPass;
 uname=0
 pass=0;
+
+function ajaxvalidation(){
+	$.ajax({
+		type: 'POST',
+		url: 'AJAXValidation',
+		contentType: 'application/json',
+		data: JSON.stringify({
+			a: 'emailVerificationInitiated',
+			action1: 'new'
+		}),
+		cache: false,
+		processData: false,
+		success: function(result){
+			if(result == "1"){
+				msg="Email sent successfully for emailVerificationInitiated"
+				alert(msg)
+			}else{
+				var msg="Error in sending email for emailVerificationInitiated";
+				alert(msg)
+				console.log(msg);
+			}
+		},
+		error: function(){
+			console.log("Not able");
+		}
+	});
+}
+
 $(document).ready(function(){
 	$('input').keypress(function(e){
 		if(e.which==32)
@@ -14,30 +42,9 @@ $(document).ready(function(){
 	    	e.preventDefault();
 	    	return false;
 	    }*/
-	    $.ajax({
-			type: 'POST',
-			url: "{{url_for('bookadd')}}",
-			contentType: 'application/json;charset=UTF-8',
-			data: {
-				action: 'emailVerificationInitiated'
-			},
-			cache: false,
-			success: function(result){
-				console.log(typeof(result));
-				console.log(result);
-				if(result==1){
-					console.log("Email sent successfully for emailVerificationInitiated");
-				}else{
-					var msg="Error in sending email for emailVerificationInitiated";
-					alert(msg)
-					console.log(msg);
-				}
-			}
-		});
 	});
 
 	$('[name="uname"]').on('focus blur mouseleave',function(){
-		console.log("here");
 		if(unameType==0){
 			return false;
 		}

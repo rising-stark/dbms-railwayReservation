@@ -41,50 +41,6 @@
 					System.out.println("already attr "+(String)session.getAttribute("already"));
 				%>
 			}
-		
-			//document.addEventListener('contextmenu', event => event.preventDefault());
-			/*
-			This code will block the right click of mouse, Ctrl + Shift + I, Ctrl+ Shift + J, Ctrl + S, Ctrl + U, and F12 key.
-			The F12 key uses for looking the source code of page, so it also need be disabled.
-			https://mycyberuniverse.com/developing/disabling-right-clicking-by-using-javascript.html
-			*/
-			window.onload = function() {
-			    document.addEventListener("contextmenu", function(e){
-			      e.preventDefault();
-			    }, false);
-			    document.addEventListener("keydown", function(e) {
-			    //document.onkeydown = function(e) {
-			      // "I" key
-			      if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
-			        disabledEvent(e);
-			      }
-			      // "J" key
-			      if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
-			        disabledEvent(e);
-			      }
-			      // "S" key + macOS
-			      if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
-			        disabledEvent(e);
-			      }
-			      // "U" key
-			      if (e.ctrlKey && e.keyCode == 85) {
-			        disabledEvent(e);
-			      }
-			      // "F12" key
-			      if (event.keyCode == 123) {
-			        disabledEvent(e);
-			      }
-			    }, false);
-			    function disabledEvent(e){
-			      if (e.stopPropagation){
-			        e.stopPropagation();
-			      } else if (window.event){
-			        window.event.cancelBubble = true;
-			      }
-			      e.preventDefault();
-			      return false;
-			    }
-			  };
 		</script> -->
 	</head>
 	<body>
@@ -96,14 +52,14 @@
 				<div class="twop2">
 					<table>
 						<tr>
-						    <td width="40%">Enter Your Name* :</td>
+						    <td width="40%">Enter Your Name :</td>
 						    <td width="40%"><input id="fname" type="text" name="fname" size="60" placeholder="Enter First Name" required/></td>
 						    <td width="5%"><img id="fnameimg" src="img/wrong.png" alt="wrong" hidden="true"/></td>
 						    <td width="40%"><input id="lname" type="text" name="lname" size="60" placeholder="Enter Last Name" required/></td>
 						    <td width="5%"><img id="lnameimg" src="img/wrong.png" alt="wrong" hidden="true"/></td>
 					    </tr>
 					    <tr>
-							<td>Date-of-Birth*: </td>
+							<td>Date-of-Birth: </td>
 						    <td><input id="dob" type="date" name="dob" size="40" required/></td>
 							<td><img id="dobimg" src="img/wrong.png" alt="wrong" hidden="true"/></td>
 							<td>Gender: </td>
@@ -118,12 +74,12 @@
 							<td><img id="genderimg" src="img/wrong.png" alt="wrong" hidden="true"/></td>
 					    </tr>
 					    <tr>
-						    <td>Enter Your Email-id* : </td>
+						    <td>Enter Your Email-id : </td>
 						    <td colspan="3"><input id="email" type="text" name="email" size="40" placeholder="Enter Your Email-id"  required/></td>
 						    <td><img id="emailimg" src="img/wrong.png" alt="wrong" hidden="true"/></td>
 					    </tr>
 					    <tr>
-						    <td>Enter Your Phone No.* : </td>
+						    <td>Enter Your Phone No. : </td>
 						    <td colspan="3"><input id="phone" type="text" name="phone" size="40" placeholder="Enter Your Phone Number"  required/></td>
 						    <td><img id="phoneimg" src="img/wrong.png" alt="wrong" hidden="true"/></td>
 					    </tr>
@@ -137,34 +93,37 @@
 				<div class="twop3">
 					<h4>Care: Username and Password are case sensitive</h4>
 					<table>
+						<tr>
+						    <td>Choose a user name : </td>
+						    <td colspan="3"><input id="uname" type="text" name="uname" size="40" placeholder="Enter A User Name that has not been taken" required/></td>
+					    	<td><img id="unameimg" src="img/wrong.png" alt="wrong" hidden="true"/></td>
+					    </tr>
 					    <tr>
-						    <td>Enter a password* : </td>
+						    <td>Enter credit card number : </td>
+						    <td colspan="3"><input id="credit" type="text" name="credit" size="40" placeholder="Enter your credit card number" required/></td>
+					    	<td><img id="creditimg" src="img/wrong.png" alt="wrong" hidden="true"/></td>
+					    </tr>
+					    <tr>
+						    <td>Enter a password : </td>
 						    <td colspan="3"><input id="pass" type="password" name="pass" size="40" placeholder="Enter a password"  required/></td>
 						    <td><img id="passimg" src="img/wrong.png" alt="wrong" hidden="true"/></td>
 					    </tr>
 					    <tr>
-						    <td>Re-enter password* : </td>
+						    <td>Re-enter password : </td>
 						    <td colspan="3"><input id="cnfpass" type="password" name="cnfpass" size="40" placeholder="Re-enter password"  required/></td>
 						    <td><img id="cnfpassimg" src="img/wrong.png" alt="wrong" hidden="true"/></td>
 					    </tr>
-					    
-					    <tr>
-						    <td>Choose a user name* : </td>
-						    <td colspan="3"><input id="uname" type="text" name="uname" size="40" placeholder="Enter A User Name that has not been taken" required/></td>
-					    	<td><img id="unameimg" src="img/wrong.png" alt="wrong" hidden="true"/></td>
-					    </tr>
-					    <tr id="termsrow">
+					    <!-- <tr id="termsrow">
 					    	<td id="terms" colspan="2">
 					    		<input id="chkbox" type="checkbox" name="chkbox" value="accept"/>&nbsp;&nbsp;I ACCEPT THE <a href="Terms.html" target="_blank">TERMS AND LICENSE AGREEMENT</a>
 					    	</td>
-					    </tr>
+					    </tr> -->
 					    <tr>
 					    	<td><input class="grow reset" type="button" name="btnRESET" value="RESET"></td>
 						    <td colspan="2"><input class="next" type="submit" name="btnNEXT" value="NEXT"></td>
 					    </tr>
 
 					</table>
-					<h3>Note: The fields marked with * are compulsory</h3>
 				</div>
 			</form>
 		</div>
