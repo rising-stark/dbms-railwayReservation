@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-engine = create_engine("postgresql://postgres:1234@localhost:5432/temp")
+engine = create_engine("postgresql://postgres:1234@localhost:5432/railway")
 db = scoped_session(sessionmaker(bind=engine))
 
 app = Flask(__name__)
