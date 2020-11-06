@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Railway Admin Home</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<link rel="stylesheet" type="text/css" href="../static/CSS/admin_home.css">
+		
+		<script type="text/javascript" src="../static/JS/Jquery.js"></script>
+		<script type="text/javascript" src="../static/JS/admin_home.js"></script>
+	</head>
+	<body>
+		<div class="two">
+			<div class="twop1">
+				<img src="../static/IMAGES/avatar.png">
+				<div class="twop1p1">Welcome, <span>oufgidfgyuvhhhvhjvfsdgfhg</span></div>
+			</div>
+		</div>
+		<div class="three">
+			<div class="threep1">
+				<div class="threep1p1 active" id="threep1p1">View Trains Info</div>
+				<div class="threep1p1" id="threep1p2">Add Trains Info</div>
+			</div>
+			<div class="threep2">
+				<h2>Insert the train number and/or date to search</h2>
+				<br>
+				<form>
+					<div class="threep2p1">
+						Train no. <input id="train" type="text" name="trainno" size="40" placeholder="Enter Train Number"/>
+					</div>
+					<div class="threep2p1">
+						Date <input id="doj" type="date" name="doj" size="40"/>
+					</div>
+					<input id="btnSearch" class="valid" type="button" name="btnSearch" value="Search">
+				</form>
+			</div>
+			<div class="threep3">
+				<table id="threep3p1">
+					<tr>
+						<th>Sl. no</th>
+						<th>Train Number</th>
+						<th>Date of Journey</th>
+						<th>Source</th>
+						<th>Start Time</th>
+						<th>Destination</th>
+						<th>End Time</th>
+						<th>#AC coaches</th>
+						<th>AC Fare</th>
+						<th>#SL coaches</th>
+						<th>SL Fare</th>
+						<th>#AC Seats Available</th>
+						<th>#SL Seats Available</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="five">
+			<img alt="loading" src="../static/IMAGES/loading.gif">
+			<h1>PROCESSING</h1>
+		</div>
+	</body>
+</html>

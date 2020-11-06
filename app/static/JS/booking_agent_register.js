@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$('.next').click( function (event) {
+	$('.next').click( function () {
 		//event.preventDefault();
 		// var form_data = new FormData($('#register_form')[0]);
 		// console.log('form_data')

@@ -87,7 +87,7 @@ body{
 .three .threep1 .threep1p1:hover{
 	cursor: pointer;
 }
-.three .threep1 #active{
+.three .threep1 .active{
 	background-color: white;
 	opacity: 1.0;
 	border-right: 2px solid brown;
@@ -127,9 +127,9 @@ body{
 	color: white;
 	background-color: rgba(140, 0, 0, 0.8);
 }
-.three .threep2 #btnSearch:hover{
+/*.three .threep2 #btnSearch:hover{
 	cursor: not-allowed;
-}
+}*/
 
 .three .threep2 .valid{
 	width: 10%;
@@ -150,6 +150,7 @@ body{
 }
 
 .three .threep3{
+	display: none;
 	position: relative;
 	top: 25px;
 	left: 5%;
@@ -181,4 +182,32 @@ body{
 }
 .three .threep3 table tr #available{
 	background-color: green;
+}
+.five {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 20;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.6);
+	display: none;
+	align-items: center;
+	text-align: center;
+	/* vertical-align: baseline; */
+	/* line-height: 140px; */
+}
+
+.five h1 {
+	position: absolute;
+	top: 50%;
+	left: 45%;
+}
+
+.five img {
+	position: absolute;
+	width: 10%;
+	height: 20%;
+	top: 200px;
+	left: 50%;
 }
