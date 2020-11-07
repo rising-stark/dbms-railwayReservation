@@ -28,12 +28,14 @@
 				<br>
 				<form>
 					<div class="threep2p1">
-						Train no. <input id="train" type="text" name="trainno" size="40" placeholder="Enter Train Number"/>
+						4-digit Train no. <input id="train" type="text" name="trainno" size="40" placeholder="Enter Train Number"/>
+						<div id = "threep2p1_input_train_tooltip">The train number must be of 4 digits</div>
 					</div>
 					<div class="threep2p1">
 						Date <input id="doj" type="date" name="doj" size="40"/>
 					</div>
-					<input id="btnSearch" class="valid" type="button" name="btnSearch" value="Search">
+					<div id="threep2p1btn"><input id="btnSearch" class = "invalid" type="button" name="btnSearch" value="Show" disabled></div>
+					<div id="threep2p1_btn_show_tooltip">This button is disabled because both the fields are empty now.</div>
 				</form>
 			</div>
 			<div class="threep3">
