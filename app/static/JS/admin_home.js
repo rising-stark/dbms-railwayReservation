@@ -1,11 +1,13 @@
 var trainnoType = 0,
 	dojType = 0;
-var trainno, doj;
+var trainno, doj, reenter_trainno, global_settimeout;
 var tooltipTrainno, tooltipDoj;
 
 $(document).ready(function(){
 	trainno = 0;
 	doj = 0;
+	reenter_trainno = 0;
+	global_settimeout = 0;
 	$('.five').fadeOut(0);
 
 	$('input').keypress(function(e) {
@@ -14,7 +16,21 @@ $(document).ready(function(){
 	});
 
 	$('[name="trainno"]').keypress(function(e) {
+		console.log(reenter_trainno);
 		if ($('[name="trainno"]').val().length > 3) {
+			tooltipTrainno = "Cannot input more than 4 digits";
+			$('#threep1p1_input_train_tooltip').html(tooltipTrainno);
+			if(reenter_trainno < 3){
+				reenter_trainno+=1;
+				$('#threep1p1_input_train_tooltip').show(250).delay(500).hide(250);
+			}else if(global_settimeout == 0){
+				global_settimeout = 1;
+				setTimeout(function(){
+					console.log("Setting ");
+					reenter_trainno = 0;
+					global_settimeout = 0;
+				}, 2500);
+			}
 			e.preventDefault();
 			return false;
 		}
@@ -45,15 +61,15 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#threep2p1btn').mouseenter(function(){
+	$('#threep1p1btn').mouseenter(function(){
 		if($('#btnSearch').is(':disabled')){
-			$('#threep2p1_btn_show_tooltip').show(250);
+			$('#threep1p1_btn_show_tooltip').show(250);
 		}
 	});
 	
-	$('#threep2p1btn').mouseleave(function(){
+	$('#threep1p1btn').mouseleave(function(){
 		if($('#btnSearch').is(':disabled')){
-			$('#threep2p1_btn_show_tooltip').hide(250);
+			$('#threep1p1_btn_show_tooltip').hide(250);
 		}
 	});
 	$('input').on('keydown keyup keypress', function() {
@@ -91,28 +107,28 @@ $(document).ready(function(){
 			if(trainnolen !=4){
 				trainno = 0;
 				tooltipTrainno = "The train number must be of 4 digits";
-				$('#threep2p1_input_train_tooltip').html(tooltipTrainno);
-				$('#threep2p1_input_train_tooltip').show(250).delay(1500).hide(250);
+				$('#threep1p1_input_train_tooltip').html(tooltipTrainno);
+				$('#threep1p1_input_train_tooltip').show(250).delay(1500).hide(250);
 			}else{
 				trainno = 1;
 				tooltipTrainno = "Accepted";
-				$('#threep2p1_input_train_tooltip').html(tooltipTrainno);
-				$('#threep2p1_input_train_tooltip').hide(250);
+				$('#threep1p1_input_train_tooltip').html(tooltipTrainno);
+				$('#threep1p1_input_train_tooltip').hide(250);
 			}
 		}else{
 			trainno = 0;
 			tooltipTrainno = "Please fill out this field";
-			$('#threep2p1_input_train_tooltip').html(tooltipTrainno);
-			$('#threep2p1_input_train_tooltip').show(250).delay(1500).hide(250);
+			$('#threep1p1_input_train_tooltip').html(tooltipTrainno);
+			$('#threep1p1_input_train_tooltip').show(250).delay(1500).hide(250);
 		}
 		$('[name="trainno"]').attr('title', tooltipTrainno);
 	});
 
 	$('[name="doj"]').on('focus blur mouseleave', function() {
-		if (dojType == 0) {
+		/*if (dojType == 0) {
 			return false;
 		}
-		dojType = 0;
+		dojType = 0;*/
 		dojlen=$('[name="doj"]').val().length;
 		if (dojlen > 0) {
 			doj = 1;
@@ -124,20 +140,25 @@ $(document).ready(function(){
 		$('[name="doj"]').attr('title', tooltipDoj);
 	});
 
-	$('#threep1p2').click( function () {
-		$('#threep1p2').addClass("active");
-		$('#threep1p1').removeClass("active");
-		$('.threep2').slideUp(250);
-		$('.threep3').slideUp(250);
+	$('#twop1p2').click( function () {
+		$('#twop1p2').addClass("active");
+		$('#twop1p1').removeClass("active");
+		$('.three').fadeOut(250);
+		$('.four').fadeIn(0);
+		$('.four').addClass("animate-to-left");
+		$('.three').css("left", "-100%");
 	});
 
-	$('#threep1p1').click( function () {
-		$('#threep1p1').addClass("active");
-		$('#threep1p2').removeClass("active");
-		$('.threep2').slideDown(250);
-		if($('.threep3').hasClass('.result')){
-			$('.threep3').slideDown(250);
-		}
+	$('#twop1p1').click( function () {
+		/*if($('#twop1p1').hasClass('active')){
+			return;
+		}*/
+		$('#twop1p1').addClass("active");
+		$('#twop1p2').removeClass("active");
+		$('.four').fadeOut(250);
+		$('.three').fadeIn(0);
+		$('.three').addClass("animate-to-right");
+		$('.four').css("left", "100%");
 	});
 
 	$('.valid').click( function () {
@@ -159,7 +180,7 @@ $(document).ready(function(){
 			$(".five").slideDown(500);
 			$.ajax({
 				type: 'POST',
-				url: '/showtrain',
+				url: '/admin_show_train',
 				contentType: "application/json",
 				/*dataType: "json",*/
 				data: JSON.stringify({
@@ -200,9 +221,9 @@ $(document).ready(function(){
 							}
 							train += '</tr>';
 						}
-						$('#threep3p1').append(train);
-						$(".threep3").slideDown(500);
-						$(".threep3").addClass("result");
+						$('#threep2p1').append(train);
+						$(".threep2").slideDown(500);
+						$(".threep2").addClass("result");
 					}
 					else{
 						msg = "No records found for this trainno and Date of journey";
@@ -215,6 +236,53 @@ $(document).ready(function(){
 				}
 			});
 		}
+	});
+
+	$('.grow').click( function () {
+		$(".five").slideUp(0);
+		$(".five").slideDown(500);
+		$.ajax({
+			type: 'POST',
+			url: '/admin_add_train',
+			contentType: "application/json",
+			/*dataType: "json",*/
+			data: JSON.stringify({
+				trainno: $('[name="trainno"]').val(),
+				source: $('[name="source"]').val(),
+				dest: $('[name="dest"]').val(),
+				start_time: $('[name="start_time"]').val(),
+				end_time: $('[name="end_time"]').val(),
+				ac_coaches: $('[name="ac_coaches"]').val(),
+				ac_fare: $('[name="ac_fare"]').val(),
+				sl_fare: $('[name="sl_fare"]').val(),
+				doj: $('[name="doj"]').val()
+			}),
+			cache: false,
+			processData: false,
+			success: function(result){
+				if(result == "1"){
+					msg = "Record Successfully Inserted.<br>Press OK to empty the fields. Press cancel to retain the field values.";
+					$(".five").slideUp(250);
+					var ans = confirm(msg);
+					if(ans == true){
+						$('input').val("");
+					}
+				}
+				else if(result == "0"){
+					msg = "Primary Key violation. Already a pair with same train number and date of journey exists.<br>Press OK to empty the fields. Press cancel to retain the field values.";
+					$(".five").slideUp(250);
+					var ans = confirm(msg);
+					if(ans == true){
+						$('input').val("");
+					}
+				}else{
+					console.log("Result is neither 0 nor 1. Return error from flask");	
+				}
+			},
+			error: function(){
+				console.log("Not able to get response from flask function namely admin_add_train");
+			}
+		});
 	});
 
 	setInterval(Check, 250);

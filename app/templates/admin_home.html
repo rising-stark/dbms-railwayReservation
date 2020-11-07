@@ -12,34 +12,36 @@
 		<script type="text/javascript" src="../static/JS/admin_home.js"></script>
 	</head>
 	<body>
+		<div class="one">
+			<div class="onep1">
+				<img src="../static/IMAGES/avatar.png">
+				<div class="onep1p1">Welcome, <span>oufgidfgyuvhhhvhjvfsdgfhg</span></div>
+			</div>
+		</div>
 		<div class="two">
 			<div class="twop1">
-				<img src="../static/IMAGES/avatar.png">
-				<div class="twop1p1">Welcome, <span>oufgidfgyuvhhhvhjvfsdgfhg</span></div>
+				<div class="twop1p1 active" id="twop1p1">View Trains Info</div>
+				<div class="twop1p1" id="twop1p2">Add Trains Info</div>
 			</div>
 		</div>
 		<div class="three">
 			<div class="threep1">
-				<div class="threep1p1 active" id="threep1p1">View Trains Info</div>
-				<div class="threep1p1" id="threep1p2">Add Trains Info</div>
-			</div>
-			<div class="threep2">
 				<h2>Insert the train number and/or date to search</h2>
 				<br>
 				<form>
-					<div class="threep2p1">
+					<div class="threep1p1">
 						4-digit Train no. <input id="train" type="text" name="trainno" size="40" placeholder="Enter Train Number"/>
-						<div id = "threep2p1_input_train_tooltip">The train number must be of 4 digits</div>
+						<div id = "threep1p1_input_train_tooltip">The train number must be of 4 digits</div>
 					</div>
-					<div class="threep2p1">
+					<div class="threep1p1">
 						Date <input id="doj" type="date" name="doj" size="40"/>
 					</div>
-					<div id="threep2p1btn"><input id="btnSearch" class = "invalid" type="button" name="btnSearch" value="Show" disabled></div>
-					<div id="threep2p1_btn_show_tooltip">This button is disabled because both the fields are empty now.</div>
+					<div id="threep1p1btn"><input id="btnSearch" class = "invalid" type="button" name="btnSearch" value="Show" disabled></div>
+					<div id="threep1p1_btn_show_tooltip">This button is disabled because both the fields are empty now.</div>
 				</form>
 			</div>
-			<div class="threep3">
-				<table id="threep3p1">
+			<div class="threep2">
+				<table id="threep2p1">
 					<tr>
 						<th>Sl. no</th>
 						<th>Train Number</th>
@@ -57,6 +59,60 @@
 					</tr>
 				</table>
 			</div>
+		</div>
+		<div class="four">
+			<form action="register" method="post" id="register-form">
+				<table>
+					<h2>Primary Key (Train no, doj)</h2>
+					<tr>
+						<td>Enter Train No. : </td>
+						<td colspan="3"><input id="trainno" type="text" name="trainno" size="40" placeholder="Enter Train Number"  required/></td>
+						<td><img id="trainnoimg" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>
+						<td ><span class="wrong"></span><span class="tick">Accepted</span></td>
+					</tr>
+					<tr>
+						<td width="35%">Enter Source and Destination :</td>
+						<td width="30%"><input id="source" type="text" name="source" size="40" placeholder="Enter Source Station Name" required/></td>
+						<td width="5%"><img id="sourceimg" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>
+						<td width="40%"><input id="dest" type="text" name="dest" size="40" placeholder="Enter Destination Station Name" required/></td>
+						<td width="5%"><img id="destimg" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>
+						<td width="1%"><span class="wrong"></span><span class="tick">Accepted</span></td>
+					</tr>
+					<tr>
+						<td>Enter Start and End time :</td>
+						<td><input id="start_time" type="time" name="start_time" size="40" placeholder="Enter Start Time" required/></td>
+						<td><img id="start_timeimg" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>
+						<td><input id="end_time" type="time" name="end_time" size="40" placeholder="Enter End Time" required/></td>
+						<td><img id="end_timeimg" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>
+						<td ><span class="wrong"></span><span class="tick">Accepted</span></td>
+					</tr>
+					<tr>
+						<td>Enter Number of AC and SL coaches :</td>
+						<td><input id="ac_coaches" type="text" name="ac_coaches" size="40" placeholder="Enter Number of AC coaches" required/></td>
+						<td><img id="ac_coachesimg" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>
+						<td><input id="sl_coaches" type="text" name="sl_coaches" size="40" placeholder="Enter Number of SL coaches" required/></td>
+						<td><img id="sl_coachesimg" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>
+						<td ><span class="wrong"></span><span class="tick">Accepted</span></td>
+					</tr>
+					<tr>
+						<td>Enter Fare of SL and AC coaches :</td>
+						<td><input id="ac_fare" type="text" name="ac_fare" size="40" placeholder="Enter Fare of AC coach" required/></td>
+						<td><img id="ac_fareimg" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>
+						<td><input id="sl_fare" type="text" name="sl_fare" size="40" placeholder="Enter Fare of Sleeper coach" required/></td>
+						<td><img id="sl_fareimg" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>
+						<td ><span class="wrong"></span><span class="tick">Accepted</span></td>
+					</tr>
+					<tr>
+						<td>Enter Date of Journey : </td>
+						<td colspan="3"><input id="doj" type="date" name="doj" size="40" placeholder="Enter Date of Journey"  required/></td>
+						<td><img id="dojimg" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>
+						<td ><span class="wrong"></span><span class="tick">Accepted</span></td>
+					</tr>
+					<tr>
+						<td colspan="56"><input class="next" type="button" name="btnNEXT" value="SUBMIT"></td>
+					</tr>
+				</table>
+			</form>
 		</div>
 		<div class="five">
 			<img alt="loading" src="../static/IMAGES/loading.gif">

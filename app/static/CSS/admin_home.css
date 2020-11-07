@@ -9,7 +9,7 @@ body{
 	background-repeat: no-repeat;
 }*/
 
-.two {
+.one {
 	position: relative;
 	width: 100%;
 	/*background-color: rgba(10,10,15,0.5);*/
@@ -21,7 +21,7 @@ body{
 	background-repeat: no-repeat;
 }
 
-.two .twop1{
+.one .onep1{
 	position: fixed;
 	right: 2%;
 	top: 10px;
@@ -30,7 +30,7 @@ body{
 	height: 40px;
 }
 
-.two .twop1 img{
+.one .onep1 img{
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
@@ -38,7 +38,7 @@ body{
 	padding: 2px;
 }
 
-.two .twop1 .twop1p1{
+.one .onep1 .onep1p1{
 	position: relative;
 	top: -35%;
 	right: -2%;
@@ -50,31 +50,28 @@ body{
 	color: white;
 }
 
-.two .twop1 .twop1p1 span{
+.one .onep1 .onep1p1 span{
 	font-weight: bold;
 	text-decoration: underline;
 }
 
-.two .twop1:hover{
+.one .onep1:hover{
 	cursor: pointer;
 }
-
-.three{
+.two{
 	position: relative;
 	left: 0%;
 	width: 100%;
-	height: auto;
-	min-height: 300px;
-	max-height: 640px;
-	/*background-image: linear-gradient(to right, rgba(25, 90, 60, 0), rgba(25, 40, 50, 1));*/
-	background-image: linear-gradient(red, yellow, blue);
+	height: 40px;
+	background-image: linear-gradient(rgb(1 32 45), red);
 }
-
-.three .threep1{
+.two .twop1{
+	position: relative;
+	left: 0%;
 	width: 100%;
 	height: 40px;
 }
-.three .threep1 .threep1p1{
+.two .twop1 .twop1p1{
 	width: 50%;
 	font-size: 18px;
 	height: 40px;
@@ -86,10 +83,10 @@ body{
 	background-color: #efeeee;
 	opacity: 0.7;
 }
-.three .threep1 .threep1p1:hover{
+.two .twop1 .twop1p1{
 	cursor: pointer;
 }
-.three .threep1 .active{
+.two .twop1 .active{
 	background-color: white;
 	opacity: 1.0;
 	border-right: 2px solid brown;
@@ -99,8 +96,18 @@ body{
 	/*border-top-right-radius: 10px;
 	border-top-left-radius: 10px;*/
 }
+.three{
+	position: relative;
+	left: 0%;
+	width: 100%;
+	height: auto;
+	min-height: 250px;
+	max-height: 640px;
+	/*background-image: linear-gradient(to right, rgba(25, 90, 60, 0), rgba(25, 40, 50, 1));*/
+	background-image: linear-gradient(red, yellow, blue);
+}
 
-.three .threep2{
+.three .threep1{
 	position: relative;
 	width: 70%;
 	top: 40px;
@@ -109,14 +116,14 @@ body{
 	/*border: 2px solid black;*/
 }
 
-.three .threep2 h2{
+.three .threep1 h2{
 	position: relative;
 	width: 100%;
 	text-align: center;
 	text-decoration: underline;
 }
 
-.three .threep2 .threep2p1{
+.three .threep1 .threep1p1{
 	position: relative;
 	top: 30px;
 	width: 50%;
@@ -124,14 +131,14 @@ body{
 	height: 50px;
 	font-size: 20px;
 }
-.three .threep2 .threep2p1 input[type=text], input[type=date]{
+.three .threep1 .threep1p1 input[type=text], input[type=date]{
 	position: relative;
 	left: 10px;
 	height: 35px;
 	padding: 5px;
 }
 
-.three .threep2 #threep2p1btn{
+.three .threep1 #threep1p1btn{
 	width: 110px;
 	height: 50px;
 	position: relative;
@@ -141,7 +148,7 @@ body{
 	display: inline-block;
 }
 
-.three .threep2 .invalid{
+.three .threep1 .invalid{
 	position: absolute;
 	top: 5px;
 	left: 5px;
@@ -151,10 +158,12 @@ body{
 	color: white;
 	background-color: rgba(140, 0, 0, 0.8);
 }
-.three .threep2 .invalid:hover{
+
+.three .threep1 .invalid:hover{
 	cursor: not-allowed;
 }
-.three .threep2 .valid{
+
+.three .threep1 .valid{
 	position: absolute;
 	top: 5px;
 	left: 5px;
@@ -165,20 +174,20 @@ body{
 	background-color: rgba(0, 100, 0, 0.8);
 	transition: 0.1s ease-in;
 }
-.three .threep2 .valid:hover{
+.three .threep1 .valid:hover{
 	cursor: pointer;
 	border-radius: 20px;
 	width: 105px;
 	height: 45px;
 }
 
-.three .threep2 #threep2p1_btn_show_tooltip{
+.three .threep1 #threep1p1_btn_show_tooltip{
 	position: relative;
 	left: 52.5%;
 	top: -25px;
 	width: 300px;
 	/*background-color: #a60000;*/
-	color: #a60000;
+	color: #fff;
 	box-shadow: 0px 0px 25px #a60000 inset;
 	font-weight: bolder;
 	border-radius: 20px;
@@ -190,7 +199,7 @@ body{
 	border: 4px ridge darkred;
 }
 
-.three .threep2 #threep2p1_btn_show_tooltip::before {
+.three .threep1 #threep1p1_btn_show_tooltip::before {
 	content: "";
 	position: absolute;
 	left: -22px;
@@ -199,13 +208,13 @@ body{
 	border-style: ridge;
 	border-color: transparent darkred transparent transparent;
 }
-.three .threep2 #threep2p1_input_train_tooltip{
+.three .threep1 #threep1p1_input_train_tooltip{
 	position: absolute;
 	left: -10%;
 	top: -50px;
 	width: 350px;
 	/*background-color: #a60000;*/
-	color: #a60000;
+	color: #fff;
 	box-shadow: 0px 0px 25px #a60000 inset;
 	font-weight: bolder;
 	border-radius: 20px;
@@ -216,7 +225,7 @@ body{
 	font-size: 18px;
 	border: 4px ridge darkred;
 }
-.three .threep2 #threep2p1_input_train_tooltip::before {
+.three .threep1 #threep1p1_input_train_tooltip::before {
 	content: "";
 	position: absolute;
 	right: 15px;
@@ -226,7 +235,7 @@ body{
 	border-style: ridge;
 	border-color: darkred transparent transparent transparent;
 }
-.three .threep3{
+.three .threep2{
 	display: none;
 	position: relative;
 	top: 75px;
@@ -234,22 +243,22 @@ body{
 	width: 90%;
 	overflow-y: auto;
 }
-.three .threep3 table{
+.three .threep2 table{
 	width: 100%;
 	border: 2px solid black;
 }
-.three .threep3 table tr{
+.three .threep2 table tr{
 	height: 20px;
 	border-bottom: 2px solid brown;
 }
-.three .threep3 table th{
+.three .threep2 table th{
 	font-weight: bold;
 	font-size: 18px;
 	color: white;
 	border: 2px solid brown;
 	background-color: black;
 }
-.three .threep3 table td, th{
+.three .threep2 table td, th{
 	min-width: 30px;
 	max-width: 80px;
 	text-align: center;
@@ -258,16 +267,131 @@ body{
 	border-right: 2px solid black;
 }
 
-.three .threep3 table tr .available{
+.three .threep2 table tr .available{
 	background-color: green;
 	font-size: 16px;
 	color: white;
 }
 
-.three .threep3 table tr .notavailable{
+.three .threep2 table tr .notavailable{
 	background-color: red;
 	font-size: 16px;
 	color: white;
+}
+.four{
+	position: absolute;
+	/*left: 100%;*/
+	top: 100px;
+	width: 100%;
+	height: 620px;
+	/*display: none;*/
+	min-height: 560px;
+	background: 
+    repeating-radial-gradient(
+      circle at 0 0, 
+      #bca,
+      #ccc 20px
+    );
+}
+.four h2{
+	position: relative;
+	top: 10px;
+	left: 30%;
+	width: 40%;
+	text-align: center;
+	text-decoration: underline;
+	background: black;
+	color: white;
+	padding: 6px;
+	border: 4px ridge brown;
+	border-radius: 40px;
+}
+.four table{
+	position: relative;
+	left: 15%;
+	top: 10px;
+	width: 70%;
+	height: 560px;
+	font-size: 18px;
+}
+
+.four table tr{
+	position: relative;
+	width: 100%;
+	height: 45px;
+	line-height: 50px;
+	border-bottom: 4px ridge brown;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.four table tr td{
+	text-align: left;
+	/*padding: 8px;*/
+}
+
+.four table tr td input{
+	position: relative;
+	left: 15%;
+	width: 70%;
+	height: 40px;
+	padding: 5px 10px;
+	border-radius: 20px;
+}
+.four table tr td input::placeholder{
+	text-align: center;
+}
+.four table tr td img{
+	width: 30px;
+	height: 30px;
+}
+.four .next{
+	position: relative;
+	width: 20%;
+	left: 40%;
+	background: darkred;
+	color: white;
+	font-size: 18px;
+	font-weight: bolder;
+}
+.four .next:hover{
+	cursor: not-allowed;
+}
+.four .tick{
+	display: none;
+	position: absolute;
+}
+
+.animate-to-left{
+	animation: example 0.5s ease-out 0s both;
+}
+
+@keyframes example{
+	0%{
+		left: 100%;
+	}
+	70%{
+		left: -10%;
+	}
+	100%{
+		left: 0%;
+	}
+}
+
+.animate-to-right{
+	animation: example1 0.5s ease-out 0s both;
+}
+
+@keyframes example1{
+	0%{
+		left: -100%;
+	}
+	70%{
+		left: 10%;
+	}
+	100%{
+		left: 0%;
+	}
 }
 
 .five {
