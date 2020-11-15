@@ -3,6 +3,9 @@ from flask import render_template,request, url_for, request, redirect, flash, js
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 global db, engine
+global ac_seats,sl_seats
+ac_seats = 18
+sl_seats = 24
 
 engine = create_engine("postgresql://postgres:1234@localhost:5432/railway")
 db = scoped_session(sessionmaker(bind=engine))
