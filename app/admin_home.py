@@ -14,8 +14,8 @@ def admin_add_train():
 		ac_fare = req["ac_fare"]
 		sl_fare = req["sl_fare"]
 		doj = req["doj"]
-		ac_seats = ac_seats*int(ac_coaches)
-		sl_seats = sl_seats*int(sl_coaches)
+		ac_seats = AC_SEATS*int(ac_coaches)
+		sl_seats = SL_SEATS*int(sl_coaches)
 		# add code here to return 1 if successfully entered
 		# or return 0 if primary key violates because trains table has primary key (trainno, doj)
 		fetch = db.execute("select source from trains where trainno = (:id) and doj = (:date)",{"id":trainno, "date":doj})
