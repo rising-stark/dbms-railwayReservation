@@ -33,7 +33,7 @@
 	padding: 2px;
 }
 
-.one .onep1 .onep1p1{
+.one .onep1 .onep1c1{
 	position: relative;
 	top: -35%;
 	right: -2%;
@@ -45,14 +45,97 @@
 	color: white;
 }
 
-.one .onep1 .onep1p1 span{
+.one .onep1 .onep1c1 #uname{
 	font-weight: bold;
 	text-decoration: underline;
 }
 
 .one .onep1:hover{
 	cursor: pointer;
+	box-shadow: 0px 0px 2px 10px seagreen;
 }
+
+.one #onep1p1::after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    margin-top: -3px;
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: #4cbeff transparent;
+}
+
+.one #onep1p1 .dropdown {
+    /* Size & position */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    /* Styles */
+    background: #fff;
+    border-radius: 0 0 5px 5px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-top: none;
+    border-bottom: none;
+    list-style: none;
+
+    /* Hiding */
+    display: none;
+    overflow: hidden;
+}
+
+.one #onep1p1 .dropdown li {
+    padding: 0 10px ;
+}
+
+.one #onep1p1 .dropdown li a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 10px 10px;
+    border-bottom: 1px solid #e6e8ea;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.one #onep1p1 .dropdown li:last-of-type a {
+    border: none;
+}
+
+.one #onep1p1 .dropdown li i {
+    margin-right: 5px;
+    color: red;
+    padding: 0px 10px;
+    vertical-align: middle;
+    text-align: left;
+}
+
+/* Hover state */
+
+.one #onep1p1 .dropdown li:hover a {
+    color: #57a9d9;
+}
+
+.one #onep1p1 .active {
+    border-radius: 5px 5px 0 0;
+    box-shadow: none;
+    border-bottom: none;
+    color: white;
+}
+
+.one #onep1p1 .active::after {
+    border-color: #82d1ff transparent;
+}
+
+.one #onep1p1 .active {
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    max-height: 400px;
+}
+
 .two{
 	position: relative;
 	left: 0%;
@@ -67,7 +150,7 @@
 	height: 40px;
 }
 .two .twop1 .twop1p1{
-	width: 50%;
+	width: calc(100% / 3);
 	font-size: 18px;
 	height: 40px;
 	border-right: 2px solid gray;
@@ -98,6 +181,7 @@
 	height: auto;
 	min-height: 250px;
 	max-height: 640px;
+	/*display: none;*/
 	/*background-image: linear-gradient(to right, rgba(25, 90, 60, 0), rgba(25, 40, 50, 1));*/
 	background-image: linear-gradient(red, yellow, blue);
 }
@@ -276,6 +360,10 @@
 }
 
 .four{
+	display: none;
+}
+
+.five{
 	position: absolute;
 	left: 100%;
 	top: 100px;
@@ -283,50 +371,51 @@
 	height: 620px;
 	display: none;
 	min-height: 560px;
-	background: 
-    repeating-radial-gradient(
-      circle at 0 0, 
-      #bca,
-      #ccc 20px
-    );
+	background: grey;
 }
-.four h2{
+
+.five #fivep1{
 	position: relative;
 	top: 10px;
-	left: 30%;
-	width: 40%;
+	left: 10%;
+	width: 80%;
+	height: 35%;
+	border-bottom: 4px ridge darkred;
+	border-radius: 20px;
+}
+
+.five #fivep1 h2{
+	position: relative;
+	left: 10%;
+	width: 80%;
 	text-align: center;
-	text-decoration: underline;
 	background: black;
 	color: white;
 	padding: 6px;
 	border: 4px ridge brown;
 	border-radius: 40px;
 }
-.four table{
+.five #fivep1 table{
 	position: relative;
-	left: 15%;
 	top: 10px;
-	width: 70%;
-	height: 560px;
+	height: 130px;
 	font-size: 18px;
 }
 
-.four table tr{
+.five #fivep1 table tr{
 	position: relative;
 	width: 100%;
-	height: 45px;
-	line-height: 50px;
+	height: 35px;
+	line-height: 35px;
 }
 
-.four table tr td{
+.five #fivep1 table tr td{
 	text-align: left;
-	/*padding: 8px;*/
 	position: relative;
 	/*border: 1px solid black;*/
 }
 
-.four table tr td input{
+.five #fivep1 table tr td input, select{
 	position: relative;
 	left: 5%;
 	width: 90%;
@@ -334,41 +423,162 @@
 	padding: 5px 10px;
 	border-radius: 20px;
 }
-input::placeholder{
-	text-align: center;
-}
-.four table tr td img{
+
+.five #fivep1 table tr td img{
 	position: absolute;
-	top: 20px;
+	top: 5px;
 	left: -10px;
 	width: 45px;
 	height: 45px;
 }
-.four table tr td .btnNEXTdiv{
+.five #fivep1 table tr td .btnNEXTdiv{
 	position: relative;
+	width: 40%;
+	height: 50px;
+	left: 15%;
+	top: 0px;
+	/*background: green;*/
+	border-radius: 30px;
+}
+.five #fivep2{
+	position: relative;
+	top: 10px;
+	left: 10%;
+	width: 80%;
+	height: 420px;
+	border: 4px ridge darkred;
+	border-radius: 20px;
+}
+
+.five #fivep2 h2{
+	position: relative;
+	left: 10%;
+	width: 40%;
+	text-align: center;
+	color: darkred;
+	padding: 6px;
+	float: left;
+}
+
+.five #fivep2 table{
+	position: relative;
+	top: 10px;
+	width: 100%;
+	font-size: 18px;
+}
+.five #fivep2 #scrollingdiv{
+	width: 100%;
+	height: 300px;
+	overflow-y: auto;
+}
+.five #fivep2 table #tableHead{
+	position: relative;
+	width: 100%;
+	height: 35px;
+	line-height: 35px;
+}
+
+.five #fivep2 table tr{
+	position: relative;
+	width: 100%;
+	height: 45px;
+	line-height: 45px;
+}
+
+.five #fivep2 table tr #addRow{
+	position: relative;
+	left: calc(50% - 20px);
+	top: 10px;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	border-radius: 50%;
+	background: darkred;
+	color: white;
+	text-align: center;
+	font-size: 40px;
+	font-weight: bolder;
+	transition: 0.2s ease-in;
+}
+.five #fivep2 table tr #addRow:hover{
+	cursor: pointer;
+	background: darkgreen;
+	width: 55px;
+	height: 55px;
+}
+.five #fivep2 table tr th{
+	position: relative;
+	background: black;
+	color: white;
+	font-weight: bolder;
+	font-size: 20px;
+	border-radius: 40px;
+	text-align: center;
+}
+
+.five #fivep2 table tr td{
+	text-align: center;
+	position: relative;
+	/*border: 1px solid black;*/
+}
+.five #fivep2 table tr .cancel span{
+	position: relative;
+	left: calc(50% - 20px);
+	display: block;
+	background: white;
+	width: 40px;
+	height: 40px;
+	font-size: 24px;
+	font-weight: bolder;
+	text-align: center;
+	transition: 0.2s ease-in;
+	border-radius: 50%;
+}
+.five #fivep2 table tr .cancel span:hover{
+	cursor: pointer;
+	width: 45px;
+	height: 45px;
+}
+.five #fivep2 table tr td input, select{
+	position: relative;
+	width: 90%;
+	height: 40px;
+	padding: 5px 10px;
+	border-radius: 20px;
+}
+.five #fivep2 table tr td img{
+	position: absolute;
+	top: 0px;
+	left: -10px;
+	width: 45px;
+	height: 45px;
+}
+.five #fivep2 .btnSUBMITdiv{
+	position: absolute;
 	width: 22%;
-	height: 46px;
+	height: 50px;
 	left: 40%;
-	top: -10px;
+	bottom: 5px;
 	/*background: green;*/
 	border-radius: 20px;
 }
-.four .invalid1{
+
+.five .invalid{
 	position: absolute;
-	top: 3px;
-	left: 1%;
-	width: 98%;
+	top: 5px;
+	left: 3%;
+	width: 94%;
 	height: 40px;
 	background: darkred;
 	color: white;
 	font-size: 18px;
 	font-weight: bolder;
-	border-radius: 0px;
+	border-radius: 0px !important;
 }
-.four .invalid1:hover{
+.five .invalid:hover{
 	cursor: not-allowed;
 }
-.four .valid1{
+.five .valid{
 	position: absolute;
 	top: 3px;
 	left: 1%;
@@ -379,20 +589,20 @@ input::placeholder{
 	font-size: 18px;
 	font-weight: bolder;
 }
-.four .valid1:hover{
+.five .valid:hover{
 	cursor: pointer;
 	transition: 0.1s ease-in;
 	width: 100%;
 	height: 45px;
 	border-radius: 20px;
 }
-.four #btnNEXTdiv_tooltip{
+.five #btnNEXTdiv_tooltip{
 	position: absolute;
-	left: 63%;
-	top: 0px;
+	left: 55%;
+	top: 5px;
 	width: 350px;
 	line-height: 20px;
-	/*background-color: #a60000;*/
+	background-color: #a60000;
 	color: #fff;
 	box-shadow: 0px 0px 25px #a60000 inset;
 	font-weight: bolder;
@@ -404,7 +614,7 @@ input::placeholder{
 	font-size: 18px;
 	border: 4px ridge darkred;
 }
-.four #btnNEXTdiv_tooltip::before {
+.five #btnNEXTdiv_tooltip::before {
 	content: "";
 	position: absolute;
 	left: -22px;
@@ -413,7 +623,37 @@ input::placeholder{
 	border-style: ridge;
 	border-color: transparent darkred transparent transparent;
 }
-.wrong {
+.five #btnSUBMITdiv_tooltip{
+	position: absolute;
+	left: 55%;
+	top: 25px;
+	width: 350px;
+	line-height: 20px;
+	background-color: #a60000;
+	color: #fff;
+	box-shadow: 0px 0px 25px #a60000 inset;
+	font-weight: bolder;
+	border-radius: 20px;
+	padding: 5px;
+	z-index: 2;
+	opacity: 1;
+	display: none;
+	font-size: 18px;
+	border: 4px ridge darkred;
+}
+.five #btnSUBMITdiv_tooltip::before {
+	content: "";
+	position: absolute;
+	left: -22px;
+	top: 12px;
+	border-width: 10px;
+	border-style: ridge;
+	border-color: transparent darkred transparent transparent;
+}
+input::placeholder{
+	text-align: center;
+}
+#fivep1 .wrong {
 	background-color: #a60000;
 	color: #fff;
 	text-align: right;
@@ -422,7 +662,7 @@ input::placeholder{
 	position: absolute;
 	z-index: 1;
 	bottom: 60px;
-	right: 18px;
+	right: 40px;
 	opacity: 1;
 	max-height: 35px;
 	line-height: 35px;
@@ -432,14 +672,14 @@ input::placeholder{
     white-space: nowrap;
 }
 
-.wrong1 {
+#fivep1 .wrong1 {
 	background-color: orange;
 	color: #fff;
 	text-align: center;
 	border-radius: 20px;
 	padding: 0px 10px;
 	position: absolute;
-	left: -220px;
+	right: 20px;
 	top: -5px;
 	z-index: 5;
 	opacity: 1;
@@ -451,7 +691,7 @@ input::placeholder{
     white-space: nowrap;
 }
 
-.correct {
+#fivep1 .correct {
 	background-color: #48871f;
 	color: #fff;
 	text-align: right;
@@ -460,7 +700,7 @@ input::placeholder{
 	position: absolute;
 	z-index: 1;
 	bottom: 60px;
-	right: 18px;
+	right: 40px;
 	opacity: 1;
 	max-height: 35px;
 	line-height: 35px;
@@ -469,7 +709,7 @@ input::placeholder{
 	/* transition: opacity 0.3s; */
 	white-space: nowrap;
 }
-.wrong::after {
+#fivep1 .wrong::after {
 	content: "";
 	position: absolute;
 	bottom: -16px;
@@ -479,7 +719,84 @@ input::placeholder{
 	border-style: solid;
 	border-color: #a60000 transparent transparent transparent;
 }
-.correct::after {
+#fivep1 .correct::after {
+	content: "";
+	position: absolute;
+	bottom: -16px;
+	right: 10px;
+	/* margin-left: -5px; */
+	border-width: 10px;
+	border-style: solid;
+	border-color: #48871f transparent transparent transparent;
+}
+
+#fivep2 .wrong {
+	background-color: #a60000;
+	color: #fff;
+	text-align: right;
+	border-radius: 20px;
+	padding: 0px 10px;
+	position: absolute;
+	z-index: 1;
+	bottom: 50px;
+	right: 27px;
+	opacity: 1;
+	max-height: 35px;
+	line-height: 35px;
+	/*display: none;*/
+	/* border: 5px solid #a60000; */
+	/* transition: opacity 0.3s; */
+    white-space: nowrap;
+}
+
+#fivep2 .wrong1 {
+	background-color: orange;
+	color: #fff;
+	text-align: center;
+	border-radius: 20px;
+	padding: 0px 10px;
+	position: absolute;
+	right: 20px;
+	top: -5px;
+	z-index: 5;
+	opacity: 1;
+	max-height: 35px;
+	line-height: 35px;
+	/*display: none;*/
+	/* border: 5px solid #a60000; */
+	/* transition: opacity 0.3s; */
+    white-space: nowrap;
+}
+
+#fivep2 .correct {
+	background-color: #48871f;
+	color: #fff;
+	text-align: right;
+	border-radius: 20px;
+	padding: 0px 15px;
+	position: absolute;
+	z-index: 1;
+	bottom: 50px;
+	right: 27px;
+	opacity: 1;
+	max-height: 35px;
+	line-height: 35px;
+	display: none;
+	/* border: 5px solid #a60000; */
+	/* transition: opacity 0.3s; */
+	white-space: nowrap;
+}
+#fivep2 .wrong::after {
+	content: "";
+	position: absolute;
+	bottom: -16px;
+	right: 10px;
+	/* margin-left: -5px; */
+	border-width: 10px;
+	border-style: solid;
+	border-color: #a60000 transparent transparent transparent;
+}
+#fivep2 .correct::after {
 	content: "";
 	position: absolute;
 	bottom: -16px;
@@ -531,7 +848,7 @@ input::placeholder{
 	}
 }
 
-.five {
+.seven {
 	width: 100%;
 	position: absolute;
 	top: 0;
@@ -544,7 +861,7 @@ input::placeholder{
 	text-align: center;
 }
 
-.five h1 {
+.seven h1 {
 	position: absolute;
 	width: 100%;
 	top: 60%;
@@ -552,7 +869,7 @@ input::placeholder{
 	font-size: 60px;
 }
 
-.five img {
+.seven img {
 	position: absolute;
 	width: 15%;
 	height: 32%;

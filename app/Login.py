@@ -14,7 +14,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 
 @app.route("/")
-def Home():    
+def Home():
 	return render_template("login.html")
 
 @app.route("/login", methods=['GET', 'POST'])

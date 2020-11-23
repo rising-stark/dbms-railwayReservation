@@ -1,0 +1,67 @@
+*, body{
+	margin: 0%;
+	padding: 0%;
+	box-sizing: border-box;
+}
+
+..six .invalid{
+	position: absolute;
+	top: 5px;
+	left: 3%;
+	width: 94%;
+	height: 40px;
+	background: darkred;
+	color: white;
+	font-size: 18px;
+	font-weight: bolder;
+	border-radius: 0px !important;
+}
+..six .invalid:hover{
+	cursor: not-allowed;
+}
+..six .valid{
+	position: absolute;
+	top: 3px;
+	left: 1%;
+	width: 98%;
+	height: 40px;
+	background: darkgreen;
+	color: white;
+	font-size: 18px;
+	font-weight: bolder;
+}
+..six .valid:hover{
+	cursor: pointer;
+	transition: 0.1s ease-in;
+	width: 100%;
+	height: 45px;
+	border-radius: 20px;
+}
+.seven {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 20;
+	height: 100%;
+	background-color: rgba(25, 55, 55, 0.8);
+	display: none;
+	align-items: center;
+	text-align: center;
+}
+
+.seven h1 {
+	position: absolute;
+	width: 100%;
+	top: 60%;
+	text-align: center;
+	font-size: 60px;
+}
+
+.seven img {
+	position: absolute;
+	width: 15%;
+	height: 32%;
+	top: 33%;
+	left: 45%;
+}

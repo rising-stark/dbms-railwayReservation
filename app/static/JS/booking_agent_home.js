@@ -4,31 +4,31 @@ var trainno, doj;
 var tooltipTrainno, tooltipDoj;
 var  reenter_trainno, global_settimeout;
 
-var total_fields = 11;
+var total_fields = 3;
 name_arr = new Array(total_fields).fill(0);
 type_arr = new Array(total_fields).fill(0);
 reenter_arr = new Array(total_fields).fill(0);
 global_settimeout_arr = new Array(total_fields).fill(0);
-var size_of_train_number = 4, size_of_station = 40, ac_fare_max = 5000, sl_fare_max = 2000;
+
+var total_fields1 = 0;
+name_arr1 = [];
+type_arr1 = [];
+reenter_arr1 = [];
+global_settimeout_arr1 = [];
+var size_of_train_number = 4, size_of_name = 40, max_age = 100;
 
 var dict = {
 	trainno2 : 0,
-	source : 1,
-	dest : 2,
-	start_time : 3,
-	end_time : 4,
-	start_doj : 5,
-	end_doj : 6,
-	ac_coaches : 7,
-	sl_coaches : 8,
-	ac_fare : 9,
-	sl_fare : 10,
-}
+	start_doj2 : 1,
+	coach : 2,
+};
+
+var dict1 = {};
 
 var msg ={
 	"Accepted" : "correct",
 	"Please fill out this field" : "wrong"
-}
+};
 
 $(document).ready(function(){
 	// initializations for validation
@@ -37,11 +37,12 @@ $(document).ready(function(){
 	reenter_trainno = 0;
 	global_settimeout = 0;
 
-	$('.five').fadeOut(0);
+	$('.seven').fadeOut(0);
 
 	function handleTooltips(input, text, wrong_correct, type, show = 1){
 		var img = $(input).parent().next().children("img")[0];
 		var tooltip = $(input).parent().next().next().children("span")[type];
+		console.log(tooltip);
 		if(type == 0){
 			// input element
 			if(show == 1){
@@ -88,12 +89,26 @@ $(document).ready(function(){
 		return msg[text];
 	}
 
+	$(document).click(function(event) {
+		if (!event.target.matches('#onep1p1')){
+			$('.dropdown').slideUp(500).removeClass('active');
+		}
+		else{
+			console.log("dfdf");
+			if ($('.dropdown').hasClass("active") )
+				$('.dropdown').slideUp(500).removeClass('active');
+			else
+				$('.dropdown').slideDown(500).addClass('active');
+		}
+	});
+
 	var regExpNonPrintable = /[^ -~]/;
 	var regExpNum = /[0-9]/;
 	var regExpAlpha = /[a-zA-Z]/;
 	$('input').on('keypress', function(e) {
 		var value = e.key;
 		var name = $(this).attr("name");
+		console.log(name);
 		handleTooltips(this, "Currently accepting input", "", 0, 0);
 		//console.log(value);
 
@@ -116,18 +131,9 @@ $(document).ready(function(){
 			}
 		}
 		
-		if(name == "trainno2" || name == "ac_fare" || name == "sl_fare" || name == "ac_coaches" || name == "sl_coaches"){
+		if(name == "trainno2"){
 			if(!regExpNum.test(value)){
 				var tooltip = "Only Numbers are allowed i.e. 0-9";
-				handleTooltips(this, tooltip, "wrong1", 1);
-				e.preventDefault();
-				return false;
-			}
-		}
-
-		if(name == "source" || name == "dest"){
-			if(!regExpAlpha.test(value)){
-				var tooltip = "Only alphabets are allowed i.e. a-z or A-Z";
 				handleTooltips(this, tooltip, "wrong1", 1);
 				e.preventDefault();
 				return false;
@@ -138,8 +144,59 @@ $(document).ready(function(){
 		type_arr[dict[name]] = 1;
 	});
 
+	$("#fivep2p1").on('keypress', '[name^="fname"], [name^="lname"]', function(e) {
+		var value = e.key;
+		var name = $(this).attr("name");
+		var index = parseInt($(this).parent().prev().html());
+		index--;
+		handleTooltips(this, "Currently accepting input", "", 0, 0);
+		//console.log(value);
+
+		// Here is an exception that "enter" is allowed
+		if(value == 13){
+			e.preventDefault();
+			return false;
+		}
+
+		if(!regExpAlpha.test(value)){
+			var tooltip = "Only alphabets are allowed i.e. a-z or A-Z";
+			handleTooltips(this, tooltip, "wrong1", 1);
+			e.preventDefault();
+			return false;
+		}
+
+		name_arr1[dict1[name]] = 0;
+		type_arr1[dict1[name]] = 1;
+	});
+
+	$("#fivep2p1").on('keypress', '[name^="age"]', function(e) {
+		var value = e.key;
+		var name = $(this).attr("name");
+		var index = parseInt($(this).parent().prev().html());
+		index--;
+		handleTooltips(this, "Currently accepting input", "", 0, 0);
+		//console.log(value);
+
+		// Here is an exception that "enter" is allowed
+		if(value == 13){
+			e.preventDefault();
+			return false;
+		}
+
+		if(!regExpNum.test(value)){
+			var tooltip = "Only Numbers are allowed i.e. 0-9";
+			handleTooltips(this, tooltip, "wrong1", 1);
+			e.preventDefault();
+			return false;
+		}
+
+		name_arr1[dict1[name]] = 0;
+		type_arr1[dict1[name]] = 1;
+	});
+
 	$('input').on('keydown', function(e) {
 		var name = $(this).attr("name");
+		console.log(name);
 		if(e.which == 32){
 			var tooltip = "Cannot input space in this field";
 			if(name == "trainno"){
@@ -153,8 +210,18 @@ $(document).ready(function(){
 		}
 	});
 
+	$("#fivep2p1").on('keydown', '[name^="fname"], [name^="lname"], [name^="age"]', function(e) {
+		if(e.which == 32){
+			var tooltip = "Cannot input space in this field";
+			handleTooltips(this, tooltip, "wrong1", 1);
+			e.preventDefault();
+			return false;
+		}
+	});
+
 	$('input').on('keyup', function(e) {
 		var name = $(this).attr("name");
+		console.log(name);
 		if(e.which==8 || e.which==46){
 			if ($(this).val().length == 0) {
 				var tooltip = "Please fill out this field";
@@ -172,6 +239,20 @@ $(document).ready(function(){
 					name_arr[dict[name]] = 0;
 					type_arr[dict[name]] = 1;
 				}
+			}
+		}		
+	});
+
+	$("#fivep2p1").on('keyup', '[name^="fname"], [name^="lname"], [name^="age"]', function(e) {
+		var name = $(this).attr("name");
+		console.log(name);
+		if(e.which==8 || e.which==46){
+			if ($(this).val().length == 0) {
+				var tooltip = "Please fill out this field";
+				handleTooltips(this, tooltip, "wrong", 0);
+			}else{
+				name_arr1[dict1[name]] = 0;
+				type_arr1[dict1[name]] = 1;
 			}
 		}		
 	});
@@ -201,26 +282,6 @@ $(document).ready(function(){
 		if ($(this).val().length > (size_of_train_number - 1)) {
 			tooltip = "Cannot input more than " + size_of_train_number + " digits";
 			if(reenter_arr[dict[name]] < size_of_train_number){
-				reenter_arr[dict[name]] += 1;
-				handleTooltips(this, tooltip, "wrong1", 1, 1);
-			}else if(global_settimeout_arr[dict[name]] == 0){
-				global_settimeout_arr[dict[name]] = 1;
-				setTimeout(function(){
-					//console.log("Running timeout2. Setting global_settimeout2 variable2 to 0 again");
-					reenter_arr[dict[name]] = 0;
-					global_settimeout_arr[dict[name]] = 0;
-				}, 2500);
-			}
-			e.preventDefault();
-			return false;
-		}
-	});
-
-	$('[name="source"], [name="dest"]').keypress(function(e) {
-		var name = $(this).attr("name");
-		if ($(this).val().length > (size_of_station - 1)) {
-			tooltip = "Cannot input more than " + size_of_station + " characters";
-			if(reenter_arr[dict[name]] < size_of_station){
 				reenter_arr[dict[name]] += 1;
 				handleTooltips(this, tooltip, "wrong1", 1, 1);
 			}else if(global_settimeout_arr[dict[name]] == 0){
@@ -304,25 +365,7 @@ $(document).ready(function(){
 		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
-	$('[name="source"], [name="dest"], [name="ac_coaches"], [name="sl_coaches"]').on('focus blur mouseleave', function() {
-		var name = $(this).attr("name");
-		if (type_arr[dict[name]] == 0) {
-			return false;
-		}
-		type_arr[dict[name]] = 0;
-		len=$(this).val().length;
-		var tooltip;
-		if (len > 0) {
-			name_arr[dict[name]] = 1;
-			tooltip = "Accepted";
-		}else{
-			name_arr[dict[name]] = 0;
-			tooltip = "Please fill out this field";
-		}
-		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
-	});
-
-	$('[name="start_time"], [name="end_time"], [name="start_doj"], [name="end_doj"]').on('blur', function() {
+	$('[name="start_doj2"]').on('blur', function() {
 		var name = $(this).attr("name");
 		len=$(this).val().length;
 		var tooltip;
@@ -336,55 +379,150 @@ $(document).ready(function(){
 		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
-	$('[name="ac_fare"]').on('focus blur mouseleave', function() {
+	$('[name="coach"]').click(function() {
 		var name = $(this).attr("name");
-		if (type_arr[dict[name]] == 0) {
+		var a = $(this).val();
+		var tooltip;
+		if (a == "0") {
+			name_arr[dict[name]] = 0;
+			tooltip = "Please Choose An Option";
+		} else if (a != null) {
+			name_arr[dict[name]] = 1;
+			tooltip = "Accepted";
+		}
+		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
+	});
+
+	$("#fivep2p1").on('focus blur mouseleave', '[name^="fname"], [name^="lname"]', function() {
+		var name = $(this).attr("name");
+		if (type_arr1[dict1[name]] == 0) {
 			return false;
 		}
-		type_arr[dict[name]] = 0;
+		type_arr1[dict1[name]] = 0;
 		len=$(this).val().length;
+		console.log(len);
 		var tooltip;
-		ac_fareval = parseInt($('[name="ac_fare"]').val());
 		if (len > 0) {
-			if(ac_fareval <= 0 || ac_fareval > ac_fare_max){
-				name_arr[dict[name]] = 0;
-				tooltip = "AC fare must be non-zero and less than " + ac_fare_max;
-			}else{
-				name_arr[dict[name]] = 1;
-				tooltip = "Accepted";
-			}
+			name_arr1[dict1[name]] = 1;
+			tooltip = "Accepted";
 		}else{
-			name_arr[dict[name]] = 0;
+			name_arr1[dict1[name]] = 0;
 			tooltip = "Please fill out this field";
 		}
 		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
-	$('[name="sl_fare"]').on('focus blur mouseleave', function() {
+	$("#fivep2p1").on('focus blur mouseleave', '[name^="age"]', function() {
 		var name = $(this).attr("name");
-		if (type_arr[dict[name]] == 0) {
+		console.log(name);
+		console.log(type_arr1[dict1[name]]);
+		if (type_arr1[dict1[name]] == 0) {
 			return false;
 		}
-		type_arr[dict[name]] = 0;
+		type_arr1[dict1[name]] = 0;
 		len=$(this).val().length;
+		ageval = parseInt($(this).val());
 		var tooltip;
-		sl_fareval = parseInt($('[name="sl_fare"]').val());
 		if (len > 0) {
-			if(sl_fareval <= 0 || sl_fareval > sl_fare_max){
-				name_arr[dict[name]] = 0;
-				tooltip = "SL fare must be non-zero and less than " + sl_fare_max;
+			if(ageval <= 0 || ageval > max_age){
+				name_arr1[dict1[name]] = 0;
+				tooltip = "Age must be non-zero and less than " + max_age;
 			}else{
-				name_arr[dict[name]] = 1;
+				name_arr1[dict1[name]] = 1;
 				tooltip = "Accepted";
 			}
 		}else{
-			name_arr[dict[name]] = 0;
+			name_arr1[dict1[name]] = 0;
 			tooltip = "Please fill out this field";
 		}
 		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
-	$("img[id$=img]").click(function(){
+	$("#fivep2p1").on('click', '[name^="gender"]', function() {
+		var name = $(this).attr("name");
+		var a = $('select[name="'+name+'"] option:selected').val();
+		var tooltip;
+		if (a == "0") {
+			name_arr1[dict1[name]] = 0;
+			tooltip = "Please fill out this field";
+		}else{
+			name_arr1[dict1[name]] = 1;
+			tooltip = "Accepted";
+		}
+		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
+	});
+
+	$("#addRow").click(function(){
+		console.log(dict1);
+		acSeats = parseInt($("#acSeats").val());
+		slSeats = parseInt($("#slSeats").val());
+		coach = $('[name="coach"]').val();
+		if(coach == "A"){
+			if(total_fields1 == acSeats){
+				msg = "You have added enough passengers. Cannot add more rows";
+				alert(msg);
+				return;
+			}
+		}else if(coach == "S"){
+			if(total_fields1 == slSeats){
+				msg = "You have added enough passengers. Cannot add more rows";
+				alert(msg);
+				return;
+			}
+		}
+		for(var i = 0; i < 4; i++){
+			name_arr1.push(0);
+			type_arr1.push(0);
+			reenter_arr1.push(0);
+			global_settimeout_arr1.push(0);
+		}
+		dict1["fname" + total_fields1] = (total_fields1*4);
+		dict1["lname"+ total_fields1] = (total_fields1*4)+1;
+		dict1["age"+ total_fields1] = (total_fields1*4)+2;
+		dict1["gender"+ total_fields1] = (total_fields1*4)+3;
+
+		$("#addRowtr").before('<tr>'
+								+'<td width="5%">'+(total_fields1 + 1)+'</td>'
+								+'<td width="19%"><input type="text" name="fname'+total_fields1+'"></td>'
+								+'<td width="4%"><img id="fnameimg'+total_fields1+'" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>'
+								+'<td width="1%"><span></span><span></span></td>'
+								+'<td width="19%"><input type="text" name="lname'+total_fields1+'"></td>'
+								+'<td width="4%"><img id="lnameimg'+total_fields1+'" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>'
+								+'<td width="1%"><span></span><span></span></td>'
+								+'<td width="14%"><input type="text" name="age'+total_fields1+'"></td>'
+								+'<td width="4%"><img id="ageimg'+total_fields1+'" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>'
+								+'<td width="1%"><span></span><span></span></td>'
+								+'<td width="14%">'
+									+'<select name="gender'+total_fields1+'" required>'
+										+'<option value="0">-- Choose Gender --</option>'
+										+'<option value="M">Male</option>'
+										+'<option value="F">Female</option>'
+										+'<option value="O">Other</option>'
+									+'</select>'
+								+'</td>'
+								+'<td width="4%"><img id="genderimg'+total_fields1+'" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>'
+								+'<td width="1%"><span></span><span></span></td>'
+								+'<td width="9%" class="cancel"><span>X</span></td>'
+							+'</tr>');
+		total_fields1++;
+		$("#totalPassengersAdded").html(total_fields1);
+	});
+
+	$(".cancel").click(function(){
+		name_arr1.push(0);
+		type_arr1.push(0);
+		reenter_arr1.push(0);
+		global_settimeout_arr1.push(0);
+		dict1["fname" + total_fields1] = (total_fields1*4)+0;
+		dict1["lname"+ total_fields1] = (total_fields1*4)+1;
+		dict1["age"+ total_fields1] = (total_fields1*4)+2;
+		dict1["gender"+ total_fields1] = (total_fields1*4)+3;
+
+		total_fields1--;
+		$("#totalPassengersAdded").html(total_fields1);
+	});
+
+	$("#fivep2p1").on('click', "img[id*=img]", function(){
 		var item = $(this).parent().next().children("span")[0];
 		$(item).slideToggle(250);
 	});
@@ -421,21 +559,36 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#twop1p2').click( function () {
-		$('#twop1p2').addClass("active");
-		$('#twop1p1').removeClass("active");
-		$('.three').fadeOut(250);
-		$('.four').fadeIn(0);
-		$('.four').addClass("animate-to-left");
-		$('.three').css("left", "-100%");
+	$('#twop1p1').click( function () {
+		$('.twop1p1').removeClass("active");
+		$('#twop1p1').addClass("active");
+		$('.four').fadeOut(250);
+		$('.five').fadeOut(250);
+		$('.three').fadeIn(0);
+		$('.three').addClass("animate-to-left");
+		$('.four').css("left", "100%");
+		$('.five').css("left", "100%");
 	});
 
-	$('#twop1p1').click( function () {
-		$('#twop1p1').addClass("active");
-		$('#twop1p2').removeClass("active");
+	$('#twop1p2').click( function () {
+		$('.twop1p1').removeClass("active");
+		$('#twop1p2').addClass("active");
+		$('.three').fadeOut(250);
+		$('.five').fadeOut(250);
+		$('.four').fadeIn(0);
+		$('.four').addClass("animate-to-left");
+		$('.three').css("left", "100%");
+		$('.five').css("left", "100%");
+	});
+
+	$('#twop1p3').click( function () {
+		$('.twop1p1').removeClass("active");
+		$('#twop1p3').addClass("active");
+		$('.three').fadeOut(250);
 		$('.four').fadeOut(250);
-		$('.three').fadeIn(0);
-		$('.three').addClass("animate-to-right");
+		$('.five').fadeIn(0);
+		$('.five').addClass("animate-to-left");
+		$('.three').css("left", "100%");
 		$('.four').css("left", "100%");
 	});
 
@@ -443,8 +596,8 @@ $(document).ready(function(){
 		var trainnoval = $('[name="trainno"]').val();
 		var dojval = $('[name="doj"]').val();
 		if((trainnoval.length ==0 && dojval.length!=0) || ((trainnoval.length !=0 && dojval.length==0))){
-			$(".five").slideUp(0);
-			$(".five").slideDown(500);
+			$(".seven").slideUp(0);
+			$(".seven").slideDown(500);
 			$.ajax({
 				type: 'POST',
 				url: '/admin_show_train',
@@ -460,12 +613,12 @@ $(document).ready(function(){
 					console.log(result);
 					len = result.length;
 					if(len > 0){
-						$(".five").delay(100).slideUp(500);
+						$(".seven").delay(100).slideUp(500);
 						var train = ''; 
 						var i;
 						for(i = 0; i < len; i++){
 							train += '<tr>'; 
-							train += '<td>' + (i+1) + '.</td>';
+							train += '<td>' + (i+1) + '</td>';
 							train += '<td>' + result[i].trainno + '</td>';
 							train += '<td>' + result[i].source + '</td>';
 							train += '<td>' + result[i].dest + '</td>';
@@ -507,71 +660,29 @@ $(document).ready(function(){
 	});
 
 	$('[name="btnNEXT"]').click(function(){
-		a = parseInt($('[name="ac_coaches"]').val());
-		b = parseInt($('[name="sl_coaches"]').val());
-		if((a + b) == 0){
-			tooltip = "Both the number of coaches cannot be 0. Atleast one coach has to be non-zero for a valid train.";
-			handleTooltips('[name="ac_coaches"]', tooltip, "wrong", 0, 1);
-			handleTooltips('[name="sl_coaches"]', tooltip, "wrong", 0, 1);
-			name_arr[dict["ac_coaches"]] = 0;
-			name_arr[dict["sl_coaches"]] = 0;
-			return;
-		}
-		
-		/* 
-		check time and date validation
-		a = $('[name="start_time"]').val();
-		b = $('[name="end_time"]').val();
-		c = $('[name="start_doj"]').val();
-		d = $('[name="end_doj"]').val();
-		const date1 = new Date(c);
-		const date2 = new Date(d);
-		const time1 = new Date(a);
-		const time2 = new Date(b);
-		const diffDays = Math.ceil(date2 - date1 / (1000 * 60 * 60 * 24));
-		const diffTime = time2 - time1;
-		console.log(diffTime);
-		return;
-		*/
-
-		$(".five").slideUp(0);
-		$(".five").slideDown(500);
+		$(".seven").slideUp(0);
+		$(".seven").slideDown(500);
 		$.ajax({
 			type: 'POST',
-			url: '/admin_add_train',
+			url: '/booking_agent_home1',
 			contentType: "application/json",
 			/*dataType: "json",*/
 			data: JSON.stringify({
 				trainno: $('[name="trainno2"]').val(),
-				source: $('[name="source"]').val(),
-				dest: $('[name="dest"]').val(),
-				start_time: $('[name="start_time"]').val(),
-				end_time: $('[name="end_time"]').val(),
-				ac_coaches: $('[name="ac_coaches"]').val(),
-				sl_coaches: $('[name="sl_coaches"]').val(),
-				ac_fare: $('[name="ac_fare"]').val(),
-				sl_fare: $('[name="sl_fare"]').val(),
-				start_doj: $('[name="start_doj"]').val(),
-				end_doj: $('[name="end_doj"]').val()
+				start_doj: $('[name="start_doj2"]').val(),
+				coach: $('[name="coach"]').val()
 			}),
 			cache: false,
 			processData: false,
 			success: function(result){
+				$(".seven").slideUp(250);
 				if(result == "1"){
-					msg = "Record Successfully Inserted.<br>Press OK to empty the fields. Press cancel to retain the field values.";
-					$(".five").slideUp(250);
-					var ans = confirm(msg);
-					if(ans == true){
-						$('input').val("");
-					}
+					msg = "Please Fill the passenger details below";
+					alert(msg);
 				}
 				else if(result == "0"){
-					msg = "Primary Key violation. Already a pair with same train number and date of journey exists.<br>Press OK to empty the fields. Press cancel to retain the field values.";
-					$(".five").slideUp(250);
-					var ans = confirm(msg);
-					if(ans == true){
-						$('input').val("");
-					}
+					msg = "No seats left for this booking. Please choose another train or date of journey";
+					alert(msg);
 				}else{
 					console.log("Result is neither 0 nor 1. Return value is different from flask");	
 					console.log("Return value is " + result);
@@ -579,9 +690,78 @@ $(document).ready(function(){
 				}
 			},
 			error: function(){
-				console.log("Not able to get response from flask function namely admin_add_train");
+				console.log("Not able to get response from flask function namely booking_agent_home1");
 			}
 		});
+	});
+
+	$('[name="btnSUBMIT"]').click(function(){
+		$(".seven").slideUp(0);
+		$(".seven").slideDown(500);
+		$.ajax({
+			type: 'POST',
+			url: '/booking_agent_home2',
+			contentType: "application/json",
+			/*dataType: "json",*/
+			data: JSON.stringify({
+				trainno: $('[name="trainno2"]').val(),
+				start_doj: $('[name="start_doj2"]').val(),
+				coach: $('[name="coach"]').val(),
+				passengers: total_fields1,
+
+			}),
+			cache: false,
+			processData: false,
+			success: function(result){
+				$(".seven").slideUp(250);
+				if(result == "-1"){
+					msg = "No seats left for this booking. Please choose another train or date of journey";
+					alert(msg);
+				}else{
+					window.location.href = "confirm_payment.html";
+				}
+			},
+			error: function(){
+				console.log("Not able to get response from flask function namely booking_agent_home1");
+			}
+		});
+	});
+
+	$('[name="btnCONFIRM"]').click(function(){
+		$(".seven").slideUp(0);
+		$(".seven").slideDown(500);
+		$.ajax({
+			type: 'POST',
+			url: '/booking_agent_home3',
+			contentType: "application/json",
+			/*dataType: "json",*/
+			cache: false,
+			processData: false,
+			success: function(result){
+				$(".seven").slideUp(250);
+				if(result == "1"){
+					msg = "Seats Booked. Redirecting you to booking tickets page";
+					alert(msg);
+					window.location.href = "booking_agent_home.html";
+				}else{
+					console.log("Some error happened from flask function namely booking_agent_home1");
+					console.log("Result is not 1. Return value is different from flask");	
+					console.log("Return value is " + result);
+					console.log("Return value type is " + typeof result);
+				}
+			},
+			error: function(){
+				console.log("Not able to get response from flask function namely booking_agent_home1");
+			}
+		});
+	});
+
+	$('[name="btnCANCEL"]').click(function(){
+		$(".seven").slideUp(0);
+		$(".seven").slideDown(500);
+		msg = "Transaction Cancelled";
+		alert(msg);
+
 	});
 
 	setInterval(Valid, 500);
@@ -606,14 +786,36 @@ $(document).ready(function(){
 				break;
 			}
 		}
+
 		if (test == 1) {
 			$('[name="btnNEXT"]').removeClass();
-			$('[name="btnNEXT"]').addClass("valid1");
+			$('[name="btnNEXT"]').addClass("valid");
 			$('[name="btnNEXT"]')[0].disabled = false;
 		} else{
 			$('[name="btnNEXT"]').removeClass();
-			$('[name="btnNEXT"]').addClass("invalid1");
+			$('[name="btnNEXT"]').addClass("invalid");
 			$('[name="btnNEXT"]')[0].disabled = true;
+		}
+	}
+
+	setInterval(Valid2, 500);
+	function Valid2() {
+		var test = 1;
+		for(i=0; i<4*total_fields1; i++){
+			if(name_arr1[i]==0){
+				test=0;
+				break;
+			}
+		}
+
+		if (test == 1 && total_fields1 > 0) {
+			$('[name="btnSUBMIT"]').removeClass();
+			$('[name="btnSUBMIT"]').addClass("valid");
+			$('[name="btnSUBMIT"]')[0].disabled = false;
+		} else{
+			$('[name="btnSUBMIT"]').removeClass();
+			$('[name="btnSUBMIT"]').addClass("invalid");
+			$('[name="btnSUBMIT"]')[0].disabled = true;
 		}
 	}
 });
