@@ -1,4 +1,5 @@
-*, body{
+*,
+body {
 	margin: 0%;
 	padding: 0%;
 	box-sizing: border-box;
@@ -17,7 +18,7 @@
 	z-index: 100 !important;
 }
 
-.one .onep1{
+.one .onep1 {
 	position: absolute;
 	right: 2%;
 	top: 10px;
@@ -26,7 +27,7 @@
 	height: 40px;
 }
 
-.one .onep1 img{
+.one .onep1 img {
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
@@ -34,7 +35,7 @@
 	padding: 2px;
 }
 
-.one .onep1 .onep1c1{
+.one .onep1 .onep1c1 {
 	position: relative;
 	top: -35%;
 	right: -2%;
@@ -46,16 +47,16 @@
 	color: white;
 }
 
-.one .onep1 .onep1c1 #uname{
+.one .onep1 .onep1c1 #uname {
 	font-weight: bold;
 	text-decoration: underline;
 }
 
-.one .onep1:hover{
+.one .onep1:hover {
 	cursor: pointer;
 }
 
-.one .onep1 img:hover{
+.one .onep1 img:hover {
 	box-shadow: 0px 0px 2px 10px seagreen;
 }
 
@@ -80,7 +81,7 @@
 	/* Styles */
 	background: #fee;
 	border-radius: 0 0 5px 5px;
-	border: 1px solid rgba(0,0,0,0.2);
+	border: 1px solid rgba(0, 0, 0, 0.2);
 	border-top: none;
 	border-bottom: none;
 	list-style: none;
@@ -90,6 +91,7 @@
 	z-index: 100 !important;
 	/*overflow: hidden;*/
 }
+
 /*.two, .three, .four, .five, .six{
 	display: none;
 }*/
@@ -139,24 +141,26 @@
 }
 
 .one #onep1p1 .active {
-	border-bottom: 1px solid rgba(0,0,0,0.2);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 	max-height: 400px;
 }
 
-.two{
+.two {
 	position: relative;
 	left: 0%;
 	width: 100%;
 	height: 40px;
 	background-image: linear-gradient(rgb(1 32 45), red);
 }
-.two .twop1{
+
+.two .twop1 {
 	position: relative;
 	left: 0%;
 	width: 100%;
 	height: 40px;
 }
-.two .twop1 .twop1p1{
+
+.two .twop1 .twop1p1 {
 	width: calc(100% / 3);
 	font-size: 18px;
 	height: 40px;
@@ -168,10 +172,12 @@
 	background-color: #efeeee;
 	opacity: 0.7;
 }
-.two .twop1 .twop1p1{
+
+.two .twop1 .twop1p1 {
 	cursor: pointer;
 }
-.two .twop1 .active{
+
+.two .twop1 .active {
 	background-color: white;
 	opacity: 1.0;
 	border-right: 2px solid brown;
@@ -181,7 +187,8 @@
 	/*border-top-right-radius: 10px;
 	border-top-left-radius: 10px;*/
 }
-.three{
+
+.three {
 	position: relative;
 	left: 0%;
 	width: 100%;
@@ -192,7 +199,7 @@
 	background-image: linear-gradient(red, yellow, blue);
 }
 
-.three .threep1{
+.three .threep1 {
 	position: relative;
 	width: 70%;
 	top: 40px;
@@ -201,14 +208,14 @@
 	/*border: 2px solid black;*/
 }
 
-.three .threep1 h2{
+.three .threep1 h2 {
 	position: relative;
 	width: 100%;
 	text-align: center;
 	text-decoration: underline;
 }
 
-.three .threep1 .threep1p1{
+.three .threep1 .threep1p1 {
 	position: relative;
 	top: 30px;
 	width: 50%;
@@ -216,14 +223,16 @@
 	height: 50px;
 	font-size: 20px;
 }
-.three .threep1 .threep1p1 input[type=text], input[type=date]{
+
+.three .threep1 .threep1p1 input[type=text],
+input[type=date] {
 	position: relative;
 	left: 10px;
 	height: 35px;
 	padding: 5px;
 }
 
-.three .threep1 #threep1p1btn{
+.three .threep1 #threep1p1btn {
 	width: 110px;
 	height: 50px;
 	position: relative;
@@ -233,7 +242,7 @@
 	display: inline-block;
 }
 
-.three .threep1 .invalid{
+.three .threep1 .invalid {
 	position: absolute;
 	top: 5px;
 	left: 5px;
@@ -244,11 +253,11 @@
 	background-color: rgba(140, 0, 0, 0.8);
 }
 
-.three .threep1 .invalid:hover{
+.three .threep1 .invalid:hover {
 	cursor: not-allowed;
 }
 
-.three .threep1 .valid{
+.three .threep1 .valid {
 	position: absolute;
 	top: 5px;
 	left: 5px;
@@ -259,14 +268,15 @@
 	background-color: rgba(0, 100, 0, 0.8);
 	transition: 0.1s ease-in;
 }
-.three .threep1 .valid:hover{
+
+.three .threep1 .valid:hover {
 	cursor: pointer;
 	border-radius: 20px;
 	width: 105px;
 	height: 45px;
 }
 
-.three .threep1 #threep1p1_btn_show_tooltip{
+.three .threep1 #threep1p1_btn_show_tooltip {
 	position: relative;
 	left: 52.5%;
 	top: -25px;
@@ -293,7 +303,8 @@
 	border-style: ridge;
 	border-color: transparent darkred transparent transparent;
 }
-.three .threep1 #threep1p1_input_train_tooltip{
+
+.three .threep1 #threep1p1_input_train_tooltip {
 	position: absolute;
 	left: -10%;
 	top: -50px;
@@ -310,6 +321,7 @@
 	font-size: 18px;
 	border: 4px ridge darkred;
 }
+
 .three .threep1 #threep1p1_input_train_tooltip::before {
 	content: "";
 	position: absolute;
@@ -320,7 +332,8 @@
 	border-style: ridge;
 	border-color: darkred transparent transparent transparent;
 }
-.three .threep2{
+
+.three .threep2 {
 	display: none;
 	position: relative;
 	top: 75px;
@@ -330,23 +343,28 @@
 	border: 2px solid red;
 	overflow-y: auto;
 }
-.three .threep2 table{
+
+.three .threep2 table {
 	width: 100%;
 	border: 2px solid black;
 	table-layout: fixed;
 }
-.three .threep2 table tr{
+
+.three .threep2 table tr {
 	height: 20px;
 	border-bottom: 2px solid brown;
 }
-.three .threep2 table th{
+
+.three .threep2 table th {
 	font-weight: bold;
 	font-size: 18px;
 	color: white;
 	border: 2px solid brown;
 	background-color: black;
 }
-.three .threep2 table td, th{
+
+.three .threep2 table td,
+th {
 	min-width: 30px;
 	max-width: 80px;
 	text-align: center;
@@ -355,23 +373,88 @@
 	border-right: 2px solid black;
 }
 
-.three .threep2 table tr .available{
+.three .threep2 table tr .available {
 	background-color: green;
 	font-size: 16px;
 	color: white;
 }
 
-.three .threep2 table tr .notavailable{
+.three .threep2 table tr .notavailable {
 	background-color: red;
 	font-size: 16px;
 	color: white;
 }
 
-.four{
-	display: none;
+.four {
+	/*display: none;*/
+	position: relative;
+	width: 100%;
+	max-height: 600px;
+	background: wheat;
+	overflow-y: auto;
+	color: white;
+	padding-bottom: 150px;
 }
 
-.five{
+.four #fourp1 {
+	position: relative;
+	left: 5%;
+	width: 90%;
+}
+
+.four h2 {
+	position: relative;
+	top: 20px;
+	left: 20%;
+	width: 60%;
+	height: 45px;
+	line-height: 45px;
+	background: black;
+	text-align: center;
+	border-radius: 25px;
+}
+.four h3 {
+	position: relative;
+	top: 50px;
+	left: 30%;
+	width: 40%;
+	height: 45px;
+	line-height: 45px;
+	background: darkred;
+	text-align: center;
+	border-radius: 25px;
+}
+.four #fourp1 table {
+	position: relative;
+	top: 80px;
+	width: 100%;
+	border: 2px solid black;
+	table-layout: fixed;
+}
+
+.four #fourp1 table tr {
+	height: 20px;
+	border-bottom: 2px solid brown;
+}
+
+.four #fourp1 table th {
+	font-weight: bold;
+	font-size: 18px;
+	color: white;
+	border: 2px solid brown;
+	background-color: black;
+}
+
+.four #fourp1 table td, th {
+	min-width: 30px;
+	max-width: 80px;
+	text-align: center;
+	padding: 5px;
+	word-wrap: normal;
+	border-right: 2px solid black;
+}
+
+.five {
 	position: absolute;
 	left: 100%;
 	top: 100px;
@@ -382,19 +465,20 @@
 	background: grey;
 }
 
-.five #fivep1{
+.five #fivep1 {
 	position: relative;
 	top: 10px;
 	left: 10%;
 	width: 80%;
-	height: 35%;
+	height: 350px;
 	border-bottom: 4px ridge darkred;
 	border-radius: 20px;
-	display: none;
+	/*display: none;*/
 }
 
-.five #fivep1 h2{
+.five #fivep1 h2 {
 	position: relative;
+	top: 20px;
 	left: 10%;
 	width: 80%;
 	text-align: center;
@@ -404,28 +488,29 @@
 	border: 4px ridge brown;
 	border-radius: 40px;
 }
-.five #fivep1 table{
-	position: relative;
 
-	top: 10px;
-	height: 130px;
+.five #fivep1 table {
+	position: relative;
+	top: 80px;
+	height: 250px;
 	font-size: 18px;
 }
 
-.five #fivep1 table tr{
+.five #fivep1 table tr {
 	position: relative;
 	width: 100%;
-	height: 35px;
-	line-height: 35px;
+	height: 45px;
+	line-height: 45px;
 }
 
-.five #fivep1 table tr td{
+.five #fivep1 table tr td {
 	text-align: left;
 	position: relative;
 	/*border: 1px solid black;*/
 }
 
-.five #fivep1 table tr td input, select{
+.five #fivep1 table tr td input,
+select {
 	position: relative;
 	left: 5%;
 	width: 90%;
@@ -434,14 +519,15 @@
 	border-radius: 20px;
 }
 
-.five #fivep1 table tr td img{
+.five #fivep1 table tr td img {
 	position: absolute;
-	top: 5px;
+	top: 40px;
 	left: -10px;
 	width: 45px;
 	height: 45px;
 }
-.five #fivep1 table tr td .btnNEXTdiv{
+
+.five #fivep1 table tr td .btnNEXTdiv {
 	position: relative;
 	width: 40%;
 	height: 50px;
@@ -450,7 +536,8 @@
 	/*background: green;*/
 	border-radius: 30px;
 }
-.five #fivep2{
+
+.five #fivep2 {
 	position: relative;
 	top: 10px;
 	left: 10%;
@@ -458,16 +545,16 @@
 	height: 420px;
 	border: 4px ridge darkred;
 	border-radius: 20px;
-	/*display: none;*/
+	display: none;
 }
 
-.five #fivep2 #scrollingdiv{
+.five #fivep2 #scrollingdiv {
 	width: 100%;
 	height: 300px;
 	overflow-y: auto;
 }
 
-.five #fivep2 h2{
+.five #fivep2 h2 {
 	position: relative;
 	left: 10%;
 	width: 40%;
@@ -477,27 +564,28 @@
 	float: left;
 }
 
-.five #fivep2 #fivep2p1{
+.five #fivep2 #fivep2p1 {
 	position: relative;
 	top: 10px;
 	width: 100%;
 	font-size: 18px;
 }
-.five #fivep2 #fivep2p1 #tableHead{
+
+.five #fivep2 #fivep2p1 #tableHead {
 	position: relative;
 	width: 100%;
 	height: 35px;
 	line-height: 35px;
 }
 
-.five #fivep2 #fivep2p1 tr{
+.five #fivep2 #fivep2p1 tr {
 	position: relative;
 	width: 100%;
 	height: 45px;
 	line-height: 45px;
 }
 
-.five #fivep2 #fivep2p1 tr #addRow{
+.five #fivep2 #fivep2p1 tr #addRow {
 	position: relative;
 	left: calc(50% - 20px);
 	top: 10px;
@@ -512,13 +600,15 @@
 	font-weight: bolder;
 	transition: 0.2s ease-in;
 }
-.five #fivep2 #fivep2p1 tr #addRow:hover{
+
+.five #fivep2 #fivep2p1 tr #addRow:hover {
 	cursor: pointer;
 	background: darkgreen;
 	width: 55px;
 	height: 55px;
 }
-.five #fivep2 #fivep2p1 tr th{
+
+.five #fivep2 #fivep2p1 tr th {
 	position: relative;
 	background: black;
 	color: white;
@@ -528,12 +618,13 @@
 	text-align: center;
 }
 
-.five #fivep2 table tr td{
+.five #fivep2 table tr td {
 	text-align: center;
 	position: relative;
 	/*border: 1px solid black;*/
 }
-.five #fivep2 table tr .cancel span{
+
+.five #fivep2 table tr .cancel span {
 	position: relative;
 	left: calc(50% - 20px);
 	display: block;
@@ -546,26 +637,31 @@
 	transition: 0.2s ease-in;
 	border-radius: 50%;
 }
-.five #fivep2 table tr .cancel span:hover{
+
+.five #fivep2 table tr .cancel span:hover {
 	cursor: pointer;
 	width: 45px;
 	height: 45px;
 }
-.five #fivep2 table tr td input, select{
+
+.five #fivep2 table tr td input,
+select {
 	position: relative;
 	width: 90%;
 	height: 40px;
 	padding: 5px 10px;
 	border-radius: 20px;
 }
-.five #fivep2 table tr td img{
+
+.five #fivep2 table tr td img {
 	position: absolute;
 	top: 0px;
 	left: -10px;
 	width: 35px;
 	height: 35px;
 }
-.five #fivep2 .btnSUBMITdiv{
+
+.five #fivep2 .btnSUBMITdiv {
 	position: relative;
 	width: 22%;
 	left: 20%;
@@ -577,7 +673,7 @@
 	margin-right: 200px;
 }
 
-.five .invalid{
+.five .invalid {
 	position: absolute;
 	top: 5px;
 	left: 3%;
@@ -589,10 +685,12 @@
 	font-weight: bolder;
 	border-radius: 0px !important;
 }
-.five .invalid:hover{
+
+.five .invalid:hover {
 	cursor: not-allowed;
 }
-.five .valid{
+
+.five .valid {
 	position: absolute;
 	top: 3px;
 	left: 1%;
@@ -603,17 +701,19 @@
 	font-size: 18px;
 	font-weight: bolder;
 }
-.five .valid:hover{
+
+.five .valid:hover {
 	cursor: pointer;
 	transition: 0.1s ease-in;
 	width: 100%;
 	height: 45px;
 	border-radius: 20px;
 }
-.five #btnNEXTdiv_tooltip{
+
+.five #btnNEXTdiv_tooltip {
 	position: absolute;
 	left: 55%;
-	top: 5px;
+	top: 40px;
 	width: 350px;
 	line-height: 20px;
 	background-color: #a60000;
@@ -628,6 +728,7 @@
 	font-size: 18px;
 	border: 4px ridge darkred;
 }
+
 .five #btnNEXTdiv_tooltip::before {
 	content: "";
 	position: absolute;
@@ -637,7 +738,8 @@
 	border-style: ridge;
 	border-color: transparent darkred transparent transparent;
 }
-.five #btnSUBMITdiv_tooltip{
+
+.five #btnSUBMITdiv_tooltip {
 	position: absolute;
 	left: 81%;
 	bottom: 25px;
@@ -655,6 +757,7 @@
 	font-size: 18px;
 	border: 4px ridge darkred;
 }
+
 .five #btnSUBMITdiv_tooltip::before {
 	content: "";
 	position: absolute;
@@ -664,9 +767,11 @@
 	border-style: ridge;
 	border-color: transparent darkred transparent transparent;
 }
-input::placeholder{
+
+input::placeholder {
 	text-align: center;
 }
+
 #fivep1 .wrong {
 	background-color: #a60000;
 	color: #fff;
@@ -675,7 +780,7 @@ input::placeholder{
 	padding: 0px 10px;
 	position: absolute;
 	z-index: 1;
-	bottom: 60px;
+	top: 0px;
 	right: 40px;
 	opacity: 1;
 	max-height: 35px;
@@ -713,7 +818,7 @@ input::placeholder{
 	padding: 0px 15px;
 	position: absolute;
 	z-index: 1;
-	bottom: 60px;
+	top: 0px;
 	right: 40px;
 	opacity: 1;
 	max-height: 35px;
@@ -723,6 +828,7 @@ input::placeholder{
 	/* transition: opacity 0.3s; */
 	white-space: nowrap;
 }
+
 #fivep1 .wrong::after {
 	content: "";
 	position: absolute;
@@ -733,6 +839,7 @@ input::placeholder{
 	border-style: solid;
 	border-color: #a60000 transparent transparent transparent;
 }
+
 #fivep1 .correct::after {
 	content: "";
 	position: absolute;
@@ -800,6 +907,7 @@ input::placeholder{
 	/* transition: opacity 0.3s; */
 	white-space: nowrap;
 }
+
 #fivep2 .wrong::after {
 	content: "";
 	position: absolute;
@@ -810,6 +918,7 @@ input::placeholder{
 	border-style: solid;
 	border-color: #a60000 transparent transparent transparent;
 }
+
 #fivep2 .correct::after {
 	content: "";
 	position: absolute;
@@ -820,83 +929,108 @@ input::placeholder{
 	border-style: solid;
 	border-color: #48871f transparent transparent transparent;
 }
+
 .wronginput {
-	box-shadow:inset 0 0 4px 1px rgba(255, 0, 0, 0.6);
+	box-shadow: inset 0 0 4px 1px rgba(255, 0, 0, 0.6);
 	border: 2px solid darkred;
 }
 
 .correctinput {
-	box-shadow:inset 0 0 4px 1px rgba(0, 255, 0, 0.6);
+	box-shadow: inset 0 0 4px 1px rgba(0, 255, 0, 0.6);
 	border: 2px solid darkgreen;
 }
 
-.animate-to-left{
+.animate-to-left {
 	animation: example 0.5s ease-out 0s both;
 }
 
-@keyframes example{
-	0%{
+@keyframes example {
+	0% {
 		left: 100%;
 	}
-	70%{
+
+	70% {
 		left: -10%;
 	}
-	100%{
+
+	100% {
 		left: 0%;
 	}
 }
 
-.animate-to-right{
+.animate-to-right {
 	animation: example1 0.5s ease-out 0s both;
 }
 
-@keyframes example1{
-	0%{
+@keyframes example1 {
+	0% {
 		left: -100%;
 	}
-	70%{
+
+	70% {
 		left: 10%;
 	}
-	100%{
+
+	100% {
 		left: 0%;
 	}
 }
-.six{
+
+#fivep3 {
+	position: relative;
+	top: 50px;
+	left: 20%;
+	width: 60%;
+	height: 200px;
 	display: none;
-}
-.six .invalid{
-	position: absolute;
-	top: 5px;
-	left: 3%;
-	width: 94%;
-	height: 40px;
+	border: 2px solid red;
 	background: darkred;
 	color: white;
-	font-size: 18px;
+	text-align: center;
+}
+
+#fivep3 #fivep3p2 {
+	position: relative;
+	top: 25px;
+	font-size: 20px;
+	height: 50px;
+}
+
+#fivep3 #fivep3p2 #finalFare {
+	text-decoration: underline;
 	font-weight: bolder;
-	border-radius: 0px !important;
+	font-size: 34px;
+	color: green;
 }
-.six .invalid:hover{
-	cursor: not-allowed;
+
+#fivep3 #fivep3p3 {
+	position: relative;
+	top: 80px;
+	height: 100px;
 }
-.six .valid{
-	position: absolute;
-	top: 3px;
-	left: 1%;
-	width: 98%;
-	height: 40px;
+
+#fivep3 .valid {
+	position: relative;
+	left: 5%;
+	width: 25%;
+	height: 45px;
 	background: darkgreen;
 	color: white;
 	font-size: 18px;
 	font-weight: bolder;
+	float: left;
+	margin-left: 12%;
+	padding: 15px;
 }
-.six .valid:hover{
+
+#fivep3 .valid:hover {
 	cursor: pointer;
 	transition: 0.1s ease-in;
-	width: 100%;
+	width: 27%;
 	height: 45px;
-	border-radius: 20px;
+	border-radius: 25px;
 }
+
 .seven {
 	width: 100%;
 	position: absolute;

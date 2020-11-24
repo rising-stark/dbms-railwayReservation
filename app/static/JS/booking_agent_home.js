@@ -128,11 +128,11 @@ $(document).ready(function() {
 				$('#threep1p1_input_train_tooltip').html(tooltip);
 				$('#threep1p1_input_train_tooltip').show(250).delay(500).hide(250);
 				e.preventDefault();
-				return false;
 			} else {
 				trainnoType = 1;
 				trainno = 0;
 			}
+			return;
 		}
 
 		if (name == "trainno2") {
@@ -143,7 +143,6 @@ $(document).ready(function() {
 				return false;
 			}
 		}
-
 		name_arr[dict[name]] = 0;
 		type_arr[dict[name]] = 1;
 	});
@@ -231,6 +230,8 @@ $(document).ready(function() {
 				if (name == "trainno") {
 					$('#threep1p1_input_train_tooltip').html(tooltip);
 					$('#threep1p1_input_train_tooltip').show(250).delay(500).hide(250);
+				}else if (name == "doj") {
+
 				} else {
 					handleTooltips(this, tooltip, "wrong", 0);
 				}
@@ -612,67 +613,67 @@ $(document).ready(function() {
 	$('[name="btnSearch"]').click(function() {
 		var trainnoval = $('[name="trainno"]').val();
 		var dojval = $('[name="doj"]').val();
-		if ((trainnoval.length == 0 && dojval.length != 0) || ((trainnoval.length != 0 && dojval.length == 0))) {
-			$(".seven").slideUp(0);
-			$(".seven").slideDown(500);
-			$.ajax({
-				type: 'POST',
-				url: '/admin_show_train',
-				contentType: "application/json",
-				/*dataType: "json",*/
-				data: JSON.stringify({
-					trainno: trainnoval,
-					doj: dojval
-				}),
-				cache: false,
-				processData: false,
-				success: function(result) {
+		$(".seven").slideUp(0);
+		$(".threep2").slideUp(0);
+		$('#threep2p1').find("tr:gt(0)").remove();
+		$(".seven").slideDown(500);
+		$.ajax({
+			type: 'POST',
+			url: '/admin_show_train',
+			contentType: "application/json",
+			/*dataType: "json",*/
+			data: JSON.stringify({
+				trainno: trainnoval,
+				doj: dojval
+			}),
+			cache: false,
+			processData: false,
+			success: function(result) {
+				$(".seven").delay(100).slideUp(500);
+				console.log(result);
+				len = result.length;
+				if (len > 0) {
 					$(".seven").delay(100).slideUp(500);
-					console.log(result);
-					len = result.length;
-					if (len > 0) {
-						$(".seven").delay(100).slideUp(500);
-						var train = '';
-						var i;
-						for (i = 0; i < len; i++) {
-							train += '<tr>';
-							train += '<td>' + (i + 1) + '.</td>';
-							train += '<td>' + result[i].trainno + '</td>';
-							train += '<td>' + result[i].source + '</td>';
-							train += '<td>' + result[i].doj + '</td>';
-							train += '<td>' + result[i].start_time + '</td>';
-							train += '<td>' + result[i].dest + '</td>';
-							/*train += '<td>' + result[i].end_doj + '</td>';*/
-							train += '<td>' + result[i].end_time + '</td>';
-							train += '<td>' + result[i].ac_coaches + '</td>';
-							train += '<td>' + result[i].ac_fare + '</td>';
-							train += '<td>' + result[i].sl_coaches + '</td>';
-							train += '<td>' + result[i].sl_fare + '</td>';
-							if (result[i].ac_seats > 0) {
-								train += '<td class = "available">' + result[i].ac_seats + '</td>';
-							} else {
-								train += '<td class = "notavailable">' + result[i].ac_seats + '</td>';
-							}
-							if (result[i].sl_seats > 0) {
-								train += '<td class = "available">' + result[i].sl_seats + '</td>';
-							} else {
-								train += '<td class = "notavailable">' + result[i].sl_seats + '</td>';
-							}
-							train += '</tr>';
+					var train = '';
+					var i;
+					for (i = 0; i < len; i++) {
+						train += '<tr>';
+						train += '<td>' + (i + 1) + '.</td>';
+						train += '<td>' + result[i].trainno + '</td>';
+						train += '<td>' + result[i].source + '</td>';
+						train += '<td>' + result[i].doj + '</td>';
+						train += '<td>' + result[i].start_time + '</td>';
+						train += '<td>' + result[i].dest + '</td>';
+						/*train += '<td>' + result[i].end_doj + '</td>';*/
+						train += '<td>' + result[i].end_time + '</td>';
+						train += '<td>' + result[i].ac_coaches + '</td>';
+						train += '<td>' + result[i].ac_fare + '</td>';
+						train += '<td>' + result[i].sl_coaches + '</td>';
+						train += '<td>' + result[i].sl_fare + '</td>';
+						if (result[i].ac_seats > 0) {
+							train += '<td class = "available">' + result[i].ac_seats + '</td>';
+						} else {
+							train += '<td class = "notavailable">' + result[i].ac_seats + '</td>';
 						}
-						$('#threep2p1').append(train);
-						$(".threep2").slideDown(500);
-						$(".threep2").addClass("result");
-					} else {
-						msg = "No records found for this particular trainno and Date of journey";
-						alert(msg);
+						if (result[i].sl_seats > 0) {
+							train += '<td class = "available">' + result[i].sl_seats + '</td>';
+						} else {
+							train += '<td class = "notavailable">' + result[i].sl_seats + '</td>';
+						}
+						train += '</tr>';
 					}
-				},
-				error: function() {
-					console.log("Not able to get response from flask function namely showtrain");
+					$('#threep2p1').append(train);
+					$(".threep2").slideDown(500);
+					$(".threep2").addClass("result");
+				} else {
+					msg = "No records found for this particular trainno and Date of journey";
+					alert(msg);
 				}
-			});
-		}
+			},
+			error: function() {
+				console.log("Not able to get response from flask function namely showtrain");
+			}
+		});
 	});
 
 	$('[name="btnNEXT"]').click(function() {
@@ -735,9 +736,9 @@ $(document).ready(function() {
 			processData: false,
 			success: function(result) {
 				$(".seven").slideUp(250);
-				/*window.location.href = "confirm_payment";*/
-				$(".five").fadeOut(250);
-				$(".six").fadeIn(250);
+				$("#fivep1").slideUp(250);
+				$("#fivep2").slideUp(250);
+				$("#fivep3").slideDown(250);
 				$("#finalFare").html(result);
 				console.log(result);
 			},
@@ -771,7 +772,7 @@ $(document).ready(function() {
 				coach: $('[name="coach"]').val(),
 				no_of_passengers: total_fields1,
 				fare: $("#finalFare").html(),
-				uname: "hk",
+				uname: $("#uname").html(),
 				dict1: dict2
 			}),
 			cache: false,
@@ -781,7 +782,8 @@ $(document).ready(function() {
 				if (result == "1") {
 					msg = "Seats Booked. Redirecting you to booking tickets page";
 					alert(msg);
-					window.location.href = "booking_agent_home.html";
+					window.location.href='http://127.0.0.1:5000/booking_agent_home';
+					$("#twop1p3").click();
 				} else {
 					console.log("Some error happened from flask function namely book_ticket3");
 					console.log("Result is not 1. Return value is different from flask");
@@ -804,7 +806,6 @@ $(document).ready(function() {
 	});
 
 	setInterval(Valid, 500);
-
 	function Valid() {
 		if (trainno == 1 || doj == 1) {
 			$('[name="btnSearch"]').removeClass();
@@ -818,7 +819,6 @@ $(document).ready(function() {
 	}
 
 	setInterval(Valid1, 500);
-
 	function Valid1() {
 		var test = 1;
 		for (i = 0; i < total_fields; i++) {
@@ -840,7 +840,6 @@ $(document).ready(function() {
 	}
 
 	setInterval(Valid2, 500);
-
 	function Valid2() {
 		var test = 1;
 		for (i = 0; i < 4 * total_fields1; i++) {

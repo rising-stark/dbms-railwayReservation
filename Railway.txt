@@ -1,9 +1,11 @@
+\c postgres;
+DROP DATABASE IF EXISTS railway;
+CREATE DATABASE railway;
+\c railway;
 CREATE TABLE admin(
-fname varchar(40) NOT NULL,
-lname varchar(40) NOT NULL,
 uname varchar(40) PRIMARY KEY,
-password varchar(40) NOT NULL,
-) COMMENT 'this table represents admin and interacts with tables train and stations';
+password varchar(40) NOT NULL
+);
 
 CREATE TABLE booking_agent(
 fname varchar(40) NOT NULL,
@@ -11,66 +13,59 @@ lname varchar(40) NOT NULL,
 uname varchar(40) PRIMARY KEY,
 password varchar(40) NOT NULL,
 gender char(1) NOT NULL,
-dob timestamp NOT NULL,
-email varchar(40) NOT NULL,
-phone varchar(40) NOT NULL,
-creditcard varchar(16) NOT NULL,
+dob VARCHAR(20) NOT NULL,
+email varchar(40) NOT NULL UNIQUE,
+phone varchar(40) NOT NULL UNIQUE,
+creditcard VARCHAR(20) NOT NULL UNIQUE,
 address varchar(100) NOT NULL
 );
 
 CREATE TABLE trains(
-trainno int PRIMARY KEY,
+trainno int NOT NULL,
 source varchar(40) NOT NULL,
+start_time VARCHAR(10) NOT NULL,
 dest varchar(40) NOT NULL,
+end_time VARCHAR(10) NOT NULL,
 ac_coaches int NOT NULL,
 sl_coaches int NOT NULL,
-
-);
-
-CREATE TABLE stations(
-stationid int PRIMARY KEY,
-stationname varchar(40) NOT NULL,
-
-
+ac_fare int NOT NULL,
+sl_fare int NOT NULL,
+doj VARCHAR(20) NOT NULL,
+ac_seats int NOT NULL,
+sl_seats int NOT NULL,
+Primary key(trainno, doj)
 );
 
 CREATE TABLE ticket(
-pnr varchar(40) PRIMARY KEY,
+count SERIAL PRIMARY KEY,
+pnr varchar(40) NOT NULL UNIQUE,
 bookedby varchar(40) NOT NULL,
 no_of_seats int NOT NULL,
-doj timestamp NOT NULL,
-coach char(2) NOT NULL,
+doj VARCHAR(10) NOT NULL,
 trainno int NOT NULL,
-status int NOT NULL,
 amount int NOT NULL,
-foreign key (trainno) references trains(trainno) ON UPDATE CASCADE ON DELETE CASCADE
+foreign key (trainno, doj) references trains(trainno, doj) ON UPDATE CASCADE ON DELETE CASCADE,
 foreign key (bookedby) references booking_agent(uname) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-
-
-
 CREATE TABLE passenger(
-pid varchar(40) PRIMARY KEY,
+pid SERIAL PRIMARY KEY,
 fname varchar(40) NOT NULL,
 lname varchar(40) NOT NULL,
 age int NOT NULL,
 gender char(1) NOT NULL,
 seatno int NOT NULL,
-bookedby varchar(40) NOT NULL,
+coach char(6) NOT NULL,
 berth char(2) NOT NULL,
 pnr varchar(40) NOT NULL,
-foreign key (bookedby) references booking_agent(uname) ON UPDATE CASCADE ON DELETE CASCADE,
 foreign key (pnr) references ticket(pnr) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-
 /*
 Doubts:	Answer
-1.ticket cancellation allowed or not	No need to worry
+1. ticket cancellation allowed or not	No need to worry
 2. record dates in train tables,	Lower Bound - 2 months, upper bound - jo marzi
-3. different paths or graphs of train stations including source and destination	No intermediate stations
-	
+3. different paths or graphs of train stations including source and destination	No intermediate stations	
 4 Possible Dates/Calender	
 	
 	

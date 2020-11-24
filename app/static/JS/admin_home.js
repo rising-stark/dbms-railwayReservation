@@ -113,11 +113,11 @@ $(document).ready(function() {
 				$('#threep1p1_input_train_tooltip').html(tooltip);
 				$('#threep1p1_input_train_tooltip').show(250).delay(500).hide(250);
 				e.preventDefault();
-				return false;
 			} else {
 				trainnoType = 1;
 				trainno = 0;
 			}
+			return false;
 		}
 
 		if (name == "trainno2" || name == "ac_fare" || name == "sl_fare" || name == "ac_coaches" || name == "sl_coaches") {
@@ -166,6 +166,8 @@ $(document).ready(function() {
 				if (name == "trainno") {
 					$('#threep1p1_input_train_tooltip').html(tooltip);
 					$('#threep1p1_input_train_tooltip').show(250).delay(500).hide(250);
+				}else if (name == "doj") {
+					
 				} else {
 					handleTooltips(this, tooltip, "wrong", 0);
 				}
@@ -494,66 +496,66 @@ $(document).ready(function() {
 	$('[name="btnSearch"]').click(function() {
 		var trainnoval = $('[name="trainno"]').val();
 		var dojval = $('[name="doj"]').val();
-		if ((trainnoval.length == 0 && dojval.length != 0) || ((trainnoval.length != 0 && dojval.length == 0))) {
-			$(".five").slideUp(0);
-			$(".five").slideDown(500);
-			$.ajax({
-				type: 'POST',
-				url: '/admin_show_train',
-				contentType: "application/json",
-				/*dataType: "json",*/
-				data: JSON.stringify({
-					trainno: trainnoval,
-					doj: dojval
-				}),
-				cache: false,
-				processData: false,
-				success: function(result) {
-					$(".five").slideUp(500);
-					console.log(result);
-					len = result.length;
-					if (len > 0) {
-						var train = '';
-						var i;
-						for (i = 0; i < len; i++) {
-							train += '<tr>';
-							train += '<td>' + (i + 1) + '.</td>';
-							train += '<td>' + result[i].trainno + '</td>';
-							train += '<td>' + result[i].source + '</td>';
-							train += '<td>' + result[i].doj + '</td>';
-							train += '<td>' + result[i].start_time + '</td>';
-							train += '<td>' + result[i].dest + '</td>';
-							/*train += '<td>' + result[i].end_doj + '</td>';*/
-							train += '<td>' + result[i].end_time + '</td>';
-							train += '<td>' + result[i].ac_coaches + '</td>';
-							train += '<td>' + result[i].ac_fare + '</td>';
-							train += '<td>' + result[i].sl_coaches + '</td>';
-							train += '<td>' + result[i].sl_fare + '</td>';
-							if (result[i].ac_seats > 0) {
-								train += '<td class = "available">' + result[i].ac_seats + '</td>';
-							} else {
-								train += '<td class = "notavailable">' + result[i].ac_seats + '</td>';
-							}
-							if (result[i].sl_seats > 0) {
-								train += '<td class = "available">' + result[i].sl_seats + '</td>';
-							} else {
-								train += '<td class = "notavailable">' + result[i].sl_seats + '</td>';
-							}
-							train += '</tr>';
+		$(".five").slideUp(0);
+		$(".threep2").slideUp(0);
+		$('#threep2p1').find("tr:gt(0)").remove();
+		$(".five").slideDown(500);
+		$.ajax({
+			type: 'POST',
+			url: '/admin_show_train',
+			contentType: "application/json",
+			/*dataType: "json",*/
+			data: JSON.stringify({
+				trainno: trainnoval,
+				doj: dojval
+			}),
+			cache: false,
+			processData: false,
+			success: function(result) {
+				$(".five").slideUp(500);
+				console.log(result);
+				len = result.length;
+				if (len > 0) {
+					var train = '';
+					var i;
+					for (i = 0; i < len; i++) {
+						train += '<tr>';
+						train += '<td>' + (i + 1) + '.</td>';
+						train += '<td>' + result[i].trainno + '</td>';
+						train += '<td>' + result[i].source + '</td>';
+						train += '<td>' + result[i].doj + '</td>';
+						train += '<td>' + result[i].start_time + '</td>';
+						train += '<td>' + result[i].dest + '</td>';
+						/*train += '<td>' + result[i].end_doj + '</td>';*/
+						train += '<td>' + result[i].end_time + '</td>';
+						train += '<td>' + result[i].ac_coaches + '</td>';
+						train += '<td>' + result[i].ac_fare + '</td>';
+						train += '<td>' + result[i].sl_coaches + '</td>';
+						train += '<td>' + result[i].sl_fare + '</td>';
+						if (result[i].ac_seats > 0) {
+							train += '<td class = "available">' + result[i].ac_seats + '</td>';
+						} else {
+							train += '<td class = "notavailable">' + result[i].ac_seats + '</td>';
 						}
-						$('#threep2p1').append(train);
-						$(".threep2").slideDown(500);
-						$(".threep2").addClass("result");
-					} else {
-						msg = "No records found for this particular trainno and Date of journey";
-						alert(msg);
+						if (result[i].sl_seats > 0) {
+							train += '<td class = "available">' + result[i].sl_seats + '</td>';
+						} else {
+							train += '<td class = "notavailable">' + result[i].sl_seats + '</td>';
+						}
+						train += '</tr>';
 					}
-				},
-				error: function() {
-					console.log("Not able to get response from flask function namely showtrain");
+					$('#threep2p1').append(train);
+					$(".threep2").slideDown(500);
+					$(".threep2").addClass("result");
+				} else {
+					msg = "No records found for this particular trainno and Date of journey";
+					alert(msg);
 				}
-			});
-		}
+			},
+			error: function() {
+				console.log("Not able to get response from flask function namely showtrain");
+			}
+		});
 	});
 
 	$('[name="btnNEXT"]').click(function() {

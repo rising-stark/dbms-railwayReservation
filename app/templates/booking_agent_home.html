@@ -69,30 +69,33 @@
 			</div>
 		</div>
 		<div class="four">
-			<table id="fourp1">
-				<tr>
-					<th>Sl. no</th>
-					<th>Train Number</th>
-					<th>Source</th>
-					<th>Start Date of Journey</th>
-					<th>Start Time</th>
-					<th>Destination</th>
-					<th>End Date of Journey</th>
-					<th>End Time</th>
-					<th>#AC coaches</th>
-					<th>AC Fare</th>
-					<th>#SL coaches</th>
-					<th>SL Fare</th>
-					<th>#AC Seats Available</th>
-					<th>#SL Seats Available</th>
-				</tr>
-			</table>
+			<div id="fourp1">
+				<h2>All the previous bookings with passenger details.</h2>
+				<h3>NO PREVIOUS BOOKINGS AVAILABLE</h3>
+				<table id="fourp1p1">
+					<tr>
+						<th>Sl. no</th>
+						<th>Train Number</th>
+						<th>Source</th>
+						<th>Start Date of Journey</th>
+						<th>Start Time</th>
+						<th>Destination</th>
+						<!-- <th>End Date of Journey</th> -->
+						<th>End Time</th>
+						<th>Coach No.</th>
+						<th>Seat No.</th>
+						<th>Berth Type</th>
+						<th>Fare</th>
+						<th>passenger details</th>
+					</tr>
+				</table>
+			</div>
 		</div>
 		<div class="five">
 			<form action="booking_agent_new_booking" method="post" id="booking_agent_new_booking">
 				<div id = "fivep1">
+					<h2>Enter the train no., start date of journey and select coach type</h2>
 					<table>
-						<h2>Enter the train no., start date of journey and select coach type</h2>
 						<tr>
 							<td width="19%">Enter Train No. : </td>
 							<td width="25%"><input id="trainno2" type="text" name="trainno2" size="40" placeholder="Enter Train Number" required/></td>
@@ -171,19 +174,19 @@
 					<div class="btnSUBMITdiv" id="btnSUBMITdiv"><input class="invalid" id="btnSUBMIT" type="button" name="btnSUBMIT" value="Book Ticket" disabled></div>
 					<div id="btnSUBMITdiv_tooltip">This button is disabled because altleast some of the fields are empty now.</div>
 				</div>
+				<div id = "fivep3">
+					<!-- <div id="fivep3c1">
+						<h4>Confirm the transaction. This page is valid for <span id="timer"></span></h4>
+					</div> -->
+					<div id="fivep3p2">
+						Confirm your payment of &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="finalFare">0</span>
+					</div>
+					<div id="fivep3p3">
+						<input class="valid" id="btnCANCEL" type="button" name="btnCANCEL" value="Cancel Payment">
+						<input class="valid" id="btnCONFIRM" type="button" name="btnCONFIRM" value="Confirm Transaction">
+					</div>
+				</div>
 			</form>
-		</div>
-		<div class = "six">
-			<div class="sixc1">
-				<h4>Confirm the transaction. This page is valid for <span id="timer"></span></h4>
-			</div>
-			<div class="sixc2">
-				Confirm your payment of <span id="finalFare">0</span>
-			</div>
-			<div class="sixc3">
-				<input class="valid" id="btnCANCEL" type="button" name="btnCANCEL" value="Cancel Payment">
-				<input class="valid" id="btnCONFIRM" type="button" name="btnCONFIRM" value="Confirm Transaction">
-			</div>
 		</div>
 		<div class="seven">
 			<img alt="loading" src="../static/IMAGES/loading.gif">

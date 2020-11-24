@@ -325,6 +325,8 @@
 	top: 75px;
 	left: 5%;
 	width: 90%;
+	max-height: 300px;
+	border: 2px solid red;
 	overflow-y: auto;
 }
 .three .threep2 table{
