@@ -68,7 +68,7 @@ def book_ticket3():
 			acq_seats = tot_seats - s_detail[0][0]
 			sl_berths = ["LB","LB","UB","UB","SL","SU"]
 			m = len(sl_berths)
-			pnr = 1
+			pnr = 2
 			seats = []
 			coaches = []
 			berths = []
@@ -98,7 +98,7 @@ def book_ticket3():
 			acq_seats = tot_seats - s_detail[0][0]
 			ac_berths = ["LB","MB","UB","LB","MB","UB","SL","SU"]
 			m = len(ac_berths)
-			pnr = 1
+			pnr = 2
 			seats = []
 			coaches = []
 			berths = []

@@ -1,28 +1,20 @@
-from flask import Flask, render_template, url_for, request, redirect
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
-
-app = Flask(__name__)
-
-engine = create_engine("postgresql://postgres:12345@localhost:5432/test1")
-db = scoped_session(sessionmaker(bind=engine))
-
-
-app.secret_key = 'aaed92bfdd1f28a5671fedf04cd61079'
-
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
+from main import *
 
 @app.route("/")
 def Home():
+	print(session)
+	session.clear()
 	return render_template("login.html")
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-	uname=request.form.get("uname")
-	password=request.form.get("password")
+	if request.method == "POST":
 
-	resultproxy = db.execute("SELECT * FROM Admin WHERE uname = (:uname)&& password=(:password)",{"uname": uname, "password": password})
+		req = request.json
+		uname = req["uname"]
+		password = req["pass"]
+
+	resultproxy = db.execute("SELECT uname FROM Admin WHERE uname = (:uname) and password=(:password)",{"uname": uname, "password": password})
 
 	d, a = {}, []
 	for rowproxy in resultproxy:
@@ -30,23 +22,43 @@ def login():
 			d = {**d, **{column: value}}
 		a.append(d)
 
-	if len(str(d))!=2:
-		return redirect(url_for('login'))
+	ct = 0
+	for _ in a:
+		ct += 1
+		break
+	if ct == 1:
+		session["uname"] = uname
+		return "1"
 	else:
-		resultproxy1 = db.execute("SELECT * FROM booking_agent WHERE uname = (:uname)&& password=(:password)",{"uname": uname, "password": password})
+		resultproxy1 = db.execute("SELECT uname FROM booking_agent WHERE uname = (:uname) and password=(:password)",{"uname": uname, "password": password})
 		x, y = {}, []
 		for rowproxy in resultproxy1:
 			for column, value in rowproxy.items():
 				x = {**x, **{column: value}}
 			y.append(x)
 
-		if len(str(x))!=2:
-			return redirect(url_for('login'))
+		ct = 0
+		for _ in y:
+			ct += 1
+			break
+		if ct == 1:
+			session["uname"] = uname
+			return "2"
 		else:
-			return "Username doen't exist"
+			return "0"
 		
-	return render_template("admin_login.html", form=login_form)
+	return "NULL"
 
+@app.route("/admin_home", methods=['GET', 'POST'])
+def admin_home():
+	print(session)
+	if session.get('uname') == None:
+		return render_template("login.html")
+	return render_template("admin_home.html")
 
-if __name__=='__main__':
-	app.run(debug=True)
+@app.route("/booking_agent_home", methods=['GET', 'POST'])
+def booking_agent_home():
+	print(session)
+	if session.get('uname') == None:
+		return render_template("login.html")
+	return render_template("booking_agent_home.html")

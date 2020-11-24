@@ -14,10 +14,11 @@
 	font-family: serif;
 	background: url(../IMAGES/train.jpg);
 	background-repeat: no-repeat;
+	z-index: 100 !important;
 }
 
 .one .onep1{
-	position: fixed;
+	position: absolute;
 	right: 2%;
 	top: 10px;
 	min-width: 20%;
@@ -33,7 +34,7 @@
 	padding: 2px;
 }
 
-.one .onep1 .onep1p1{
+.one .onep1 .onep1c1{
 	position: relative;
 	top: -35%;
 	right: -2%;
@@ -45,7 +46,7 @@
 	color: white;
 }
 
-.one .onep1 .onep1p1 span{
+.one .onep1 .onep1c1 #uname{
 	font-weight: bold;
 	text-decoration: underline;
 }
@@ -53,6 +54,95 @@
 .one .onep1:hover{
 	cursor: pointer;
 }
+
+.one .onep1 img:hover{
+	box-shadow: 0px 0px 2px 10px seagreen;
+}
+
+.one #onep1p1::after {
+	content: "";
+	width: 0;
+	height: 0;
+	position: absolute;
+	top: 60%;
+	right: -15px;
+	margin-top: -3px;
+	border-width: 6px 6px 0 6px;
+	border-style: solid;
+	border-color: #fff transparent;
+}
+
+.one #onep1p1 .dropdown {
+	/* Size & position */
+	position: absolute;
+	left: -50px;
+	width: 150%;
+	/* Styles */
+	background: #fee;
+	border-radius: 0 0 5px 5px;
+	border: 1px solid rgba(0,0,0,0.2);
+	border-top: none;
+	border-bottom: none;
+	list-style: none;
+
+	/* Hiding */
+	display: none;
+	z-index: 100 !important;
+	/*overflow: hidden;*/
+}
+/*.two, .three, .four, .five, .six{
+	display: none;
+}*/
+.one #onep1p1 .dropdown li {
+	padding: 0 10px;
+	z-index: 100;
+}
+
+.one #onep1p1 .dropdown li a {
+	display: block;
+	text-decoration: none;
+	color: #333;
+	padding: 10px 10px;
+	border-bottom: 2px solid #e6e8ea;
+	vertical-align: middle;
+	text-align: left;
+	z-index: 100;
+}
+
+.one #onep1p1 .dropdown li:last-of-type a {
+	border: none;
+}
+
+.one #onep1p1 .dropdown li i {
+	margin-right: 5px;
+	color: red;
+	padding: 0px 10px;
+	vertical-align: middle;
+	text-align: left;
+}
+
+/* Hover state */
+
+.one #onep1p1 .dropdown li:hover a {
+	color: #32a9d9;
+}
+
+.one #onep1p1 .active {
+	border-radius: 5px 5px 0 0;
+	box-shadow: none;
+	border-bottom: none;
+	color: white;
+}
+
+.one #onep1p1 .active::after {
+	border-color: #82d1ff transparent;
+}
+
+.one #onep1p1 .active {
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	max-height: 400px;
+}
+
 .two{
 	position: relative;
 	left: 0%;
@@ -284,11 +374,11 @@
 	display: none;
 	min-height: 560px;
 	background: 
-    repeating-radial-gradient(
-      circle at 0 0, 
-      #bca,
-      #ccc 20px
-    );
+	repeating-radial-gradient(
+	  circle at 0 0, 
+	  #bca,
+	  #ccc 20px
+	);
 }
 .four h2{
 	position: relative;
@@ -429,7 +519,7 @@ input::placeholder{
 	/*display: none;*/
 	/* border: 5px solid #a60000; */
 	/* transition: opacity 0.3s; */
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 .wrong1 {
@@ -448,7 +538,7 @@ input::placeholder{
 	/*display: none;*/
 	/* border: 5px solid #a60000; */
 	/* transition: opacity 0.3s; */
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 .correct {

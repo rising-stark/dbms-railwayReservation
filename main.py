@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template,request, url_for, request, redirect, flash, jsonify
+from flask import render_template,request, url_for, request, redirect, flash, jsonify, session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 global db, engine

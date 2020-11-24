@@ -14,10 +14,11 @@
 	font-family: serif;
 	background: url(../IMAGES/train.jpg);
 	background-repeat: no-repeat;
+	z-index: 100 !important;
 }
 
 .one .onep1{
-	position: fixed;
+	position: absolute;
 	right: 2%;
 	top: 10px;
 	min-width: 20%;
@@ -52,88 +53,94 @@
 
 .one .onep1:hover{
 	cursor: pointer;
+}
+
+.one .onep1 img:hover{
 	box-shadow: 0px 0px 2px 10px seagreen;
 }
 
 .one #onep1p1::after {
-    content: "";
-    width: 0;
-    height: 0;
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    margin-top: -3px;
-    border-width: 6px 6px 0 6px;
-    border-style: solid;
-    border-color: #4cbeff transparent;
+	content: "";
+	width: 0;
+	height: 0;
+	position: absolute;
+	top: 60%;
+	right: -15px;
+	margin-top: -3px;
+	border-width: 6px 6px 0 6px;
+	border-style: solid;
+	border-color: #fff transparent;
 }
 
 .one #onep1p1 .dropdown {
-    /* Size & position */
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+	/* Size & position */
+	position: absolute;
+	left: -50px;
+	width: 150%;
+	/* Styles */
+	background: #fee;
+	border-radius: 0 0 5px 5px;
+	border: 1px solid rgba(0,0,0,0.2);
+	border-top: none;
+	border-bottom: none;
+	list-style: none;
 
-    /* Styles */
-    background: #fff;
-    border-radius: 0 0 5px 5px;
-    border: 1px solid rgba(0,0,0,0.2);
-    border-top: none;
-    border-bottom: none;
-    list-style: none;
-
-    /* Hiding */
-    display: none;
-    overflow: hidden;
+	/* Hiding */
+	display: none;
+	z-index: 100 !important;
+	/*overflow: hidden;*/
 }
-
+/*.two, .three, .four, .five, .six{
+	display: none;
+}*/
 .one #onep1p1 .dropdown li {
-    padding: 0 10px ;
+	padding: 0 10px;
+	z-index: 100;
 }
 
 .one #onep1p1 .dropdown li a {
-    display: block;
-    text-decoration: none;
-    color: #333;
-    padding: 10px 10px;
-    border-bottom: 1px solid #e6e8ea;
-    vertical-align: middle;
-    text-align: left;
+	display: block;
+	text-decoration: none;
+	color: #333;
+	padding: 10px 10px;
+	border-bottom: 2px solid #e6e8ea;
+	vertical-align: middle;
+	text-align: left;
+	z-index: 100;
 }
 
 .one #onep1p1 .dropdown li:last-of-type a {
-    border: none;
+	border: none;
 }
 
 .one #onep1p1 .dropdown li i {
-    margin-right: 5px;
-    color: red;
-    padding: 0px 10px;
-    vertical-align: middle;
-    text-align: left;
+	margin-right: 5px;
+	color: red;
+	padding: 0px 10px;
+	vertical-align: middle;
+	text-align: left;
 }
 
 /* Hover state */
 
 .one #onep1p1 .dropdown li:hover a {
-    color: #57a9d9;
+	color: #32a9d9;
 }
 
 .one #onep1p1 .active {
-    border-radius: 5px 5px 0 0;
-    box-shadow: none;
-    border-bottom: none;
-    color: white;
+	border-radius: 5px 5px 0 0;
+	box-shadow: none;
+	border-bottom: none;
+	color: white;
 }
 
 .one #onep1p1 .active::after {
-    border-color: #82d1ff transparent;
+	border-color: #82d1ff transparent;
 }
 
 .one #onep1p1 .active {
-    border-bottom: 1px solid rgba(0,0,0,0.2);
-    max-height: 400px;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	max-height: 400px;
 }
 
 .two{
@@ -382,6 +389,7 @@
 	height: 35%;
 	border-bottom: 4px ridge darkred;
 	border-radius: 20px;
+	display: none;
 }
 
 .five #fivep1 h2{
@@ -397,6 +405,7 @@
 }
 .five #fivep1 table{
 	position: relative;
+
 	top: 10px;
 	height: 130px;
 	font-size: 18px;
@@ -448,6 +457,13 @@
 	height: 420px;
 	border: 4px ridge darkred;
 	border-radius: 20px;
+	/*display: none;*/
+}
+
+.five #fivep2 #scrollingdiv{
+	width: 100%;
+	height: 300px;
+	overflow-y: auto;
 }
 
 .five #fivep2 h2{
@@ -460,32 +476,27 @@
 	float: left;
 }
 
-.five #fivep2 table{
+.five #fivep2 #fivep2p1{
 	position: relative;
 	top: 10px;
 	width: 100%;
 	font-size: 18px;
 }
-.five #fivep2 #scrollingdiv{
-	width: 100%;
-	height: 300px;
-	overflow-y: auto;
-}
-.five #fivep2 table #tableHead{
+.five #fivep2 #fivep2p1 #tableHead{
 	position: relative;
 	width: 100%;
 	height: 35px;
 	line-height: 35px;
 }
 
-.five #fivep2 table tr{
+.five #fivep2 #fivep2p1 tr{
 	position: relative;
 	width: 100%;
 	height: 45px;
 	line-height: 45px;
 }
 
-.five #fivep2 table tr #addRow{
+.five #fivep2 #fivep2p1 tr #addRow{
 	position: relative;
 	left: calc(50% - 20px);
 	top: 10px;
@@ -500,13 +511,13 @@
 	font-weight: bolder;
 	transition: 0.2s ease-in;
 }
-.five #fivep2 table tr #addRow:hover{
+.five #fivep2 #fivep2p1 tr #addRow:hover{
 	cursor: pointer;
 	background: darkgreen;
 	width: 55px;
 	height: 55px;
 }
-.five #fivep2 table tr th{
+.five #fivep2 #fivep2p1 tr th{
 	position: relative;
 	background: black;
 	color: white;
@@ -554,13 +565,15 @@
 	height: 35px;
 }
 .five #fivep2 .btnSUBMITdiv{
-	position: absolute;
+	position: relative;
 	width: 22%;
+	left: 20%;
 	height: 50px;
-	left: 40%;
 	bottom: 5px;
 	/*background: green;*/
 	border-radius: 20px;
+	float: left;
+	margin-right: 200px;
 }
 
 .five .invalid{
@@ -625,11 +638,11 @@
 }
 .five #btnSUBMITdiv_tooltip{
 	position: absolute;
-	left: 55%;
-	top: 25px;
+	left: 81%;
+	bottom: 25px;
 	width: 350px;
-	line-height: 20px;
-	background-color: #a60000;
+	height: auto;
+	/*background-color: #a60000;*/
 	color: #fff;
 	box-shadow: 0px 0px 25px #a60000 inset;
 	font-weight: bolder;
@@ -669,7 +682,7 @@ input::placeholder{
 	/*display: none;*/
 	/* border: 5px solid #a60000; */
 	/* transition: opacity 0.3s; */
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 #fivep1 .wrong1 {
@@ -688,7 +701,7 @@ input::placeholder{
 	/*display: none;*/
 	/* border: 5px solid #a60000; */
 	/* transition: opacity 0.3s; */
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 #fivep1 .correct {
@@ -739,14 +752,14 @@ input::placeholder{
 	position: absolute;
 	z-index: 1;
 	bottom: 50px;
-	right: 27px;
+	right: -3px;
 	opacity: 1;
 	max-height: 35px;
 	line-height: 35px;
 	/*display: none;*/
 	/* border: 5px solid #a60000; */
 	/* transition: opacity 0.3s; */
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 #fivep2 .wrong1 {
@@ -765,7 +778,7 @@ input::placeholder{
 	/*display: none;*/
 	/* border: 5px solid #a60000; */
 	/* transition: opacity 0.3s; */
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 #fivep2 .correct {
@@ -777,7 +790,7 @@ input::placeholder{
 	position: absolute;
 	z-index: 1;
 	bottom: 50px;
-	right: 27px;
+	right: -3px;
 	opacity: 1;
 	max-height: 35px;
 	line-height: 35px;
@@ -847,7 +860,42 @@ input::placeholder{
 		left: 0%;
 	}
 }
-
+.six{
+	display: none;
+}
+.six .invalid{
+	position: absolute;
+	top: 5px;
+	left: 3%;
+	width: 94%;
+	height: 40px;
+	background: darkred;
+	color: white;
+	font-size: 18px;
+	font-weight: bolder;
+	border-radius: 0px !important;
+}
+.six .invalid:hover{
+	cursor: not-allowed;
+}
+.six .valid{
+	position: absolute;
+	top: 3px;
+	left: 1%;
+	width: 98%;
+	height: 40px;
+	background: darkgreen;
+	color: white;
+	font-size: 18px;
+	font-weight: bolder;
+}
+.six .valid:hover{
+	cursor: pointer;
+	transition: 0.1s ease-in;
+	width: 100%;
+	height: 45px;
+	border-radius: 20px;
+}
 .seven {
 	width: 100%;
 	position: absolute;

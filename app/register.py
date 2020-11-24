@@ -1,10 +1,6 @@
 from main import *
 import numpy as np
 
-@app.route("/")
-def addbook():
-	return render_template("booking_agent_home.html")
-
 @app.route("/register", methods=["GET","POST"])
 def register():
 	if request.method == "POST":

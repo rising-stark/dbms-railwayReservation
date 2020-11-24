@@ -14,17 +14,14 @@
 	</head>
 	<body>
 		<div class="one">
-			<div class="onep1">
+			<div class="onep1" id="onep1">
 				<img src="../static/IMAGES/avatar.png">
-				<div class="onep1c1" id="onep1p1">Welcome, <span id="uname">oufgidfgyuvhhhvhjvfsdgfhg</span><i class=" fa fa-down-arrow"></i>
+				<div class="onep1c1" id="onep1p1">Welcome, <span id="uname">{{session["uname"]}}</span>
 					<ul class="dropdown">
 						<li><a href="AccountProfile?action=Profile"><i class="fa fa-user-circle-o"></i>Profile</a></li>
 						<li><a href="AccountProfile?action=Logout"><i class="fa fa-sign-out"></i>Log out</a></li>
 					</ul>
 				</div>
-			</div>
-			<div id="onec2p2" class="onec2c1"><i class=" fa fa-university"></i>  Welcome, <%=uname%>
-				
 			</div>
 		</div>
 		<div class="two">
@@ -125,18 +122,18 @@
 					</table>
 				</div>
 				<div id = "fivep2">
-					<h2>#AC seats available:&nbsp;&nbsp;&nbsp;&nbsp;<span id="acSeats">87</span></h2>
-					<h2>#SL seats available:&nbsp;&nbsp;&nbsp;&nbsp;<span id="slSeats">22</span></h2>
+					<h2>#AC seats available:&nbsp;&nbsp;&nbsp;&nbsp;<span id="acSeats">0</span></h2>
+					<h2>#SL seats available:&nbsp;&nbsp;&nbsp;&nbsp;<span id="slSeats">0</span></h2>
 					<div id="scrollingdiv">
 						<table id="fivep2p1">
 							<thead>
 								<tr id="tableHead">
-									<th width="5%">Sl. no</th>
-									<th width="25%" colspan="3">First Name</th>
-									<th width="25%" colspan="3">Last Name</th>
-									<th width="15%" colspan="3">Age</th>
-									<th width="20%" colspan="3">Gender</th>
-									<th width="10%">Total:&nbsp;&nbsp;&nbsp;&nbsp;<span id="totalPassengersAdded">0</span></th>
+									<th width="6%">S. No.</th>
+									<th width="24%" colspan="3">First Name</th>
+									<th width="24%" colspan="3">Last Name</th>
+									<th width="19%" colspan="3">Age</th>
+									<th width="19%" colspan="3">Gender</th>
+									<th width="8%">Total:&nbsp;&nbsp;<span id="totalPassengersAdded">0</span></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -170,7 +167,8 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="btnSUBMITdiv"><input class="invalid" id="btnSUBMIT" type="button" name="btnSUBMIT" value="Book Ticket" disabled></div>
+					<div class="btnSUBMITdiv"><input class="valid" id="btnBACK" type="button" name="btnBACK" value="Back"></div>
+					<div class="btnSUBMITdiv" id="btnSUBMITdiv"><input class="invalid" id="btnSUBMIT" type="button" name="btnSUBMIT" value="Book Ticket" disabled></div>
 					<div id="btnSUBMITdiv_tooltip">This button is disabled because altleast some of the fields are empty now.</div>
 				</div>
 			</form>

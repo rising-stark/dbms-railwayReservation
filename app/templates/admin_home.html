@@ -13,9 +13,14 @@
 	</head>
 	<body>
 		<div class="one">
-			<div class="onep1">
+			<div class="onep1" id="onep1">
 				<img src="../static/IMAGES/avatar.png">
-				<div class="onep1p1">Welcome, <span>oufgidfgyuvhhhvhjvfsdgfhg</span></div>
+				<div class="onep1c1" id="onep1p1">Welcome, <span id="uname">{{session["uname"]}}</span>
+					<ul class="dropdown">
+						<li><a href="AccountProfile?action=Profile"><i class="fa fa-user-circle-o"></i>Profile</a></li>
+						<li><a href="AccountProfile?action=Logout"><i class="fa fa-sign-out"></i>Log out</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div class="two">
