@@ -7,13 +7,14 @@ def admin_add_train():
 		trainno = req["trainno"]
 		source = req["source"]
 		dest = req["dest"]
-		st_time = req["st_time"]
+		st_time = req["start_time"]
 		end_time = req["end_time"]
 		ac_coaches = req["ac_coaches"]
 		sl_coaches = req["sl_coaches"]
 		ac_fare = req["ac_fare"]
 		sl_fare = req["sl_fare"]
-		doj = req["doj"]
+		doj = req["start_doj"]
+
 		ac_seats = AC_SEATS*int(ac_coaches)
 		sl_seats = SL_SEATS*int(sl_coaches)
 		# add code here to return 1 if successfully entered
@@ -41,7 +42,7 @@ def admin_show_train():
 		doj=req["doj"]
 		print(req)
 
-		attr = ["trainno","source","start_time","dest","end_time","ac_coaches","sl_coaches","ac_fare","sl_fare","doj"]
+		attr = ["trainno","source","start_time","dest","end_time","ac_coaches","sl_coaches","ac_fare","sl_fare","doj", "ac_seats", "sl_seats"]
 		
 		if(doj == ""):
 			trains = db.execute("select * from trains where trainno = (:id)", {"id":trainno}).fetchall()

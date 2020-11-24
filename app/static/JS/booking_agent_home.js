@@ -25,7 +25,7 @@ var dict = {
 
 var dict1 = {};
 
-var msg ={
+var msgdict ={
 	"Accepted" : "correct",
 	"Please fill out this field" : "wrong"
 };
@@ -42,7 +42,6 @@ $(document).ready(function(){
 	function handleTooltips(input, text, wrong_correct, type, show = 1){
 		var img = $(input).parent().next().children("img")[0];
 		var tooltip = $(input).parent().next().next().children("span")[type];
-		console.log(tooltip);
 		if(type == 0){
 			// input element
 			if(show == 1){
@@ -83,10 +82,10 @@ $(document).ready(function(){
 	}
 
 	function handleMsg(text){
-		if(typeof msg[text] == 'undefined'){
+		if(typeof msgdict[text] == 'undefined'){
 			return "wrong";
 		}
-		return msg[text];
+		return msgdict[text];
 	}
 
 	$(document).click(function(event) {
@@ -108,7 +107,6 @@ $(document).ready(function(){
 	$('input').on('keypress', function(e) {
 		var value = e.key;
 		var name = $(this).attr("name");
-		console.log(name);
 		handleTooltips(this, "Currently accepting input", "", 0, 0);
 		//console.log(value);
 
@@ -196,7 +194,6 @@ $(document).ready(function(){
 
 	$('input').on('keydown', function(e) {
 		var name = $(this).attr("name");
-		console.log(name);
 		if(e.which == 32){
 			var tooltip = "Cannot input space in this field";
 			if(name == "trainno"){
@@ -221,7 +218,6 @@ $(document).ready(function(){
 
 	$('input').on('keyup', function(e) {
 		var name = $(this).attr("name");
-		console.log(name);
 		if(e.which==8 || e.which==46){
 			if ($(this).val().length == 0) {
 				var tooltip = "Please fill out this field";
@@ -240,12 +236,11 @@ $(document).ready(function(){
 					type_arr[dict[name]] = 1;
 				}
 			}
-		}		
+		}
 	});
 
 	$("#fivep2p1").on('keyup', '[name^="fname"], [name^="lname"], [name^="age"]', function(e) {
 		var name = $(this).attr("name");
-		console.log(name);
 		if(e.which==8 || e.which==46){
 			if ($(this).val().length == 0) {
 				var tooltip = "Please fill out this field";
@@ -254,7 +249,7 @@ $(document).ready(function(){
 				name_arr1[dict1[name]] = 0;
 				type_arr1[dict1[name]] = 1;
 			}
-		}		
+		}
 	});
 
 	$('[name="trainno"]').keypress(function(e) {
@@ -400,7 +395,6 @@ $(document).ready(function(){
 		}
 		type_arr1[dict1[name]] = 0;
 		len=$(this).val().length;
-		console.log(len);
 		var tooltip;
 		if (len > 0) {
 			name_arr1[dict1[name]] = 1;
@@ -414,8 +408,6 @@ $(document).ready(function(){
 
 	$("#fivep2p1").on('focus blur mouseleave', '[name^="age"]', function() {
 		var name = $(this).attr("name");
-		console.log(name);
-		console.log(type_arr1[dict1[name]]);
 		if (type_arr1[dict1[name]] == 0) {
 			return false;
 		}
@@ -453,10 +445,12 @@ $(document).ready(function(){
 	});
 
 	$("#addRow").click(function(){
-		console.log(dict1);
-		acSeats = parseInt($("#acSeats").val());
-		slSeats = parseInt($("#slSeats").val());
+		acSeats = parseInt($("#acSeats").html());
+		slSeats = parseInt($("#slSeats").html());
 		coach = $('[name="coach"]').val();
+		console.log(acSeats);
+		console.log(slSeats);
+		console.log(coach);
 		if(coach == "A"){
 			if(total_fields1 == acSeats){
 				msg = "You have added enough passengers. Cannot add more rows";
@@ -520,6 +514,11 @@ $(document).ready(function(){
 
 		total_fields1--;
 		$("#totalPassengersAdded").html(total_fields1);
+	});
+
+	$("img[id$=img]").click(function(){
+		var item = $(this).parent().next().children("span")[0];
+		$(item).slideToggle(250);
 	});
 
 	$("#fivep2p1").on('click', "img[id*=img]", function(){
@@ -664,7 +663,7 @@ $(document).ready(function(){
 		$(".seven").slideDown(500);
 		$.ajax({
 			type: 'POST',
-			url: '/booking_agent_home1',
+			url: '/book_ticket1',
 			contentType: "application/json",
 			/*dataType: "json",*/
 			data: JSON.stringify({
@@ -676,21 +675,24 @@ $(document).ready(function(){
 			processData: false,
 			success: function(result){
 				$(".seven").slideUp(250);
-				if(result == "1"){
+				console.log(result);
+				len = result.length;
+				if(len > 0){
 					msg = "Please Fill the passenger details below";
 					alert(msg);
+					$("#acSeats").html(result[0].ac_seats);
+					$("#slSeats").html(result[0].sl_seats);
+					$('[name="trainno2"]').prop("readonly", true);
+					$('[name="start_doj2"]').prop("readonly", true);
+					$('[name="coach"]').prop("readonly", true);
 				}
-				else if(result == "0"){
-					msg = "No seats left for this booking. Please choose another train or date of journey";
+				else{
+					msg = "No train found on this particular date. Please choose another train or date of journey";
 					alert(msg);
-				}else{
-					console.log("Result is neither 0 nor 1. Return value is different from flask");	
-					console.log("Return value is " + result);
-					console.log("Return value type is " + typeof result);
 				}
 			},
 			error: function(){
-				console.log("Not able to get response from flask function namely booking_agent_home1");
+				console.log("Not able to get response from flask function namely book_ticket1");
 			}
 		});
 	});
@@ -700,29 +702,27 @@ $(document).ready(function(){
 		$(".seven").slideDown(500);
 		$.ajax({
 			type: 'POST',
-			url: '/booking_agent_home2',
+			url: '/book_ticket2',
 			contentType: "application/json",
 			/*dataType: "json",*/
 			data: JSON.stringify({
 				trainno: $('[name="trainno2"]').val(),
 				start_doj: $('[name="start_doj2"]').val(),
 				coach: $('[name="coach"]').val(),
-				passengers: total_fields1,
-
+				no_of_passengers: total_fields1
 			}),
 			cache: false,
 			processData: false,
 			success: function(result){
 				$(".seven").slideUp(250);
-				if(result == "-1"){
-					msg = "No seats left for this booking. Please choose another train or date of journey";
-					alert(msg);
-				}else{
-					window.location.href = "confirm_payment.html";
-				}
+				/*window.location.href = "confirm_payment";*/
+				$(".five").fadeOut(250);
+				$(".six").fadeIn(250);
+				$("#finalFare").html(result);
+				console.log(result);
 			},
 			error: function(){
-				console.log("Not able to get response from flask function namely booking_agent_home1");
+				console.log("Not able to get response from flask function namely book_ticket2");
 			}
 		});
 	});
@@ -730,11 +730,30 @@ $(document).ready(function(){
 	$('[name="btnCONFIRM"]').click(function(){
 		$(".seven").slideUp(0);
 		$(".seven").slideDown(500);
+		fname = [];
+		lname = [];
+		age = [];
+		gender = [];
+		dict2 = {};
+		for (const [key, value] of Object.entries(dict1)) {
+			dict2[key]=($('[name="'+key+'"]').val());
+		}
+		console.log(dict2);
+
 		$.ajax({
 			type: 'POST',
-			url: '/booking_agent_home3',
+			url: '/book_ticket3',
 			contentType: "application/json",
 			/*dataType: "json",*/
+			data: JSON.stringify({
+				trainno: $('[name="trainno2"]').val(),
+				start_doj: $('[name="start_doj2"]').val(),
+				coach: $('[name="coach"]').val(),
+				no_of_passengers: total_fields1,
+				fare: $("#finalFare").html(),
+				uname: "hk",
+				dict1: dict2
+			}),
 			cache: false,
 			processData: false,
 			success: function(result){
@@ -744,14 +763,14 @@ $(document).ready(function(){
 					alert(msg);
 					window.location.href = "booking_agent_home.html";
 				}else{
-					console.log("Some error happened from flask function namely booking_agent_home1");
+					console.log("Some error happened from flask function namely book_ticket3");
 					console.log("Result is not 1. Return value is different from flask");	
 					console.log("Return value is " + result);
 					console.log("Return value type is " + typeof result);
 				}
 			},
 			error: function(){
-				console.log("Not able to get response from flask function namely booking_agent_home1");
+				console.log("Not able to get response from flask function namely book_ticket3");
 			}
 		});
 	});

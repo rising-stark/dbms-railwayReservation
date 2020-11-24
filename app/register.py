@@ -1,12 +1,9 @@
-#from app import app
-# from flask import render_template,request, url_for, request, redirect, flash, jsonify
-# from main import db,engine
 from main import *
 import numpy as np
 
 @app.route("/")
 def addbook():
-	return render_template("booking_agent_register.html")
+	return render_template("booking_agent_home.html")
 
 @app.route("/register", methods=["GET","POST"])
 def register():

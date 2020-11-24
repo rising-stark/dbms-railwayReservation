@@ -9,8 +9,8 @@ name_arr = new Array(total_fields).fill(0);
 type_arr = new Array(total_fields).fill(0);
 reenter_arr = new Array(total_fields).fill(0);
 global_settimeout_arr = new Array(total_fields).fill(0);
-var size_of_train_number = 4, size_of_station = 40, ac_fare_max = 5000, sl_fare_max = 2000;
-
+var size_of_train_number = 4, size_of_station = 40, ac_fare_max = 5000, sl_fare_max = 2000, max_coaches = 100;
+name_arr[6] = 1;
 var dict = {
 	trainno2 : 0,
 	source : 1,
@@ -25,7 +25,7 @@ var dict = {
 	sl_fare : 10,
 }
 
-var msg ={
+var msgdict ={
 	"Accepted" : "correct",
 	"Please fill out this field" : "wrong"
 }
@@ -82,10 +82,10 @@ $(document).ready(function(){
 	}
 
 	function handleMsg(text){
-		if(typeof msg[text] == 'undefined'){
+		if(typeof msgdict[text] == 'undefined'){
 			return "wrong";
 		}
-		return msg[text];
+		return msgdict[text];
 	}
 
 	var regExpNonPrintable = /[^ -~]/;
@@ -304,7 +304,7 @@ $(document).ready(function(){
 		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
-	$('[name="source"], [name="dest"], [name="ac_coaches"], [name="sl_coaches"]').on('focus blur mouseleave', function() {
+	$('[name="source"], [name="dest"]').on('focus blur mouseleave', function() {
 		var name = $(this).attr("name");
 		if (type_arr[dict[name]] == 0) {
 			return false;
@@ -329,6 +329,54 @@ $(document).ready(function(){
 		if (len > 0) {
 			name_arr[dict[name]] = 1;
 			tooltip = "Accepted";
+		}else{
+			name_arr[dict[name]] = 0;
+			tooltip = "Please fill out this field";
+		}
+		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
+	});
+
+	$('[name="ac_coaches"]').on('focus blur mouseleave', function() {
+		var name = $(this).attr("name");
+		if (type_arr[dict[name]] == 0) {
+			return false;
+		}
+		type_arr[dict[name]] = 0;
+		len=$(this).val().length;
+		var tooltip;
+		ac_coachval = parseInt($('[name="ac_coaches"]').val());
+		if (len > 0) {
+			if(ac_coachval <= 0 || ac_coachval > max_coaches){
+				name_arr[dict[name]] = 0;
+				tooltip = "AC coaches must be less than " + max_coaches;
+			}else{
+				name_arr[dict[name]] = 1;
+				tooltip = "Accepted";
+			}
+		}else{
+			name_arr[dict[name]] = 0;
+			tooltip = "Please fill out this field";
+		}
+		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
+	});
+
+	$('[name="sl_coaches"]').on('focus blur mouseleave', function() {
+		var name = $(this).attr("name");
+		if (type_arr[dict[name]] == 0) {
+			return false;
+		}
+		type_arr[dict[name]] = 0;
+		len=$(this).val().length;
+		var tooltip;
+		sl_coachval = parseInt($('[name="sl_coaches"]').val());
+		if (len > 0) {
+			if(sl_coachval <= 0 || sl_coachval > max_coaches){
+				name_arr[dict[name]] = 0;
+				tooltip = "SL coaches must be less than " + max_coaches;
+			}else{
+				name_arr[dict[name]] = 1;
+				tooltip = "Accepted";
+			}
 		}else{
 			name_arr[dict[name]] = 0;
 			tooltip = "Please fill out this field";
@@ -457,10 +505,10 @@ $(document).ready(function(){
 				cache: false,
 				processData: false,
 				success: function(result){
+					$(".five").slideUp(500);		
 					console.log(result);
 					len = result.length;
 					if(len > 0){
-						$(".five").delay(100).slideUp(500);
 						var train = ''; 
 						var i;
 						for(i = 0; i < len; i++){
@@ -468,11 +516,11 @@ $(document).ready(function(){
 							train += '<td>' + (i+1) + '.</td>';
 							train += '<td>' + result[i].trainno + '</td>';
 							train += '<td>' + result[i].source + '</td>';
-							train += '<td>' + result[i].dest + '</td>';
+							train += '<td>' + result[i].doj + '</td>';
 							train += '<td>' + result[i].start_time + '</td>';
+							train += '<td>' + result[i].dest + '</td>';
+							/*train += '<td>' + result[i].end_doj + '</td>';*/
 							train += '<td>' + result[i].end_time + '</td>';
-							train += '<td>' + result[i].start_doj + '</td>';
-							train += '<td>' + result[i].end_doj + '</td>';
 							train += '<td>' + result[i].ac_coaches + '</td>';
 							train += '<td>' + result[i].ac_fare + '</td>';
 							train += '<td>' + result[i].sl_coaches + '</td>';
@@ -495,7 +543,6 @@ $(document).ready(function(){
 					}
 					else{
 						msg = "No records found for this particular trainno and Date of journey";
-						$(".five").slideUp(500);
 						alert(msg);
 					}
 				},
@@ -552,7 +599,7 @@ $(document).ready(function(){
 				ac_fare: $('[name="ac_fare"]').val(),
 				sl_fare: $('[name="sl_fare"]').val(),
 				start_doj: $('[name="start_doj"]').val(),
-				end_doj: $('[name="end_doj"]').val()
+				/*end_doj: $('[name="end_doj"]').val()*/
 			}),
 			cache: false,
 			processData: false,
