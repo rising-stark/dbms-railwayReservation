@@ -86,8 +86,8 @@ def book_ticket3():
 			{"pnr":pnr,"bookedby":uname,"no_of_seats":n,"doj":doj,"trainno":trainno,"amount":fare})
 			db.commit()
 			for i in range(n):
-				db.execute("INSERT INTO passenger(fname,lname,age,gender,seatno,coach,berth,pnr) VALUES (:fname,:lname,:age,:gender,:seatno,:coach,:berth,:pnr)",
-				{"fname":fname[i],"lname":lname[i],"age":age[i],"gender":gender[i],"seatno":seats[i],"coach":coaches[i],"berth":berths[i],"pnr":pnr})
+				db.execute("INSERT INTO passenger(fname,lname,age,gender,seatno,coach,berth,pnr,trainno,doj) VALUES (:fname,:lname,:age,:gender,:seatno,:coach,:berth,:pnr,:trainno,:doj)",
+				{"fname":fname[i],"lname":lname[i],"age":age[i],"gender":gender[i],"seatno":seats[i],"coach":coaches[i],"berth":berths[i],"pnr":pnr,"doj":doj,"trainno":trainno})
 				db.commit()
 			return "1"
 		else:
@@ -116,8 +116,8 @@ def book_ticket3():
 			{"pnr":pnr,"bookedby":uname,"no_of_seats":n,"doj":doj,"trainno":trainno,"amount":fare})
 			db.commit()
 			for i in range(n):
-				db.execute("INSERT INTO passenger(fname,lname,age,gender,seatno,coach,berth,pnr) VALUES (:fname,:lname,:age,:gender,:seatno,:coach,:berth,:pnr)",
-				{"fname":fname[i],"lname":lname[i],"age":age[i],"gender":gender[i],"seatno":seats[i],"coach":coaches[i],"berth":berths[i],"pnr":pnr})
+				db.execute("INSERT INTO passenger(fname,lname,age,gender,seatno,coach,berth,pnr,trainno,doj) VALUES (:fname,:lname,:age,:gender,:seatno,:coach,:berth,:pnr,:trainno,:doj)",
+				{"fname":fname[i],"lname":lname[i],"age":age[i],"gender":gender[i],"seatno":seats[i],"coach":coaches[i],"berth":berths[i],"pnr":pnr,"doj":doj,"trainno":trainno})
 				db.commit()
 			return "1"
 	return "NULL"
