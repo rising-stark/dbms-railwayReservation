@@ -186,8 +186,7 @@
 	left: 0%;
 	width: 100%;
 	height: auto;
-	min-height: 250px;
-	max-height: 640px;
+	padding-bottom: 100px;
 	/*display: none;*/
 	/*background-image: linear-gradient(to right, rgba(25, 90, 60, 0), rgba(25, 40, 50, 1));*/
 	background-image: linear-gradient(red, yellow, blue);
@@ -327,6 +326,8 @@
 	top: 75px;
 	left: 5%;
 	width: 90%;
+	max-height: 300px;
+	border: 2px solid red;
 	overflow-y: auto;
 }
 .three .threep2 table{

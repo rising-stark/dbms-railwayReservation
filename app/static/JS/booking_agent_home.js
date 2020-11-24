@@ -627,6 +627,7 @@ $(document).ready(function() {
 				cache: false,
 				processData: false,
 				success: function(result) {
+					$(".seven").delay(100).slideUp(500);
 					console.log(result);
 					len = result.length;
 					if (len > 0) {
@@ -635,14 +636,14 @@ $(document).ready(function() {
 						var i;
 						for (i = 0; i < len; i++) {
 							train += '<tr>';
-							train += '<td>' + (i + 1) + '</td>';
+							train += '<td>' + (i + 1) + '.</td>';
 							train += '<td>' + result[i].trainno + '</td>';
 							train += '<td>' + result[i].source + '</td>';
-							train += '<td>' + result[i].dest + '</td>';
+							train += '<td>' + result[i].doj + '</td>';
 							train += '<td>' + result[i].start_time + '</td>';
+							train += '<td>' + result[i].dest + '</td>';
+							/*train += '<td>' + result[i].end_doj + '</td>';*/
 							train += '<td>' + result[i].end_time + '</td>';
-							train += '<td>' + result[i].start_doj + '</td>';
-							train += '<td>' + result[i].end_doj + '</td>';
 							train += '<td>' + result[i].ac_coaches + '</td>';
 							train += '<td>' + result[i].ac_fare + '</td>';
 							train += '<td>' + result[i].sl_coaches + '</td>';
@@ -664,7 +665,6 @@ $(document).ready(function() {
 						$(".threep2").addClass("result");
 					} else {
 						msg = "No records found for this particular trainno and Date of journey";
-						$(".five").slideUp(500);
 						alert(msg);
 					}
 				},

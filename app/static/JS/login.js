@@ -83,6 +83,7 @@ $(document).ready(function() {
 	$('input').on('keyup', function(e) {
 		var name = $(this).attr("name");
 		if (e.which == 8 || e.which == 46) {
+			handleTooltips(this, "Currently accepting input", "", 0, 0);
 			if ($(this).val().length == 0) {
 				var tooltip = "Please fill out this field";
 				handleTooltips(this, tooltip, "wrong", 0);
@@ -194,7 +195,6 @@ $(document).ready(function() {
 
 
 	setInterval(Valid, 500);
-
 	function Valid() {
 		var test = 1;
 		for (i = 0; i < total_fields; i++) {

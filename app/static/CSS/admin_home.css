@@ -186,8 +186,7 @@
 	left: 0%;
 	width: 100%;
 	height: auto;
-	min-height: 250px;
-	max-height: 640px;
+	padding-bottom: 100px;
 	/*background-image: linear-gradient(to right, rgba(25, 90, 60, 0), rgba(25, 40, 50, 1));*/
 	background-image: linear-gradient(red, yellow, blue);
 }
