@@ -24,7 +24,6 @@ def search_source_destination():
 			break
 		if ct==1:
 			return jsonify(a)
-	
 		else:
 			trains = db.execute("SELECT * FROM trains as T1 Inner Join trains as T2 on T1.dest = T2.source WHERE T1.source = (:source) and T2.dest=(:dest) and T1.end_time <= T2.start_time",{"source": source, "dest": dest})
 			

@@ -68,12 +68,12 @@ def book_ticket3():
 			acq_seats = tot_seats - s_detail[0][0]
 			sl_berths = ["LB","LB","UB","UB","SL","SU"]
 			m = len(sl_berths)
-			pnr = 3
+			pnr = 41
 			seats = []
 			coaches = []
 			berths = []
-			c_num = acq_seats/SL_SEATS + 1
-			s_num = acq_seats%SL_SEATS + 1
+			c_num = int(acq_seats//SL_SEATS + 1)
+			s_num = int(acq_seats%SL_SEATS + 1)
 			for _ in range(n):
 				seats.append(s_num)
 				coaches.append("S"+str(c_num))
@@ -98,7 +98,7 @@ def book_ticket3():
 			acq_seats = tot_seats - s_detail[0][0]
 			ac_berths = ["LB","MB","UB","LB","MB","UB","SL","SU"]
 			m = len(ac_berths)
-			pnr = 3
+			pnr = 42
 			seats = []
 			coaches = []
 			berths = []
@@ -106,7 +106,7 @@ def book_ticket3():
 			s_num = int(acq_seats%AC_SEATS + 1)
 			for _ in range(n):
 				seats.append(s_num)
-				coaches.append("S"+str(c_num))
+				coaches.append("A"+str(c_num))
 				berths.append(ac_berths[(s_num-1)%m])
 				s_num += 1
 				if(s_num > AC_SEATS):

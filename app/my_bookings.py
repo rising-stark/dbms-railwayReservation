@@ -1,12 +1,13 @@
 from main import *
 
-@app.route("/my_booking")
-def my_booking():
+@app.route("/my_bookings")
+def my_bookings():
 	if request.method == "POST":
 		req = request.json
 		uname = req["uname"]
 
-		attr = []
+		# adding the attributes that I need in AJAX
+		attr = ["trainno", "pnr", "source", "doj", "start_time", "dest", "end_time", "amount", "fname", "lname", "age", "gender", "coach", "seatno", "berth"]
 		tickets = db.execute("select * from passenger p1 where p1.pnr in (select t.pnr from ticket t where t.bookedby = (:uname))",
 		{"uname":uname}).fetchall()
 
@@ -26,3 +27,4 @@ def my_booking():
 				one_ticket.clear()
 		
 		return jsonify(list_of_tickets)
+	return "NULL"

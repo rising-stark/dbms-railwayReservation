@@ -597,6 +597,60 @@ $(document).ready(function() {
 		$('.four').addClass("animate-to-left");
 		$('.three').css("left", "100%");
 		$('.five').css("left", "100%");
+		$.ajax({
+			type: 'POST',
+			url: '/my_bookings',
+			contentType: "application/json",
+			/*dataType: "json",*/
+			data: JSON.stringify({
+				uname: $("#uname").html()
+			}),
+			cache: false,
+			processData: false,
+			success: function(result){
+				$(".seven").slideUp(500);
+				console.log(result);
+				len = result.length;
+				if(len > 0){
+					var train = ''; 
+					var i;
+					for(i = 0; i < len; i++){
+						var num = result[i].length;
+						train += '<tr class="passrow">';
+						train += '<td>' + (i+1) + '.</td>';
+						train += '<td rowspan='+num+'>' + result[i].trainno + '</td>';
+						train += '<td rowspan='+num+'>' + result[i].pnr + '</td>';
+						train += '<td rowspan='+num+'>' + result[i].source + '</td>';
+						train += '<td rowspan='+num+'>' + result[i].doj + '</td>';
+						train += '<td rowspan='+num+'>' + result[i].start_time + '</td>';
+						train += '<td rowspan='+num+'>' + result[i].dest + '</td>';
+						train += '<td rowspan='+num+'>' + result[i].end_time + '</td>';
+						train += '<td rowspan='+num+' class="lasttd">' + result[i].fare + '</td>';
+						train += '</tr>';
+						for(var j = 0; j<num;j++){
+							train += '<tr>';
+							train += '<td>' + result[i].fname + ' ' + result[i].lname + '</td>';
+							train += '<td>' + result[i].age + '</td>';
+							train += '<td>' + result[i].gender + '</td>';
+							train += '<td>' + result[i].coach + '</td>';
+							train += '<td>' + result[i].seatno + '</td>';
+							train += '<td>' + result[i].berth + '</td>';
+							train += '</tr>';
+						}
+					}
+					$('#fourp1p1').append(train);
+					$("#fourp1 h3").hide();
+					$("#fourp1p1").slideDown(500);
+				}
+				else{
+					$("#fourp1 h3").show();
+					$("#fourp1p1").hide();
+				}
+			},
+			error: function(){
+				console.log("Not able to get response from flask function namely my_bookings");
+			}
+		});
 	});
 
 	$('#twop1p3').click(function() {
@@ -664,7 +718,6 @@ $(document).ready(function() {
 					}
 					$('#threep2p1').append(train);
 					$(".threep2").slideDown(500);
-					$(".threep2").addClass("result");
 				} else {
 					msg = "No records found for this particular trainno and Date of journey";
 					alert(msg);
@@ -783,7 +836,14 @@ $(document).ready(function() {
 					msg = "Seats Booked. Redirecting you to booking tickets page";
 					alert(msg);
 					window.location.href='http://127.0.0.1:5000/booking_agent_home';
-					$("#twop1p3").click();
+					$('.twop1p1').removeClass("active");
+					$('#twop1p3').addClass("active");
+					$('.three').fadeOut(250);
+					$('.four').fadeOut(250);
+					$('.five').fadeIn(0);
+					$('.five').addClass("animate-to-left");
+					$('.three').css("left", "100%");
+					$('.four').css("left", "100%");
 				} else {
 					console.log("Some error happened from flask function namely book_ticket3");
 					console.log("Result is not 1. Return value is different from flask");
@@ -802,7 +862,6 @@ $(document).ready(function() {
 		$(".seven").slideDown(500);
 		msg = "Transaction Cancelled";
 		alert(msg);
-
 	});
 
 	setInterval(Valid, 500);
