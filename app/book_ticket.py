@@ -1,5 +1,5 @@
 from main import *
-
+import random
 @app.route("/book_ticket1",methods=["POST"])
 def book_ticket1():
 	if request.method == "POST":
@@ -68,7 +68,12 @@ def book_ticket3():
 			acq_seats = tot_seats - s_detail[0][0]
 			sl_berths = ["LB","LB","UB","UB","SL","SU"]
 			m = len(sl_berths)
-			pnr = 41
+			count_list = db.execute("select count from tickets").fetchall()
+			count = 0
+			if(len(count_list)>0):
+				count = count_list[len(count_list)-1][0]
+			pnr = random.randint(1000,9999)
+			pnr = pnr*10 + count
 			seats = []
 			coaches = []
 			berths = []
@@ -98,7 +103,12 @@ def book_ticket3():
 			acq_seats = tot_seats - s_detail[0][0]
 			ac_berths = ["LB","MB","UB","LB","MB","UB","SL","SU"]
 			m = len(ac_berths)
-			pnr = 42
+			count_list = db.execute("select count from tickets").fetchall()
+			count = 0
+			if(len(count_list)>0):
+				count = count_list[len(count_list)-1][0]
+			pnr = random.randint(1000,9999)
+			pnr = pnr*10 + count
 			seats = []
 			coaches = []
 			berths = []
