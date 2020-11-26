@@ -237,14 +237,14 @@ $(document).ready(function() {
 							}
 							train += '</tr>';
 						}
-					}else if(result[0] == "2"){
-						for (i = 1; i <len; i++) {
+					} else if(result[0] == "2"){
+						for (i = 1, k = 1; i < len; i += 2, k++) {
 							train += '<tr class="passrow">';
-							train += '<td rowspan="3" class="lasttd">' + i + '.</td>';
+							train += '<td rowspan="3" class="lasttd">' + k + '.</td>';
 							train += '</tr>';
-							for(var j = 0; j<2;j++){
+							for(var j = 0; j<2; j++){
 								train += '<tr>';
-								train += '<td>' + result[i+j+j].trainno + '</td>';
+								train += '<td>' + result[i+j].trainno + '</td>';
 								train += '<td>' + result[i+j].source + '</td>';
 								train += '<td>' + result[i+j].doj + '</td>';
 								train += '<td>' + result[i+j].start_time + '</td>';
@@ -267,7 +267,9 @@ $(document).ready(function() {
 								}
 								train += '</tr>';
 							}
-							train += '<tr><td colspan="13"></td></tr>';
+							if(i < len-2){
+								train += '<tr style="height: 35px;"><td colspan="13"></td></tr>';
+							}
 						}
 					}
 					$('#threep2p1').append(train);

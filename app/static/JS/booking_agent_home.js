@@ -265,8 +265,8 @@ $(document).ready(function() {
 				var tooltip = "Please fill out this field";
 				handleTooltips(name, tooltip, "wrong", 0);
 			}
-			name_arr[dict[name]] = 0;
-			type_arr[dict[name]] = 1;
+			name_arr1[dict1[name]] = 0;
+			type_arr1[dict1[name]] = 1;
 		}
 	});
 
@@ -523,7 +523,8 @@ $(document).ready(function() {
 			'</td>' +
 			'<td width="1%"><img id="genderimg' + total_fields1 + '" src="../static/IMAGES/wrong.gif" alt="wrong" hidden="true"/></td>' +
 			'<td width="1%"><span></span><span></span></td>' +
-			'<td width="8%" class="cancel"><span>X</span></td>' +
+			/*'<td width="8%" class="cancel"><span>X</span></td>' +*/
+			'<td width="8%"></td>' +
 			'</tr>');
 		total_fields1++;
 		$("#totalPassengersAdded").html(total_fields1);
@@ -660,6 +661,9 @@ $(document).ready(function() {
 							train += '<td>' + result[i][j].berth + '</td>';
 							train += '</tr>';
 						}
+						if(i < len-1){
+							train += '<tr style="height: 35px;"><td colspan="14"></td></tr>';
+						}
 					}
 					$('#fourp1p1').append(train);
 					$("#fourp1 h3").hide();
@@ -792,6 +796,8 @@ $(document).ready(function() {
 	$('[name="btnBACK"]').click(function() {
 		$("#fivep2").slideUp(250);
 		$("#fivep1").slideDown(500);
+		$("#fivep2p1 tbody").find("tr:not(:last)").remove();
+		$("#totalPassengersAdded").html(0);
 	});
 
 	$('[name="btnSUBMIT"]').click(function() {
