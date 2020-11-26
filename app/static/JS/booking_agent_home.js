@@ -382,9 +382,18 @@ $(document).ready(function() {
 		var name = $(this).attr("name");
 		len = $(this).val().length;
 		var tooltip;
+		c = $('[name="start_doj2"]').val();
+		const date1 = new Date();
+		const date2 = new Date(c);
+		const diffDays = Math.ceil((date2 - date1) / (1000 * 60 * 60 * 24));
 		if (len > 0) {
-			name_arr[dict[name]] = 1;
-			tooltip = "Accepted";
+			if (diffDays <= 0){
+				tooltip = "You cannot book ticket in a past train or on same day";
+				name_arr[dict[name]] = 0;
+			}else{
+				name_arr[dict[name]] = 1;
+				tooltip = "Accepted";
+			}
 		} else {
 			name_arr[dict[name]] = 0;
 			tooltip = "Please fill out this field";
@@ -520,7 +529,7 @@ $(document).ready(function() {
 		$("#totalPassengersAdded").html(total_fields1);
 	});
 
-	$(".cancel").click(function() {
+	/*$(".cancel").click(function() {
 		name_arr1.push(0);
 		type_arr1.push(0);
 		reenter_arr1.push(0);
@@ -532,7 +541,7 @@ $(document).ready(function() {
 
 		total_fields1--;
 		$("#totalPassengersAdded").html(total_fields1);
-	});
+	});*/
 
 	$("img[id$=img]").click(function() {
 		var item = $(this).parent().next().children("span")[0];

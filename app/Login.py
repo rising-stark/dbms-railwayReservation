@@ -3,8 +3,6 @@ from main import *
 @app.route("/")
 @app.route("/home")
 def home():
-	print(session)
-	session.clear()
 	return render_template("login.html")
 
 @app.route("/login", methods=['POST'])
