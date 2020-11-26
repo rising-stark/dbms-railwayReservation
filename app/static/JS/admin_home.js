@@ -43,18 +43,18 @@ $(document).ready(function() {
 
 	$('.five').fadeOut(0);
 
-	function handleTooltips(input, text, wrong_correct, type, show = 1) {
-		var img = $(input).parent().next().children("img")[0];
-		var tooltip = $(input).parent().next().next().children("span")[type];
+	function handleTooltips(name, text, wrong_correct, type, show = 1) {
+		var img = $('[name="' + name + '"]').parent().next().children("img")[0];
+		var tooltip = $('[name="' + name + '"]').parent().next().next().children("span")[type];
 		if (type == 0) {
 			// input element
 			if (show == 1) {
-				$(input).attr('title', text);
-				$(input).removeClass();
-				$(input).addClass(wrong_correct + "input");
+				$('[name="' + name + '"]').attr('title', text);
+				$('[name="' + name + '"]').removeClass();
+				$('[name="' + name + '"]').addClass(wrong_correct + "input");
 			} else {
-				$(input).attr('title', text);
-				$(input).removeClass();
+				$('[name="' + name + '"]').attr('title', text);
+				$('[name="' + name + '"]').removeClass();
 			}
 
 			//image element
@@ -63,8 +63,8 @@ $(document).ready(function() {
 				$(img).prop("alt", wrong_correct);
 				$(img).attr("hidden", false);
 			} else {
-				$(img).attr("src", "");
-				$(img).prop("alt", "None");
+				$(img).attr("src", "../static/IMAGES/wrong.gif");
+				$(img).prop("alt", "wrong");
 				$(img).attr("hidden", true);
 			}
 		}
@@ -81,7 +81,7 @@ $(document).ready(function() {
 			$(tooltip).hide(0);
 		}
 		if (type == 1) {
-			$(tooltip).delay(750).hide(250);;
+			$(tooltip).delay(750).hide(250);
 		}
 	}
 
@@ -92,13 +92,35 @@ $(document).ready(function() {
 		return msgdict[text];
 	}
 
+	function resetALL(){
+		var text = "Please fill out this field";
+		var img = $(".four img[id$=img]");
+		var input = $('input[type=text]');
+		var tooltip = $(".four .wrong, .four .correct");
+		$(input).val("");
+		$(input).attr('title', text);
+		$(input).removeClass();
+		$(img).attr("src", "../static/IMAGES/wrong.gif");
+		$(img).prop("alt", "wrong");
+		$(img).attr("hidden", true);
+		$(tooltip).html("");
+		$(tooltip).removeClass();
+		$(tooltip).hide(250);
+		for (i = 0; i < total_fields; i++) {
+			name_arr[i] = 0;
+			type_arr[i] = 0;
+			reenter_arr[i] = 0;
+			global_settimeout_arr[i] = 0;
+		}
+	}
+
 	var regExpNonPrintable = /[^ -~]/;
 	var regExpNum = /[0-9]/;
 	var regExpAlpha = /[a-zA-Z]/;
 	$('input').on('keypress', function(e) {
 		var value = e.key;
 		var name = $(this).attr("name");
-		handleTooltips(this, "Currently accepting input", "", 0, 0);
+		handleTooltips(name, "", "", 0, 0);
 		//console.log(value);
 
 		// Here is an exception that "enter" is allowed
@@ -117,13 +139,13 @@ $(document).ready(function() {
 				trainnoType = 1;
 				trainno = 0;
 			}
-			return false;
+			return;
 		}
 
 		if (name == "trainno2" || name == "ac_fare" || name == "sl_fare" || name == "ac_coaches" || name == "sl_coaches") {
 			if (!regExpNum.test(value)) {
 				var tooltip = "Only Numbers are allowed i.e. 0-9";
-				handleTooltips(this, tooltip, "wrong1", 1);
+				handleTooltips(name, tooltip, "wrong1", 1);
 				e.preventDefault();
 				return false;
 			}
@@ -132,7 +154,7 @@ $(document).ready(function() {
 		if (name == "source" || name == "dest") {
 			if (!regExpAlpha.test(value)) {
 				var tooltip = "Only alphabets are allowed i.e. a-z or A-Z";
-				handleTooltips(this, tooltip, "wrong1", 1);
+				handleTooltips(name, tooltip, "wrong1", 1);
 				e.preventDefault();
 				return false;
 			}
@@ -150,7 +172,7 @@ $(document).ready(function() {
 				$('#threep1p1_input_train_tooltip').html(tooltip);
 				$('#threep1p1_input_train_tooltip').show(250).delay(500).hide(250);
 			} else {
-				handleTooltips(this, tooltip, "wrong1", 1);
+				handleTooltips(name, tooltip, "wrong1", 1);
 			}
 			e.preventDefault();
 			return false;
@@ -160,7 +182,7 @@ $(document).ready(function() {
 	$('input').on('keyup', function(e) {
 		var name = $(this).attr("name");
 		if (e.which == 8 || e.which == 46) {
-			handleTooltips(this, "Currently accepting input", "", 0, 0);
+			handleTooltips(name, "", "", 0, 0);
 			if ($(this).val().length == 0) {
 				var tooltip = "Please fill out this field";
 				if (name == "trainno") {
@@ -169,7 +191,7 @@ $(document).ready(function() {
 				}else if (name == "doj") {
 					
 				} else {
-					handleTooltips(this, tooltip, "wrong", 0);
+					handleTooltips(name, tooltip, "wrong", 0);
 				}
 			}
 			if (name == "trainno") {
@@ -208,7 +230,7 @@ $(document).ready(function() {
 			tooltip = "Cannot input more than " + size_of_train_number + " digits";
 			if (reenter_arr[dict[name]] < size_of_train_number) {
 				reenter_arr[dict[name]] += 1;
-				handleTooltips(this, tooltip, "wrong1", 1, 1);
+				handleTooltips(name, tooltip, "wrong1", 1, 1);
 			} else if (global_settimeout_arr[dict[name]] == 0) {
 				global_settimeout_arr[dict[name]] = 1;
 				setTimeout(function() {
@@ -228,7 +250,7 @@ $(document).ready(function() {
 			tooltip = "Cannot input more than " + size_of_station + " characters";
 			if (reenter_arr[dict[name]] < size_of_station) {
 				reenter_arr[dict[name]] += 1;
-				handleTooltips(this, tooltip, "wrong1", 1, 1);
+				handleTooltips(name, tooltip, "wrong1", 1, 1);
 			} else if (global_settimeout_arr[dict[name]] == 0) {
 				global_settimeout_arr[dict[name]] = 1;
 				setTimeout(function() {
@@ -307,7 +329,7 @@ $(document).ready(function() {
 			name_arr[dict[name]] = 0;
 			tooltip = "Please fill out this field";
 		}
-		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
+		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
 	$('[name="source"], [name="dest"]').on('focus blur mouseleave', function() {
@@ -325,7 +347,7 @@ $(document).ready(function() {
 			name_arr[dict[name]] = 0;
 			tooltip = "Please fill out this field";
 		}
-		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
+		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
 	$('[name="start_time"], [name="end_time"], [name="start_doj"], [name="end_doj"]').on('blur', function() {
@@ -339,7 +361,7 @@ $(document).ready(function() {
 			name_arr[dict[name]] = 0;
 			tooltip = "Please fill out this field";
 		}
-		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
+		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
 	$('[name="ac_coaches"]').on('focus blur mouseleave', function() {
@@ -352,9 +374,9 @@ $(document).ready(function() {
 		var tooltip;
 		ac_coachval = parseInt($('[name="ac_coaches"]').val());
 		if (len > 0) {
-			if (ac_coachval <= 0 || ac_coachval > max_coaches) {
+			if (ac_coachval < 0 || ac_coachval > max_coaches) {
 				name_arr[dict[name]] = 0;
-				tooltip = "AC coaches must be less than " + max_coaches;
+				tooltip = "AC coaches must be non-negative and less than " + max_coaches;
 			} else {
 				name_arr[dict[name]] = 1;
 				tooltip = "Accepted";
@@ -363,7 +385,7 @@ $(document).ready(function() {
 			name_arr[dict[name]] = 0;
 			tooltip = "Please fill out this field";
 		}
-		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
+		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
 	$('[name="sl_coaches"]').on('focus blur mouseleave', function() {
@@ -376,9 +398,9 @@ $(document).ready(function() {
 		var tooltip;
 		sl_coachval = parseInt($('[name="sl_coaches"]').val());
 		if (len > 0) {
-			if (sl_coachval <= 0 || sl_coachval > max_coaches) {
+			if (sl_coachval < 0 || sl_coachval > max_coaches) {
 				name_arr[dict[name]] = 0;
-				tooltip = "SL coaches must be less than " + max_coaches;
+				tooltip = "SL coaches must be non-negative and less than " + max_coaches;
 			} else {
 				name_arr[dict[name]] = 1;
 				tooltip = "Accepted";
@@ -387,7 +409,7 @@ $(document).ready(function() {
 			name_arr[dict[name]] = 0;
 			tooltip = "Please fill out this field";
 		}
-		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
+		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
 	$('[name="ac_fare"]').on('focus blur mouseleave', function() {
@@ -411,7 +433,7 @@ $(document).ready(function() {
 			name_arr[dict[name]] = 0;
 			tooltip = "Please fill out this field";
 		}
-		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
+		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
 	$('[name="sl_fare"]').on('focus blur mouseleave', function() {
@@ -435,7 +457,7 @@ $(document).ready(function() {
 			name_arr[dict[name]] = 0;
 			tooltip = "Please fill out this field";
 		}
-		handleTooltips(this, tooltip, handleMsg(tooltip), 0, 1);
+		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
 	$("img[id$=img]").click(function() {
@@ -444,12 +466,13 @@ $(document).ready(function() {
 	});
 
 	/*
-	This snippet is not working
-	$("table td span.wrong").click(function(){
-		console.log("H");
-		$(this).hide(250);
-	});
-	*/
+	It is working but not used to allow copying of tooltip text
+	
+	$("span").on('click', function(){
+		if($(this).hasClass('wrong') || $(this).hasClass('correct')){
+		$(this).hide(250);	
+		}
+	});*/
 
 	$('#threep1p1btn').mouseenter(function() {
 		if ($('#btnSearch').is(':disabled')) {
@@ -609,19 +632,18 @@ $(document).ready(function() {
 			cache: false,
 			processData: false,
 			success: function(result) {
+				$(".five").slideUp(250);
 				if (result == "1") {
-					msg = "Record Successfully Inserted.<br>Press OK to empty the fields. Press cancel to retain the field values.";
-					$(".five").slideUp(250);
+					msg = "Record Successfully Inserted.\nPress OK to empty the fields. Press cancel to retain the field values.";
 					var ans = confirm(msg);
 					if (ans == true) {
-						$('input').val("");
+						resetALL();
 					}
 				} else if (result == "0") {
-					msg = "Primary Key violation. Already a pair with same train number and date of journey exists.<br>Press OK to empty the fields. Press cancel to retain the field values.";
-					$(".five").slideUp(250);
+					msg = "Primary Key violation. Already a pair with same train number and date of journey exists.\nPress OK to empty the fields. Press cancel to retain the field values.";
 					var ans = confirm(msg);
 					if (ans == true) {
-						$('input').val("");
+						resetALL();
 					}
 				} else {
 					console.log("Result is neither 0 nor 1. Return value is different from flask");
@@ -636,7 +658,6 @@ $(document).ready(function() {
 	});
 
 	setInterval(Valid, 500);
-
 	function Valid() {
 		if (trainno == 1 || doj == 1) {
 			$('[name="btnSearch"]').removeClass();
@@ -650,7 +671,6 @@ $(document).ready(function() {
 	}
 
 	setInterval(Valid1, 500);
-
 	function Valid1() {
 		var test = 1;
 		for (i = 0; i < total_fields; i++) {

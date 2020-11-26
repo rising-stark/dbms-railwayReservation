@@ -51,6 +51,7 @@ body{
 	left: 20px;
 	height:35px;
 	line-height:35px;
+	text-decoration: underline;
 }
 
 .two .twop2 table{
@@ -138,8 +139,8 @@ input::placeholder{
 }
 .two #btnNEXTdiv_tooltip{
 	position: absolute;
-	left: 62%;
-	top: -5px;
+	left: 61%;
+	top: 10px;
 	width: 280px;
 	line-height: 20px;
 	/*background-color: #a60000;*/
@@ -171,7 +172,7 @@ input::placeholder{
 	padding: 0px 10px;
 	position: absolute;
 	z-index: 1;
-	bottom: 60px;
+	bottom: 70px;
 	right: 18px;
 	opacity: 1;
 	max-height: 35px;
@@ -189,7 +190,7 @@ input::placeholder{
 	padding: 0px 15px;
 	position: absolute;
 	z-index: 1;
-	bottom: 60px;
+	bottom: 70px;
 	right: 18px;
 	opacity: 1;
 	max-height: 35px;
@@ -206,7 +207,7 @@ input::placeholder{
 	border-radius: 20px;
 	padding: 0px 10px;
 	position: absolute;
-	left: -220px;
+	right: 10px;
 	top: -5px;
 	z-index: 5;
 	opacity: 1;

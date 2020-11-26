@@ -17,8 +17,7 @@
 				<img src="../static/IMAGES/avatar.png">
 				<div class="onep1c1" id="onep1p1">Welcome, <span id="uname">{{session["uname"]}}</span>
 					<ul class="dropdown">
-						<li><a href="AccountProfile?action=Profile"><i class="fa fa-user-circle-o"></i>Profile</a></li>
-						<li><a href="AccountProfile?action=Logout"><i class="fa fa-sign-out"></i>Log out</a></li>
+						<li><a href="{{ url_for('home')}}"><i class="fa fa-sign-out"></i>Log out</a></li>
 					</ul>
 				</div>
 			</div>
@@ -35,13 +34,13 @@
 				<br>
 				<form action="admin_show_train" method="post" id="admin_show_train">
 					<div class="threep1p1">
-						4-digit Train no. <input id="train" type="text" name="trainno" size="40" placeholder="Enter Train Number"/>
-						<div id = "threep1p1_input_train_tooltip">The train number must be of 4 digits</div>
+						4-digit Train no. <input id="trainno" type="text" name="trainno" size="40" placeholder="Enter Train Number">
+						<div id = "threep1p1_input_train_tooltip"></div>
 					</div>
 					<div class="threep1p1">
-						Start Date of Journey <td><input id="doj" type="text" name="doj" size="40" placeholder="Enter Start Date of Journey" onfocus="(this.type='date')" onblur="(this.type='text')" required/></td>
+						Start Date of Journey <input id="doj" type="text" name="doj" size="40" placeholder="Enter Start Date of Journey" onfocus="(this.type='date')" onblur="(this.type='text')">
 					</div>
-					<div id="threep1p1btn"><input id="btnSearch" class = "invalid" type="button" name="btnSearch" value="Show" disabled></div>
+					<div id="threep1p1btn"><input id="btnSearch" class = "invalid" type="button" name="btnSearch" value="Search" disabled></div>
 					<div id="threep1p1_btn_show_tooltip">This button is disabled because both the fields are empty now.</div>
 				</form>
 			</div>

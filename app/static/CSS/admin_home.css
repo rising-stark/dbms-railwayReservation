@@ -513,7 +513,7 @@ input::placeholder{
 	position: absolute;
 	z-index: 1;
 	bottom: 60px;
-	right: 18px;
+	right: 0px;
 	opacity: 1;
 	max-height: 35px;
 	line-height: 35px;
@@ -550,8 +550,8 @@ input::placeholder{
 	padding: 0px 15px;
 	position: absolute;
 	z-index: 1;
-	bottom: 60px;
-	right: 18px;
+	bottom: 65px;
+	right: 0px;
 	opacity: 1;
 	max-height: 35px;
 	line-height: 35px;

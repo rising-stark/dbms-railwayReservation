@@ -1,8 +1,8 @@
 from main import *
 
 
-@app.route("/search_source_destination", methods=["GET","POST"])
-def search_source_destination():
+@app.route("/source_dest_search", methods=["POST"])
+def source_dest_search():
 	if request.method == "POST":
 
 		req = request.json

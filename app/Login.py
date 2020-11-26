@@ -1,12 +1,13 @@
 from main import *
 
 @app.route("/")
-def Home():
+@app.route("/home")
+def home():
 	print(session)
 	session.clear()
 	return render_template("login.html")
 
-@app.route("/login", methods=['GET', 'POST'])
+@app.route("/login", methods=['POST'])
 def login():
 	if request.method == "POST":
 
@@ -62,3 +63,7 @@ def booking_agent_home():
 	if session.get('uname') == None:
 		return render_template("login.html")
 	return render_template("booking_agent_home.html")
+
+@app.route("/booking_agent_register", methods=['GET', 'POST'])
+def booking_agent_register():
+	return render_template("booking_agent_register.html")

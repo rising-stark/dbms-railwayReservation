@@ -1,7 +1,7 @@
 from main import *
 import numpy as np
 
-@app.route("/register", methods=["GET","POST"])
+@app.route("/register", methods=["POST"])
 def register():
 	if request.method == "POST":
 
@@ -14,23 +14,10 @@ def register():
 		phone = req["phone"]
 		address = req["address"]
 		gender = req["gender"]
-		creditcard = req["credit"]
+		creditcard = req["creditcard"]
 		dob = req["dob"]
 
-		x = int(creditcard)
-		print(type(x))
-		print(x)
-		print(creditcard)
-		#attr = ["fname","lname","uname","password","gender","dob","email","phone","creditcard","address"]
 		fetch = db.execute("SELECT * FROM booking_agent WHERE uname = (:uname) or email=(:email) or phone=(:phone) or creditcard=(:creditcard)",{"uname": uname,"email": email,"phone": phone, "creditcard": creditcard}).fetchall()
-		# a = []
-		# for i in fetch:
-		# 	d = {}
-		# 	for j in range(len(attr)):
-		# 		d[attr[j]] = i[j]
-		# 	a.append(d)
-		# return jsonify(a)
-
 		ct = 0
 		for _ in fetch:
 			ct = 1

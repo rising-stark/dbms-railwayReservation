@@ -178,7 +178,7 @@ $(document).ready(function() {
 						global_settimeout_arr[i] = 0;
 					}
 				} else if (result == "1") {
-					window.location.href='http://127.0.0.1:5000/booking_agent_home';
+					window.location.href='http://127.0.0.1:5000/admin_home';
 				} else if (result == "2") {
 					window.location.href='http://127.0.0.1:5000/booking_agent_home';
 				} else {
@@ -191,6 +191,10 @@ $(document).ready(function() {
 				console.log("Not able to get response from flask function namely login");
 			}
 		});
+	});
+
+	$('[name="btnREGISTER"]').click(function() {
+		window.location.href='http://127.0.0.1:5000/booking_agent_register';
 	});
 
 

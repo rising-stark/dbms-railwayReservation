@@ -1,6 +1,6 @@
 from main import *
 import random
-@app.route("/book_ticket1",methods=["POST"])
+@app.route("/book_ticket1", methods=["POST"])
 def book_ticket1():
 	if request.method == "POST":
 		req = request.json
@@ -19,7 +19,7 @@ def book_ticket1():
 		return jsonify(a)
 	return "NULL"
 
-@app.route("/book_ticket2",methods=["POST"])
+@app.route("/book_ticket2", methods=["POST"])
 def book_ticket2():
 	if request.method == "POST":
 		req = request.json
@@ -68,7 +68,7 @@ def book_ticket3():
 			acq_seats = tot_seats - s_detail[0][0]
 			sl_berths = ["LB","LB","UB","UB","SL","SU"]
 			m = len(sl_berths)
-			count_list = db.execute("select count from tickets").fetchall()
+			count_list = db.execute("select count from ticket").fetchall()
 			count = 0
 			if(len(count_list)>0):
 				count = count_list[len(count_list)-1][0]
@@ -103,7 +103,7 @@ def book_ticket3():
 			acq_seats = tot_seats - s_detail[0][0]
 			ac_berths = ["LB","MB","UB","LB","MB","UB","SL","SU"]
 			m = len(ac_berths)
-			count_list = db.execute("select count from tickets").fetchall()
+			count_list = db.execute("select count from ticket").fetchall()
 			count = 0
 			if(len(count_list)>0):
 				count = count_list[len(count_list)-1][0]

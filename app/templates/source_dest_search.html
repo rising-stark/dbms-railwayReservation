@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Source-Destination Search</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<link rel="stylesheet" type="text/css" href="../static/CSS/source_dest_search.css">
+		
+		<script type="text/javascript" src="../static/JS/Jquery.js"></script>
+		<script type="text/javascript" src="../static/JS/source_dest_search.js"></script>
+	</head>
+	<body>
+		<div class="three">
+			<div class="threep1">
+				<h2>Insert the source and destination to search</h2>
+				<br>
+				<form action="source_dest_search" method="post" id="source_dest_search">
+					<div class="threep1p1">
+						Source <input id="source" type="text" name="source" size="40" placeholder="Enter Source Station">
+						<div id = "threep1p1_input_source_tooltip"></div>
+					</div>
+					<div class="threep1p1">
+						Destination <input id="dest" type="text" name="dest" size="40" placeholder="Enter Destination Station">
+						<div id = "threep1p1_input_dest_tooltip2"></div>
+					</div>
+					<div id="threep1p1btn"><input id="btnSearch" class = "invalid" type="button" name="btnSearch" value="Show" disabled></div>
+					<div id="threep1p1_btn_show_tooltip">This button is disabled because atleast one of the fields is empty.</div>
+				</form>
+			</div>
+			<div class="threep2">
+				<table id="threep2p1">
+					<thead>
+						<tr>
+							<th>Sl. no</th>
+							<th>Train Number</th>
+							<th>Source</th>
+							<th>Start Date of Journey</th>
+							<th>Start Time</th>
+							<th>Destination</th>
+							<!-- <th>End Date of Journey</th> -->
+							<th>End Time</th>
+							<th>#AC coaches</th>
+							<th>AC Fare</th>
+							<th>#SL coaches</th>
+							<th>SL Fare</th>
+							<th>#AC Seats Available</th>
+							<th>#SL Seats Available</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+		<div class="five">
+			<img alt="loading" src="../static/IMAGES/loading.gif">
+			<h1>PROCESSING</h1>
+		</div>
+	</body>
+</html>

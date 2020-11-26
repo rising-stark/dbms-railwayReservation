@@ -18,8 +18,7 @@
 				<img src="../static/IMAGES/avatar.png">
 				<div class="onep1c1" id="onep1p1">Welcome, <span id="uname">{{session["uname"]}}</span>
 					<ul class="dropdown">
-						<li><a href="AccountProfile?action=Profile"><i class="fa fa-user-circle-o"></i>Profile</a></li>
-						<li><a href="AccountProfile?action=Logout"><i class="fa fa-sign-out"></i>Log out</a></li>
+						<li><a href="{{ url_for('home')}}"><i class="fa fa-sign-out"></i>Log out</a></li>
 					</ul>
 				</div>
 			</div>
@@ -37,13 +36,13 @@
 				<br>
 				<form action="booking_agent_show_train" method="post" id="booking_agent_show_train">
 					<div class="threep1p1">
-						4-digit Train no. <input id="train" type="text" name="trainno" size="40" placeholder="Enter Train Number"/>
+						4-digit Train no. <input id="train" type="text" name="trainno" size="40" placeholder="Enter Train Number">
 						<div id = "threep1p1_input_train_tooltip">The train number must be of 4 digits</div>
 					</div>
 					<div class="threep1p1">
-						Start Date of Journey <td><input id="doj" type="text" name="doj" size="40" placeholder="Enter Start Date of Journey" onfocus="(this.type='date')" onblur="(this.type='text')" required/></td>
+						Start Date of Journey <input id="doj" type="text" name="doj" size="40" placeholder="Enter Start Date of Journey" onfocus="(this.type='date')" onblur="(this.type='text')">
 					</div>
-					<div id="threep1p1btn"><input id="btnSearch" class = "invalid" type="button" name="btnSearch" value="Show" disabled></div>
+					<div id="threep1p1btn"><input id="btnSearch" class = "invalid" type="button" name="btnSearch" value="Search" disabled></div>
 					<div id="threep1p1_btn_show_tooltip">This button is disabled because both the fields are empty now.</div>
 				</form>
 			</div>
@@ -83,7 +82,7 @@
 							<th rowspan="2">Start Time</th>
 							<th rowspan="2">Destination</th>
 							<th rowspan="2">End Time</th>
-							<th rowspan="2">Fare</th>
+							<!-- <th rowspan="2">Fare</th> -->
 							<th colspan="6">Passenger Details</th>
 						</tr>
 						<tr>
@@ -96,200 +95,32 @@
 						</tr>
 					</thead>
 					<tbody style="color: black;">
-						<tr class="passrow">
-							<td rowspan="6">1.</td>
-							<td rowspan="6">1000</td>
-							<td rowspan="6">1000</td>
-							<td rowspan="6">Delhi</td>
-							<td rowspan="6">02-08-2020</td>
-							<td rowspan="6">10:00</td>
-							<td rowspan="6">Ropar</td>
-							<td rowspan="6">12:00</td>
-							<td rowspan="6" class="lasttd">1980</td>
+						<!-- <tr class="passrow">
+							<td rowspan="3">1.</td>
+							<td rowspan="3">1000</td>
+							<td rowspan="3">1000</td>
+							<td rowspan="3">Delhi</td>
+							<td rowspan="3">02-08-2020</td>
+							<td rowspan="3">10:00</td>
+							<td rowspan="3">Ropar</td>
+							<td rowspan="3" class="lasttd">12:00</td>
 						</tr>
 						<tr>
-							<td>HK</td>
+							<td>hk hk</td>
 							<td>21</td>
-							<td>Male</td>
+							<td>M</td>
 							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
-						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
+							<td>3</td>
 							<td>UB</td>
 						</tr>
 						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
+							<td>hk hk</td>
+							<td>23</td>
+							<td>F</td>
 							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
-						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
-						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
-						<!-- <tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
+							<td>4</td>
+							<td>LB</td>
 						</tr> -->
-						<tr class="passrow">
-							<td rowspan="3">1.</td>
-							<td rowspan="3">1000</td>
-							<td rowspan="3">1000</td>
-							<td rowspan="3">Delhi</td>
-							<td rowspan="3">02-08-2020</td>
-							<td rowspan="3">10:00</td>
-							<td rowspan="3">Ropar</td>
-							<td rowspan="3">12:00</td>
-							<td rowspan="3" class="lasttd">1980</td>
-						</tr>
-						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
-						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
-						<tr class="passrow">
-							<td rowspan="3">1.</td>
-							<td rowspan="3">1000</td>
-							<td rowspan="3">1000</td>
-							<td rowspan="3">Delhi</td>
-							<td rowspan="3">02-08-2020</td>
-							<td rowspan="3">10:00</td>
-							<td rowspan="3">Ropar</td>
-							<td rowspan="3">12:00</td>
-							<td rowspan="3" class="lasttd">1980</td>
-						</tr>
-						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
-						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
-						<tr class="passrow">
-							<td rowspan="3">1.</td>
-							<td rowspan="3">1000</td>
-							<td rowspan="3">1000</td>
-							<td rowspan="3">Delhi</td>
-							<td rowspan="3">02-08-2020</td>
-							<td rowspan="3">10:00</td>
-							<td rowspan="3">Ropar</td>
-							<td rowspan="3">12:00</td>
-							<td rowspan="3" class="lasttd">1980</td>
-						</tr>
-						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
-						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
-						<tr class="passrow">
-							<td rowspan="3">1.</td>
-							<td rowspan="3">1000</td>
-							<td rowspan="3">1000</td>
-							<td rowspan="3">Delhi</td>
-							<td rowspan="3">02-08-2020</td>
-							<td rowspan="3">10:00</td>
-							<td rowspan="3">Ropar</td>
-							<td rowspan="3">12:00</td>
-							<td rowspan="3" class="lasttd">1980</td>
-						</tr>
-						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
-						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
-						<tr class="passrow">
-							<td rowspan="3">1.</td>
-							<td rowspan="3">1000</td>
-							<td rowspan="3">1000</td>
-							<td rowspan="3">Delhi</td>
-							<td rowspan="3">02-08-2020</td>
-							<td rowspan="3">10:00</td>
-							<td rowspan="3">Ropar</td>
-							<td rowspan="3">12:00</td>
-							<td rowspan="3" class="lasttd">1980</td>
-						</tr>
-						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
-						<tr>
-							<td>HK</td>
-							<td>21</td>
-							<td>Male</td>
-							<td>A1</td>
-							<td>11</td>
-							<td>UB</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -382,7 +213,7 @@
 						<h4>Confirm the transaction. This page is valid for <span id="timer"></span></h4>
 					</div> -->
 					<div id="fivep3p2">
-						Confirm your payment of &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="finalFare">0</span>
+						Confirm your payment of &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rupees<span id="finalFare">0</span>
 					</div>
 					<div id="fivep3p3">
 						<input class="valid" id="btnCANCEL" type="button" name="btnCANCEL" value="Cancel Payment">
