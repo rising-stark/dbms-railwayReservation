@@ -17,7 +17,7 @@ var dict = {
 	uname: 7,
 	creditcard: 8,
 	pass: 9,
-	cnfpass: 10,
+	cnfpass: 10
 }
 
 /*
@@ -30,18 +30,18 @@ var mindict = {
 	dob: 10 /*min age*/,
 	gender: 0,
 	email: 0,
-	phone: 10,
+	phone: 10 /*min digits length*/,
 	address: 1,
 	uname: 2,
 	creditcard: 16,
 	pass: 8,
-	cnfpass: 0 /*No constraint because automatic constraint from pass due to compulsory matching*/,
+	cnfpass: 0 /*No constraint because automatic constraint from pass due to compulsory matching*/
 }
 
 var maxdict = {
-	fname: 40 /*max character length*/,
+	fname: 40,
 	lname: 40,
-	dob: 1000 /*max age*/,
+	dob: 100,
 	gender: 0,
 	email: 0,
 	phone: 12,
@@ -49,7 +49,7 @@ var maxdict = {
 	uname: 40,
 	creditcard: 16,
 	pass: 20,
-	cnfpass: 0,
+	cnfpass: 0
 }
 
 var msgdict = {
@@ -360,8 +360,8 @@ $(document).ready(function() {
 			}else{
 				name_arr[dict[name]] = 1;
 				tooltip = "Accepted";
-				$('[name="cnfpass"]').removeAttr('disabled'); //jQuery 1.5 and below
-				$('[name="cnfpass"]').prop('disabled', false);  //jQuery 1.6+
+				/*$('[name="cnfpass"]').removeAttr('disabled'); //jQuery 1.5 and below
+				$('[name="cnfpass"]').prop('disabled', false);  //jQuery 1.6+*/
 			}
 		}else{
 			name_arr[dict[name]] = 0;
@@ -491,7 +491,7 @@ $(document).ready(function() {
 				console.log("Not able to get response from flask function namely register");
 			}
 		});
-	})
+	});
 
 	setInterval(Valid , 500);
 	function Valid() {

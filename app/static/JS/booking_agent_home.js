@@ -15,16 +15,31 @@ name_arr1 = [];
 type_arr1 = [];
 reenter_arr1 = [];
 global_settimeout_arr1 = [];
-var size_of_train_number = 4,
-	size_of_name = 40,
-	max_age = 100;
+
+var size_of_train_number = 4;
+var popupsLimit = 3; /*This tells how many consecutive popups allowed on restricted keys*/
 
 var dict = {
 	trainno2: 0,
 	start_doj2: 1,
-	coach: 2,
+	coach: 2
 };
 
+/*
+If both min and max values are set 0 then it means
+no integer or character length constraint possible
+*/
+var mindict = {
+	trainno2: 4,
+	start_doj2: 1 /*1 day gap before booking train*/,
+	coach: 0
+}
+
+var mindict = {
+	trainno2: 4,
+	start_doj2: 120 /*Cannot book a train before 120 days*/,
+	coach: 0
+}
 var dict1 = {};
 
 var msgdict = {

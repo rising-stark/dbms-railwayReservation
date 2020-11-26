@@ -9,12 +9,11 @@ name_arr = new Array(total_fields).fill(0);
 type_arr = new Array(total_fields).fill(0);
 reenter_arr = new Array(total_fields).fill(0);
 global_settimeout_arr = new Array(total_fields).fill(0);
-var size_of_train_number = 4,
-	size_of_station = 40,
-	ac_fare_max = 5000,
-	sl_fare_max = 2000,
-	max_coaches = 100;
-name_arr[6] = 1;
+
+var popupsLimit = 3; /*This tells how many consecutive popups allowed on restricted keys*/
+var size_of_train_number = 4;
+name_arr[6] = 1; /*This is donr because not end-date is not send to backend*/
+
 var dict = {
 	trainno2: 0,
 	source: 1,
@@ -26,11 +25,44 @@ var dict = {
 	ac_coaches: 7,
 	sl_coaches: 8,
 	ac_fare: 9,
-	sl_fare: 10,
+	sl_fare: 10
+}
+
+/*
+If both min and max values are set 0 then it means
+no integer or character length constraint possible
+*/
+var mindict = {
+	trainno2: 4 /*min character length*/,
+	source: 1 /*min character length*/,
+	dest: 1 /*min character length*/,
+	start_time: 0,
+	end_time: 0,
+	start_doj: 60  /*60 days as lower bound after current date*/,
+	end_doj: 0 /*train can end on same day*/,
+	ac_coaches: 0  /*min ac coaches allowed*/,
+	sl_coaches: 0  /*min sl coaches allowed*/,
+	ac_fare: 1 /*min ac fare allowed*/,
+	sl_fare: 1 /*min sl fare allowed*/
+}
+
+var maxdict = {
+	trainno2: 4,
+	source: 40,
+	dest: 40,
+	start_time: 0,
+	end_time: 0,
+	start_doj: 120,
+	end_doj: 3 /*Train must end within 3 days of its journey*/,
+	ac_coaches: 50,
+	sl_coaches: 50,
+	ac_fare: 5000,
+	sl_fare: 3000
 }
 
 var msgdict = {
 	"Accepted": "correct",
+	"Matching": "correct",
 	"Please fill out this field": "wrong"
 }
 
@@ -92,11 +124,26 @@ $(document).ready(function() {
 		return msgdict[text];
 	}
 
+	function reenterPopup(name, tooltip, wrong_correct, type, show){
+		if (reenter_arr[dict[name]] < popupsLimit) {
+			reenter_arr[dict[name]] += 1;
+			handleTooltips(name, tooltip, wrong_correct, type, show);
+		} else if (global_settimeout_arr[dict[name]] == 0) {
+			global_settimeout_arr[dict[name]] = 1;
+			setTimeout(function() {
+				reenter_arr[dict[name]] = 0;
+				global_settimeout_arr[dict[name]] = 0;
+			}, 2500);
+		}
+	}
+
 	function resetALL(){
 		var text = "Please fill out this field";
 		var img = $(".four img[id$=img]");
-		var input = $('input[type=text]');
-		var tooltip = $(".four .wrong, .four .correct");
+		var input = $('input[type=text], input[type=password], input[type=email], input[type=time], input[type=date], input[type=number], textarea');
+		var tooltip = $(".four .wrong, .four .correct,.four .wrong1");
+		$("select").attr('title', text);
+		$("select").removeClass();
 		$(input).val("");
 		$(input).attr('title', text);
 		$(input).removeClass();
@@ -106,6 +153,9 @@ $(document).ready(function() {
 		$(tooltip).html("");
 		$(tooltip).removeClass();
 		$(tooltip).hide(250);
+		/*$('[name="cnfpass"]').attr("disabled", "disabled"); //jQuery 1.5 and below
+		$('[name="cnfpass"]').prop('disabled', true);  //jQuery 1.6+*/
+		$('select[name="gender"] option:selected').attr("selected", null);
 		for (i = 0; i < total_fields; i++) {
 			name_arr[i] = 0;
 			type_arr[i] = 0;
@@ -117,7 +167,7 @@ $(document).ready(function() {
 	var regExpNonPrintable = /[^ -~]/;
 	var regExpNum = /[0-9]/;
 	var regExpAlpha = /[a-zA-Z]/;
-	$('input').on('keypress', function(e) {
+	$('input, textarea').on('keypress', function(e) {
 		var value = e.key;
 		var name = $(this).attr("name");
 		handleTooltips(name, "", "", 0, 0);
@@ -125,6 +175,8 @@ $(document).ready(function() {
 
 		// Here is an exception that "enter" is allowed
 		if (value == 13) {
+			var tooltip = "New-line not allowed";
+			reenterPopup(name, tooltip, "wrong1", 1, 1);
 			e.preventDefault();
 			return false;
 		}
@@ -145,7 +197,7 @@ $(document).ready(function() {
 		if (name == "trainno2" || name == "ac_fare" || name == "sl_fare" || name == "ac_coaches" || name == "sl_coaches") {
 			if (!regExpNum.test(value)) {
 				var tooltip = "Only Numbers are allowed i.e. 0-9";
-				handleTooltips(name, tooltip, "wrong1", 1);
+				reenterPopup(name, tooltip, "wrong1", 1, 1);
 				e.preventDefault();
 				return false;
 			}
@@ -154,7 +206,7 @@ $(document).ready(function() {
 		if (name == "source" || name == "dest") {
 			if (!regExpAlpha.test(value)) {
 				var tooltip = "Only alphabets are allowed i.e. a-z or A-Z";
-				handleTooltips(name, tooltip, "wrong1", 1);
+				reenterPopup(name, tooltip, "wrong1", 1, 1);
 				e.preventDefault();
 				return false;
 			}
@@ -172,14 +224,14 @@ $(document).ready(function() {
 				$('#threep1p1_input_train_tooltip').html(tooltip);
 				$('#threep1p1_input_train_tooltip').show(250).delay(500).hide(250);
 			} else {
-				handleTooltips(name, tooltip, "wrong1", 1);
+				reenterPopup(name, tooltip, "wrong1", 1, 1);
 			}
 			e.preventDefault();
 			return false;
 		}
 	});
 
-	$('input').on('keyup', function(e) {
+	$('input, textarea').on('keyup', function(e) {
 		var name = $(this).attr("name");
 		if (e.which == 8 || e.which == 46) {
 			handleTooltips(name, "", "", 0, 0);
@@ -208,7 +260,7 @@ $(document).ready(function() {
 		if ($('[name="trainno"]').val().length > (size_of_train_number - 1)) {
 			tooltip = "Cannot input more than " + size_of_train_number + " digits";
 			$('#threep1p1_input_train_tooltip').html(tooltip);
-			if (reenter_trainno < size_of_train_number) {
+			if (reenter_trainno < popupsLimit) {
 				reenter_trainno += 1;
 				$('#threep1p1_input_train_tooltip').show(250).delay(500).hide(250);
 			} else if (global_settimeout == 0) {
@@ -224,44 +276,41 @@ $(document).ready(function() {
 		}
 	});
 
-	$('[name="trainno2"]').keypress(function(e) {
+	$('[name="trainno2"], [name="source"], [name="dest"]').keypress(function(e) {
 		var name = $(this).attr("name");
-		if ($(this).val().length > (size_of_train_number - 1)) {
-			tooltip = "Cannot input more than " + size_of_train_number + " digits";
-			if (reenter_arr[dict[name]] < size_of_train_number) {
-				reenter_arr[dict[name]] += 1;
-				handleTooltips(name, tooltip, "wrong1", 1, 1);
-			} else if (global_settimeout_arr[dict[name]] == 0) {
-				global_settimeout_arr[dict[name]] = 1;
-				setTimeout(function() {
-					//console.log("Running timeout2. Setting global_settimeout2 variable2 to 0 again");
-					reenter_arr[dict[name]] = 0;
-					global_settimeout_arr[dict[name]] = 0;
-				}, 2500);
-			}
+		var flag = false;
+		if ($(this).val().length > (maxdict[name] - 1)) {
+			flag  = true;
+			tooltip = "Cannot input more than " + maxdict[name] + " characters";
+		}
+		if(flag){
+			reenterPopup(name, tooltip, "wrong1", 1, 1);
 			e.preventDefault();
 			return false;
 		}
 	});
 
-	$('[name="source"], [name="dest"]').keypress(function(e) {
+	$('[name="trainno2"], [name="source"], [name="dest"]').on('blur mouseleave', function() {
 		var name = $(this).attr("name");
-		if ($(this).val().length > (size_of_station - 1)) {
-			tooltip = "Cannot input more than " + size_of_station + " characters";
-			if (reenter_arr[dict[name]] < size_of_station) {
-				reenter_arr[dict[name]] += 1;
-				handleTooltips(name, tooltip, "wrong1", 1, 1);
-			} else if (global_settimeout_arr[dict[name]] == 0) {
-				global_settimeout_arr[dict[name]] = 1;
-				setTimeout(function() {
-					//console.log("Running timeout2. Setting global_settimeout2 variable2 to 0 again");
-					reenter_arr[dict[name]] = 0;
-					global_settimeout_arr[dict[name]] = 0;
-				}, 2500);
-			}
-			e.preventDefault();
+		if (type_arr[dict[name]] == 0) {
 			return false;
 		}
+		type_arr[dict[name]] = 0;
+		len = $(this).val().length;
+		var tooltip;
+		if (len > 0) {
+			if(len < mindict[name]){
+				name_arr[dict[name]] = 0;
+				tooltip = "Input length must be greater than " + mindict[name] + " characters";
+			}else{
+				name_arr[dict[name]] = 1;
+				tooltip = "Accepted";
+			}
+		}else{
+			name_arr[dict[name]] = 0;
+			tooltip = "Please fill out this field";
+		}
+		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
 	$('[name="trainno"]').on('focus blur mouseleave', function() {
@@ -318,31 +367,13 @@ $(document).ready(function() {
 		len = $(this).val().length;
 		var tooltip;
 		if (len > 0) {
-			if (len != size_of_train_number) {
+			if (len != mindict[name]) {
 				name_arr[dict[name]] = 0;
 				tooltip = "The train number must be of " + size_of_train_number + " digits";
 			} else {
 				name_arr[dict[name]] = 1;
 				tooltip = "Accepted";
 			}
-		} else {
-			name_arr[dict[name]] = 0;
-			tooltip = "Please fill out this field";
-		}
-		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
-	});
-
-	$('[name="source"], [name="dest"]').on('focus blur mouseleave', function() {
-		var name = $(this).attr("name");
-		if (type_arr[dict[name]] == 0) {
-			return false;
-		}
-		type_arr[dict[name]] = 0;
-		len = $(this).val().length;
-		var tooltip;
-		if (len > 0) {
-			name_arr[dict[name]] = 1;
-			tooltip = "Accepted";
 		} else {
 			name_arr[dict[name]] = 0;
 			tooltip = "Please fill out this field";
@@ -364,7 +395,7 @@ $(document).ready(function() {
 		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
-	$('[name="ac_coaches"]').on('focus blur mouseleave', function() {
+	$('[name="ac_coaches"], [name="sl_coaches"], [name="ac_fare"], [name="sl_fare"]').on('focus blur mouseleave', function() {
 		var name = $(this).attr("name");
 		if (type_arr[dict[name]] == 0) {
 			return false;
@@ -372,83 +403,11 @@ $(document).ready(function() {
 		type_arr[dict[name]] = 0;
 		len = $(this).val().length;
 		var tooltip;
-		ac_coachval = parseInt($('[name="ac_coaches"]').val());
+		thisval = parseInt($(this).val());
 		if (len > 0) {
-			if (ac_coachval < 0 || ac_coachval > max_coaches) {
+			if (thisval < mindict[name] || thisval > maxdict[name]) {
 				name_arr[dict[name]] = 0;
-				tooltip = "AC coaches must be non-negative and less than " + max_coaches;
-			} else {
-				name_arr[dict[name]] = 1;
-				tooltip = "Accepted";
-			}
-		} else {
-			name_arr[dict[name]] = 0;
-			tooltip = "Please fill out this field";
-		}
-		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
-	});
-
-	$('[name="sl_coaches"]').on('focus blur mouseleave', function() {
-		var name = $(this).attr("name");
-		if (type_arr[dict[name]] == 0) {
-			return false;
-		}
-		type_arr[dict[name]] = 0;
-		len = $(this).val().length;
-		var tooltip;
-		sl_coachval = parseInt($('[name="sl_coaches"]').val());
-		if (len > 0) {
-			if (sl_coachval < 0 || sl_coachval > max_coaches) {
-				name_arr[dict[name]] = 0;
-				tooltip = "SL coaches must be non-negative and less than " + max_coaches;
-			} else {
-				name_arr[dict[name]] = 1;
-				tooltip = "Accepted";
-			}
-		} else {
-			name_arr[dict[name]] = 0;
-			tooltip = "Please fill out this field";
-		}
-		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
-	});
-
-	$('[name="ac_fare"]').on('focus blur mouseleave', function() {
-		var name = $(this).attr("name");
-		if (type_arr[dict[name]] == 0) {
-			return false;
-		}
-		type_arr[dict[name]] = 0;
-		len = $(this).val().length;
-		var tooltip;
-		ac_fareval = parseInt($('[name="ac_fare"]').val());
-		if (len > 0) {
-			if (ac_fareval <= 0 || ac_fareval > ac_fare_max) {
-				name_arr[dict[name]] = 0;
-				tooltip = "AC fare must be non-zero and less than " + ac_fare_max;
-			} else {
-				name_arr[dict[name]] = 1;
-				tooltip = "Accepted";
-			}
-		} else {
-			name_arr[dict[name]] = 0;
-			tooltip = "Please fill out this field";
-		}
-		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
-	});
-
-	$('[name="sl_fare"]').on('focus blur mouseleave', function() {
-		var name = $(this).attr("name");
-		if (type_arr[dict[name]] == 0) {
-			return false;
-		}
-		type_arr[dict[name]] = 0;
-		len = $(this).val().length;
-		var tooltip;
-		sl_fareval = parseInt($('[name="sl_fare"]').val());
-		if (len > 0) {
-			if (sl_fareval <= 0 || sl_fareval > sl_fare_max) {
-				name_arr[dict[name]] = 0;
-				tooltip = "SL fare must be non-zero and less than " + sl_fare_max;
+				tooltip = "This value must be non-negative and between " + mindict[name] + " and " + maxdict[name] + ". Both inclusive";
 			} else {
 				name_arr[dict[name]] = 1;
 				tooltip = "Accepted";
@@ -586,28 +545,55 @@ $(document).ready(function() {
 		b = parseInt($('[name="sl_coaches"]').val());
 		if ((a + b) == 0) {
 			tooltip = "Both the number of coaches cannot be 0. Atleast one coach has to be non-zero for a valid train.";
-			handleTooltips('[name="ac_coaches"]', tooltip, "wrong", 0, 1);
-			handleTooltips('[name="sl_coaches"]', tooltip, "wrong", 0, 1);
+			handleTooltips("ac_coaches", tooltip, "wrong", 0, 1);
+			handleTooltips("sl_coaches", tooltip, "wrong", 0, 1);
 			name_arr[dict["ac_coaches"]] = 0;
 			name_arr[dict["sl_coaches"]] = 0;
 			return;
 		}
 
-		/* 
-		check time and date validation
+		// check time and date validation
 		a = $('[name="start_time"]').val();
 		b = $('[name="end_time"]').val();
 		c = $('[name="start_doj"]').val();
-		d = $('[name="end_doj"]').val();
-		const date1 = new Date(c);
-		const date2 = new Date(d);
-		const time1 = new Date(a);
-		const time2 = new Date(b);
-		const diffDays = Math.ceil(date2 - date1 / (1000 * 60 * 60 * 24));
+		const date1 = new Date();
+		const date2 = new Date(c);
+		const time1 = new Date("01/01/2007 " + a);
+		const time2 = new Date("01/01/2007 " + b);
+		const diffDays = Math.ceil((date2 - date1) / (1000 * 60 * 60 * 24));
 		const diffTime = time2 - time1;
+		console.log(diffDays);
 		console.log(diffTime);
-		return;
-		*/
+		if (diffDays < 0){
+			msg = "You cannot add a train in the past";
+			alert(msg);
+			name_arr[dict["start_doj"]] = 0;
+			handleTooltips("start_doj", msg, "wrong", 0, 1);
+			return;
+		}
+		if (diffDays < mindict["start_doj"]){
+			msg = "You cannot add a train that has a start date before " + mindict["start_doj"] + " days from today";
+			alert(msg);
+			name_arr[dict["start_doj"]] = 0;
+			handleTooltips("start_doj", msg, "wrong", 0, 1);
+			return;
+		}
+		if (diffDays > maxdict["start_doj"]){
+			msg = "You cannot add a train that has a start date after " + maxdict["start_doj"] + " days from today";
+			alert(msg);
+			name_arr[dict["start_doj"]] = 0;
+			handleTooltips("start_doj", msg, "wrong", 0, 1);
+			return;
+		}
+		if (diffTime <= 0){
+			msg = "End time cannot be less than or equal to start_time since it is assumed that all trains start and end on same day.";
+			alert(msg);
+			name_arr[dict["start_time"]] = 0;
+			handleTooltips("start_time", msg, "wrong", 0, 1);
+			name_arr[dict["end_time"]] = 0;
+			handleTooltips("end_time", msg, "wrong", 0, 1);
+			return;
+		}		
 
 		$(".five").slideUp(0);
 		$(".five").slideDown(500);
@@ -626,7 +612,7 @@ $(document).ready(function() {
 				sl_coaches: $('[name="sl_coaches"]').val(),
 				ac_fare: $('[name="ac_fare"]').val(),
 				sl_fare: $('[name="sl_fare"]').val(),
-				start_doj: $('[name="start_doj"]').val(),
+				start_doj: $('[name="start_doj"]').val()
 				/*end_doj: $('[name="end_doj"]').val()*/
 			}),
 			cache: false,
