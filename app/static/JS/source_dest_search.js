@@ -4,11 +4,20 @@ type_arr = new Array(total_fields).fill(0);
 reenter_arr = new Array(total_fields).fill(0);
 global_settimeout_arr = new Array(total_fields).fill(0);
 
-var size_of_station = 40;
+var popupsLimit = 3; /*This tells how many consecutive popups allowed on restricted keys*/;
 
 var dict = {
 	source: 0,
 	dest: 1
+}
+var mindict = {
+	source: 1 /*min character length*/,
+	dest: 1 /*min character length*/
+}
+
+var maxdict = {
+	source: 40 /*max character length*/,
+	dest: 40 /*max character length*/
 }
 
 var msgdict = {
@@ -24,28 +33,38 @@ $(document).ready(function() {
 		if (type == 0) {
 			// input element
 			if (show == 1) {
-				$(input).attr('title', text);
-				$(input).removeClass();
-				$(input).addClass(wrong_correct + "input");
+				$('[name="' + name + '"]').attr('title', text);
+				$('[name="' + name + '"]').removeClass();
+				$('[name="' + name + '"]').addClass(wrong_correct + "input");
 			} else {
-				$(input).attr('title', text);
-				$(input).removeClass();
+				$('[name="' + name + '"]').attr('title', text);
+				$('[name="' + name + '"]').removeClass();
 			}
 		}
 
 		// tooltip element
 		if (show == 1) {
 			$(tooltip).html(text);
-			$(tooltip).removeClass();
-			$(tooltip).addClass(wrong_correct);
-			$(tooltip).show(250);
+			$(tooltip).show(250).delay(500).hide(250);
 		} else {
 			$(tooltip).html(text);
-			$(tooltip).removeClass();
 			$(tooltip).hide(0);
 		}
 		if (type == 1) {
 			$(tooltip).delay(750).hide(250);
+		}
+	}
+
+	function reenterPopup(name, tooltip, wrong_correct, type, show){
+		if (reenter_arr[dict[name]] < popupsLimit) {
+			reenter_arr[dict[name]] += 1;
+			handleTooltips(name, tooltip, wrong_correct, type, show);
+		} else if (global_settimeout_arr[dict[name]] == 0) {
+			global_settimeout_arr[dict[name]] = 1;
+			setTimeout(function() {
+				reenter_arr[dict[name]] = 0;
+				global_settimeout_arr[dict[name]] = 0;
+			}, 2500);
 		}
 	}
 
@@ -62,11 +81,13 @@ $(document).ready(function() {
 	$('input').on('keypress', function(e) {
 		var value = e.key;
 		var name = $(this).attr("name");
-		handleTooltips(this, name, "Currently accepting input", "", 0, 0);
+		handleTooltips(name, "", "", 0, 0);
 		//console.log(value);
 
 		// Here is an exception that "enter" is allowed
 		if (value == 13) {
+			var tooltip = "New-line not allowed";
+			reenterPopup(name, tooltip, "wrong1", 1, 1);
 			e.preventDefault();
 			return false;
 		}
@@ -74,21 +95,20 @@ $(document).ready(function() {
 		if (name == "source" || name == "dest") {
 			if (!regExpAlpha.test(value)) {
 				var tooltip = "Only alphabets are allowed i.e. a-z or A-Z";
-				handleTooltips(this, name, tooltip, "wrong1", 1);
+				reenterPopup(name, tooltip, "wrong1", 1, 1);
 				e.preventDefault();
-			} else {
-				name_arr[dict[name]] = 0;
-				type_arr[dict[name]] = 1;
+				return false;
 			}
-			return;
 		}
+		name_arr[dict[name]] = 0;
+		type_arr[dict[name]] = 1;
 	});
 
 	$('input').on('keydown', function(e) {
 		var name = $(this).attr("name");
 		if (e.which == 32) {
 			var tooltip = "Cannot input space in this field";
-			handleTooltips(this, name, tooltip, "wrong1", 1);
+			reenterPopup(name, tooltip, "wrong1", 1, 1);
 			e.preventDefault();
 			return false;
 		}
@@ -97,10 +117,10 @@ $(document).ready(function() {
 	$('input').on('keyup', function(e) {
 		var name = $(this).attr("name");
 		if (e.which == 8 || e.which == 46) {
-			handleTooltips(this, name, "Currently accepting input", "", 0, 0);
+			handleTooltips(name, "", "", 0, 0);
 			if ($(this).val().length == 0) {
 				var tooltip = "Please fill out this field";
-				handleTooltips(this, name, tooltip, "wrong", 0);
+				handleTooltips(name, tooltip, "wrong", 0, 1);
 			}
 			name_arr[dict[name]] = 0;
 			type_arr[dict[name]] = 1;
@@ -109,25 +129,19 @@ $(document).ready(function() {
 
 	$('[name="source"], [name="dest"]').keypress(function(e) {
 		var name = $(this).attr("name");
-		if ($(this).val().length > (size_of_station - 1)) {
-			tooltip = "Cannot input more than " + size_of_station + " characters";
-			if (reenter_arr[dict[name]] < 5) {
-				reenter_arr[dict[name]] += 1;
-				handleTooltips(this, name, tooltip, "wrong1", 1, 1);
-			} else if (global_settimeout_arr[dict[name]] == 0) {
-				global_settimeout_arr[dict[name]] = 1;
-				setTimeout(function() {
-					//console.log("Running timeout2. Setting global_settimeout2 variable2 to 0 again");
-					reenter_arr[dict[name]] = 0;
-					global_settimeout_arr[dict[name]] = 0;
-				}, 2500);
-			}
+		var flag = false;
+		if ($(this).val().length > (maxdict[name] - 1)) {
+			flag  = true;
+			tooltip = "Cannot input more than " + maxdict[name] + " characters";
+		}
+		if(flag){
+			reenterPopup(name, tooltip, "wrong1", 1, 1);
 			e.preventDefault();
 			return false;
 		}
 	});
 
-	$('[name="source"], [name="dest"]').on('focus blur mouseleave', function() {
+	$('[name="source"], [name="dest"]').on('blur mouseleave', function() {
 		var name = $(this).attr("name");
 		if (type_arr[dict[name]] == 0) {
 			return false;
@@ -136,13 +150,18 @@ $(document).ready(function() {
 		len = $(this).val().length;
 		var tooltip;
 		if (len > 0) {
-			name_arr[dict[name]] = 1;
-			tooltip = "Accepted";
-		} else {
+			if(len < mindict[name]){
+				name_arr[dict[name]] = 0;
+				tooltip = "Input length must be greater than " + mindict[name] + " characters";
+			}else{
+				name_arr[dict[name]] = 1;
+				tooltip = "Accepted";
+			}
+		}else{
 			name_arr[dict[name]] = 0;
 			tooltip = "Please fill out this field";
 		}
-		handleTooltips(this, name, tooltip, handleMsg(tooltip), 0, 1);
+		handleTooltips(name, tooltip, handleMsg(tooltip), 0, 1);
 	});
 
 	$('#threep1p1btn').mouseenter(function() {
@@ -161,7 +180,17 @@ $(document).ready(function() {
 		$(".five").slideUp(0);
 		$(".threep2").slideUp(0);
 		$('#threep2p1 tbody').empty();
-		$(".five").slideDown(500);
+		$("#threep2p1").hide(0);
+		$(".threep2 h3").hide(0);
+
+		sourceval = $('[name="source"]').val();
+		destval = $('[name="dest"]').val();
+		if(sourceval == destval){
+			msg = "Source and Destination Stations cannot be same";
+			alert(msg);
+			return;
+		}
+
 		$.ajax({
 			type: 'POST',
 			url: '/source_dest_search',
@@ -175,47 +204,82 @@ $(document).ready(function() {
 			processData: false,
 			success: function(result) {
 				$(".five").slideUp(500);
+				$(".threep2").slideDown(500);
 				console.log(result);
 				len = result.length;
 				if (len > 0) {
 					var train = '';
 					var i;
-					for (i = 0; i < len; i++) {
-						train += '<tr>';
-						train += '<td>' + (i + 1) + '.</td>';
-						train += '<td>' + result[i].trainno + '</td>';
-						train += '<td>' + result[i].source + '</td>';
-						train += '<td>' + result[i].doj + '</td>';
-						train += '<td>' + result[i].start_time + '</td>';
-						train += '<td>' + result[i].dest + '</td>';
-						/*train += '<td>' + result[i].end_doj + '</td>';*/
-						train += '<td>' + result[i].end_time + '</td>';
-						train += '<td>' + result[i].ac_coaches + '</td>';
-						train += '<td>' + result[i].ac_fare + '</td>';
-						train += '<td>' + result[i].sl_coaches + '</td>';
-						train += '<td>' + result[i].sl_fare + '</td>';
-						if (result[i].ac_seats > 0) {
-							train += '<td class = "available">' + result[i].ac_seats + '</td>';
-						} else {
-							train += '<td class = "notavailable">' + result[i].ac_seats + '</td>';
+					if(result[0] == "1"){
+						for (i = 1; i <len; i++) {
+							train += '<tr>';
+							train += '<td>' + i + '.</td>';
+							train += '<td>' + result[i].trainno + '</td>';
+							train += '<td>' + result[i].source + '</td>';
+							train += '<td>' + result[i].doj + '</td>';
+							train += '<td>' + result[i].start_time + '</td>';
+							train += '<td>' + result[i].dest + '</td>';
+							/*train += '<td>' + result[i].end_doj + '</td>';*/
+							train += '<td>' + result[i].end_time + '</td>';
+							train += '<td>' + result[i].ac_coaches + '</td>';
+							train += '<td>' + result[i].ac_fare + '</td>';
+							train += '<td>' + result[i].sl_coaches + '</td>';
+							train += '<td>' + result[i].sl_fare + '</td>';
+							if (result[i].ac_seats > 0) {
+								train += '<td class = "available">' + result[i].ac_seats + '</td>';
+							} else {
+								train += '<td class = "notavailable">' + result[i].ac_seats + '</td>';
+							}
+							if (result[i].sl_seats > 0) {
+								train += '<td class = "available">' + result[i].sl_seats + '</td>';
+							} else {
+								train += '<td class = "notavailable">' + result[i].sl_seats + '</td>';
+							}
+							train += '</tr>';
 						}
-						if (result[i].sl_seats > 0) {
-							train += '<td class = "available">' + result[i].sl_seats + '</td>';
-						} else {
-							train += '<td class = "notavailable">' + result[i].sl_seats + '</td>';
+					}else if(result[0] == "2"){
+						for (i = 1; i <len; i++) {
+							train += '<tr class="passrow">';
+							train += '<td rowspan="3" class="lasttd">' + i + '.</td>';
+							train += '</tr>';
+							for(var j = 0; j<2;j++){
+								train += '<tr>';
+								train += '<td>' + result[i+j+j].trainno + '</td>';
+								train += '<td>' + result[i+j].source + '</td>';
+								train += '<td>' + result[i+j].doj + '</td>';
+								train += '<td>' + result[i+j].start_time + '</td>';
+								train += '<td>' + result[i+j].dest + '</td>';
+								/*train += '<td>' + result[i+j].end_doj + '</td>';*/
+								train += '<td>' + result[i+j].end_time + '</td>';
+								train += '<td>' + result[i+j].ac_coaches + '</td>';
+								train += '<td>' + result[i+j].ac_fare + '</td>';
+								train += '<td>' + result[i+j].sl_coaches + '</td>';
+								train += '<td>' + result[i+j].sl_fare + '</td>';
+								if (result[i+j].ac_seats > 0) {
+									train += '<td class = "available">' + result[i+j].ac_seats + '</td>';
+								} else {
+									train += '<td class = "notavailable">' + result[i+j].ac_seats + '</td>';
+								}
+								if (result[i+j].sl_seats > 0) {
+									train += '<td class = "available">' + result[i+j].sl_seats + '</td>';
+								} else {
+									train += '<td class = "notavailable">' + result[i+j].sl_seats + '</td>';
+								}
+								train += '</tr>';
+							}
+							train += '<tr><td colspan="13"></td></tr>';
 						}
-						train += '</tr>';
 					}
 					$('#threep2p1').append(train);
-					$(".threep2").slideDown(500);
-					$(".threep2").addClass("result");
+					$("#threep2p1").show(0);
 				} else {
-					msg = "No records found for this particular trainno and Date of journey";
-					alert(msg);
+					msg = "No trains found for this particular source and destination";
+					console.log(msg);
+					$(".threep2 h3").show(0);
 				}
 			},
 			error: function() {
-				console.log("Not able to get response from flask function namely showtrain");
+				console.log("Not able to get response from flask function namely source_dest_search");
 			}
 		});
 	});

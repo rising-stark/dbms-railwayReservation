@@ -16,7 +16,7 @@ type_arr1 = [];
 reenter_arr1 = [];
 global_settimeout_arr1 = [];
 
-var size_of_train_number = 4;
+var size_of_train_number = 4, max_age = 100;
 var popupsLimit = 3; /*This tells how many consecutive popups allowed on restricted keys*/
 
 var dict = {

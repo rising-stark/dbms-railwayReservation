@@ -162,7 +162,21 @@ $(document).ready(function() {
 			reenter_arr[i] = 0;
 			global_settimeout_arr[i] = 0;
 		}
+		name_arr[6] = 1; /*This is donr because not end-date is not send to backend*/
 	}
+
+	$(document).click(function(event) {
+		if (!event.target.matches('.onep1 img') && !event.target.matches('#onep1p1') && !event.target.matches('#uname')) {
+			$('.dropdown').slideUp(500).removeClass('active');
+		} else {
+			if ($('.dropdown').hasClass("active")){
+				$('.dropdown').slideUp(500).removeClass('active');
+			}
+			else{
+				$('.dropdown').slideDown(500).addClass('active');
+			}
+		}
+	});
 
 	var regExpNonPrintable = /[^ -~]/;
 	var regExpNum = /[0-9]/;

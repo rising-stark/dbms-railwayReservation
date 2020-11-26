@@ -23,13 +23,14 @@
 					</div>
 					<div class="threep1p1">
 						Destination <input id="dest" type="text" name="dest" size="40" placeholder="Enter Destination Station">
-						<div id = "threep1p1_input_dest_tooltip2"></div>
+						<div id = "threep1p1_input_dest_tooltip"></div>
 					</div>
 					<div id="threep1p1btn"><input id="btnSearch" class = "invalid" type="button" name="btnSearch" value="Show" disabled></div>
-					<div id="threep1p1_btn_show_tooltip">This button is disabled because atleast one of the fields is empty.</div>
+					<div id="threep1p1_btn_show_tooltip">This button is disabled because atleast one of the fields is empty. Both Fields are necessary</div>
 				</form>
 			</div>
 			<div class="threep2">
+				<h3>No trains found for this particular source and destination</h3>
 				<table id="threep2p1">
 					<thead>
 						<tr>
@@ -49,7 +50,39 @@
 							<th>#SL Seats Available</th>
 						</tr>
 					</thead>
-					<tbody></tbody>
+					<tbody style="color: black;">
+						<!-- <tr class="passrow">
+							<td rowspan="3" class="lasttd">1.</td>
+						</tr>
+						<tr>
+							<td>5646</td>
+							<td>delhi</td>
+							<td>27-11-2020</td>
+							<td>10:00</td>
+							<td>Ropar</td>
+							<td>11:00</td>
+							<td>12</td>
+							<td>2020</td>
+							<td>10</td>
+							<td>1200</td>
+							<td class="available">65</td>
+							<td class="available">12</td>
+						</tr>
+						<tr>
+							<td>5646</td>
+							<td>delhi</td>
+							<td>27-11-2020</td>
+							<td>10:00</td>
+							<td>Ropar</td>
+							<td>11:00</td>
+							<td>12</td>
+							<td>2020</td>
+							<td>10</td>
+							<td>1200</td>
+							<td class="noavailable">65</td>
+							<td class="notavailable">12</td>
+						</tr> -->
+					</tbody>
 				</table>
 			</div>
 		</div>

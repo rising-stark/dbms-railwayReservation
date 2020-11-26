@@ -11,7 +11,7 @@
 	height: auto;
 	padding-bottom: 100px;
 	/*background-image: linear-gradient(to right, rgba(25, 90, 60, 0), rgba(25, 40, 50, 1));*/
-	background-image: linear-gradient(red, yellow, blue);
+	background: wheat;
 }
 
 .three .threep1{
@@ -144,7 +144,7 @@
 }
 .three .threep1 #threep1p1_input_dest_tooltip{
 	position: absolute;
-	left: -10%;
+	right: -10%;
 	top: -50px;
 	width: 350px;
 	/*background-color: #a60000;*/
@@ -162,46 +162,65 @@
 .three .threep1 #threep1p1_input_dest_tooltip::before {
 	content: "";
 	position: absolute;
-	right: 15px;
+	left: 15px;
 	top: 110%;
 	z-index: 0;
 	border-width: 10px;
 	border-style: ridge;
 	border-color: darkred transparent transparent transparent;
 }
-.three .threep2{
-	display: none;
+
+.three .threep2 {
 	position: relative;
-	top: 75px;
-	left: 5%;
-	width: 90%;
-	max-height: 300px;
-	border: 2px solid red;
-	overflow-y: auto;
+	left: 2%;
+	width: 96%;
 }
-.three .threep2 table{
+.three .threep2 h3 {
+	color: white;
+	position: relative;
+	top: 100px;
+	left: 30%;
+	width: 40%;
+	height: 45px;
+	line-height: 45px;
+	background: darkred;
+	text-align: center;
+	border-radius: 25px;
+	display: none;
+}
+.three .threep2 table {
+	position: relative;
+	top: 80px;
 	width: 100%;
 	border: 2px solid black;
 	table-layout: fixed;
+	border-collapse: collapse;
+	display: none;
 }
-.three .threep2 table tr{
-	height: 20px;
+
+.three .threep2 table tr {
 	border-bottom: 2px solid brown;
 }
-.three .threep2 table th{
+
+.three .threep2 table th {
 	font-weight: bold;
 	font-size: 18px;
 	color: white;
 	border: 2px solid brown;
 	background-color: black;
 }
-.three .threep2 table td, th{
+
+.three .threep2 table td, th {
 	min-width: 30px;
 	max-width: 80px;
 	text-align: center;
 	padding: 5px;
 	word-wrap: normal;
-	border-right: 2px solid black;
+	/*border-bottom: 2px solid black;*/
+}
+
+.three .threep2 table .lasttd{
+	border-right: 2px solid brown;
 }
 
 .three .threep2 table tr .available{
