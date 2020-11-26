@@ -127,7 +127,9 @@ $(document).ready(function() {
 		var text = "Please fill out this field";
 		var img = $(".two img[id$=img]");
 		var input = $('input[type=text], input[type=password], input[type=email], input[type=time], input[type=date], input[type=number], textarea');
-		var tooltip = $(".two .wrong, .two .correct");
+		var tooltip = $(".two .wrong, .two .correct, .two .wrong1");
+		$("select").attr('title', text);
+		$("select").removeClass();
 		$(input).val("");
 		$(input).attr('title', text);
 		$(input).removeClass();
@@ -137,8 +139,8 @@ $(document).ready(function() {
 		$(tooltip).html("");
 		$(tooltip).removeClass();
 		$(tooltip).hide(250);
-		$('[name="cnfpass"]').attr("disabled", "disabled"); //jQuery 1.5 and below
-		$('[name="cnfpass"]').prop('disabled', true);  //jQuery 1.6+
+		/*$('[name="cnfpass"]').attr("disabled", "disabled"); //jQuery 1.5 and below
+		$('[name="cnfpass"]').prop('disabled', true);  //jQuery 1.6+*/
 		$('select[name="gender"] option:selected').attr("selected", null);
 		for (i = 0; i < total_fields; i++) {
 			name_arr[i] = 0;
@@ -164,8 +166,8 @@ $(document).ready(function() {
 			$(tooltip).html("");
 			$(tooltip).removeClass();
 			$(tooltip).hide(250);
-			$(input).attr("disabled", "disabled"); //jQuery 1.5 and below
-			$(input).prop('disabled', true);  //jQuery 1.6+
+			/*$(input).attr("disabled", "disabled"); //jQuery 1.5 and below
+			$(input).prop('disabled', true);  //jQuery 1.6+*/
 			name_arr[dict[arr[i]]] = 0;
 			type_arr[dict[arr[i]]] = 0;
 			reenter_arr[dict[arr[i]]] = 0;
@@ -212,6 +214,13 @@ $(document).ready(function() {
 		if (name == "pass") {
 			var arr = ["cnfpass"];
 			resetThese(arr);
+		}
+
+		if (name == "cnfpass" && name_arr[dict["pass"]] == 0) {
+			var tooltip = "Fill the password field properly first";
+			reenterPopup(name, tooltip, "wrong1", 1, 1);
+			e.preventDefault();
+			return false;
 		}
 
 		name_arr[dict[name]] = 0;
