@@ -3,7 +3,7 @@ from main import *
 @app.route("/")
 @app.route("/home")
 def home():
-	return render_template("login.html")
+	return render_template("welcome.html")
 
 @app.route("/login", methods=['POST'])
 def login():
@@ -65,3 +65,7 @@ def booking_agent_home():
 @app.route("/booking_agent_register", methods=['GET', 'POST'])
 def booking_agent_register():
 	return render_template("booking_agent_register.html")
+
+@app.route("/open_login", methods=['GET', 'POST'])
+def open_login():
+	return render_template("login.html")

@@ -1,0 +1,94 @@
+.twoc1{
+	width: 100%;
+}
+.twoc1 #twoc1p1{
+	height: 300px;
+	width: 100%;
+}
+.twoc1 #twoc1p2 {
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: black;
+  font-size: 40px;
+  text-align: center;
+}
+.twoc1 #twoc1p2 span{
+  text-decoration: underline;
+  font-size: 50px;
+}
+.twoc2 {
+	position: absolute;
+	width: 50%;
+	height: 100px;
+	top: 60%;
+	left: 25%;
+}
+.twoc2 input{
+	display: inline-block;
+	width: 40%;
+	height: 60%;
+	padding: 20px;
+	font-size: 20px;
+	box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  transition: 0.2s ease-in;
+  margin-right: 5%;
+  cursor: pointer;
+}
+.twoc2 input:hover{
+	width: 45%;
+	height: 70%;
+	border-radius: 20px;
+	background: rgba(0, 90, 0, 0.8);
+	weight: 200;
+	font-size: 30px;
+}
+.three {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    height: 100%;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+.three #threep1 {
+    width: 30%;
+    position: absolute;
+    top: 32%;
+    left: 36%;
+    height: 240px;
+    /* margin: 18% 36%; */
+    z-index: 21;
+    background-color: #f27d2f;
+    /* padding: 14px; */
+    display: none;
+    border: 4px solid #008000;
+    border-radius: 30px;
+}
+#threep1 h1 {
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    padding: 5px;
+}
+#threep1 #threep1p1 {
+    position: absolute;
+    width: 30%;
+    height: 50%;
+    top: 90px;
+    left: 35%;
+    cursor:pointer;
+    /*box-shadow: 7px 10px 35px 4px #fff;
+    border:5px white solid;
+    border-radius: 50%;*/
+}

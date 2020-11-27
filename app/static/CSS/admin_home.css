@@ -148,7 +148,7 @@
 	left: 0%;
 	width: 100%;
 	height: 40px;
-	background-image: linear-gradient(rgb(1 32 45), red);
+	background: linear-gradient(rgb(1 32 45), red);
 }
 .two .twop1{
 	position: relative;
@@ -188,7 +188,7 @@
 	height: auto;
 	padding-bottom: 100px;
 	/*background-image: linear-gradient(to right, rgba(25, 90, 60, 0), rgba(25, 40, 50, 1));*/
-	background-image: linear-gradient(red, yellow, blue);
+	background: wheat;
 }
 
 .three .threep1{
