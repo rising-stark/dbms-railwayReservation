@@ -207,7 +207,7 @@ $(document).ready(function() {
 				$(".threep2").slideDown(500);
 				console.log(result);
 				len = result.length;
-				if (len > 0) {
+				if (len > 1) {
 					var train = '';
 					var i;
 					if(result[0] == "1"){
